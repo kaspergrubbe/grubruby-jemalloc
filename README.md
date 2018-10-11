@@ -8,11 +8,13 @@ Everything here is heavily inspired of how the Discourse project (https://github
 
 ## Versioning
 
-To understand the versioning of these images, we use the following format:
+`GRUBRUBY_IMAGE_VERSION` starts versioning 8001 to not be confused with Ruby patchlevels. To understand the versioning of these images, we use the following format:
 
 ```
 RUBY_MAJOR.RUBY_MINOR.RUBY_MINOR.GRUBRUBY_IMAGE_VERSION
 ```
+
+So if you download version `2.5.1.8001` you are getting Ruby-version `2.5.1` and version `8001` of Grubruby.
 
 ## How to use Jemalloc
 

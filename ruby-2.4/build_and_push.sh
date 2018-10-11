@@ -3,7 +3,7 @@ set -euxo pipefail
 
 REPOOWNER="kaspergrubbe"
 REPONAME="grubruby-jemalloc"
-VERSION="2.4.4.1"
+VERSION="2.4.4.8001"
 DOCKERFILE="ruby-2.4/Dockerfile"
 
 if [ ! -f $DOCKERFILE ]; then
