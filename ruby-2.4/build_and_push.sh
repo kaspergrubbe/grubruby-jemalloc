@@ -6,14 +6,8 @@ REPONAME="grubruby-jemalloc"
 VERSION="2.4.4.2"
 DOCKERFILE="ruby-2.4/Dockerfile"
 
-if [[ "$PWD" != */grubruby ]]
-then
-  echo "You need to be in root dir of the repo!"
-  exit 1;
-fi
-
 if [ ! -f $DOCKERFILE ]; then
-  echo "Can't find $DOCKERFILE"
+  echo "Can't find $DOCKERFILE, are you in the repo root?"
   exit 1;
 fi
 
