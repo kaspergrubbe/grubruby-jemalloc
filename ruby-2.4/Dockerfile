@@ -4,14 +4,18 @@
 FROM ruby:2.5.1 AS tooling
   RUN apt-get update && apt-get install -qq -y build-essential --fix-missing --no-install-recommends
 
+  ENV JEMALLOC_STABLE_SHA256 e16c2159dd3c81ca2dc3b5c9ef0d43e1f2f45b04548f42db12e7c12d7bdf84fe
   RUN mkdir /jemalloc-stable && cd /jemalloc-stable && \
         wget https://github.com/jemalloc/jemalloc/releases/download/3.6.0/jemalloc-3.6.0.tar.bz2 && \
+        echo "$JEMALLOC_STABLE_SHA256 *jemalloc-3.6.0.tar.bz2" | sha256sum -c - && \
         tar -xjf jemalloc-3.6.0.tar.bz2 && cd jemalloc-3.6.0 && ./configure --prefix=/usr/local && make && make install && \
         cd / && rm -rf /jemalloc-stable && \
         mv /usr/local/lib/libjemalloc.so /usr/local/lib/libjemalloc3.6.0.so
 
+  ENV JEMALLOC_NEW_SHA256 5396e61cc6103ac393136c309fae09e44d74743c86f90e266948c50f3dbb7268
   RUN mkdir /jemalloc-new && cd /jemalloc-new && \
         wget https://github.com/jemalloc/jemalloc/releases/download/5.1.0/jemalloc-5.1.0.tar.bz2 && \
+        echo "$JEMALLOC_NEW_SHA256 *jemalloc-5.1.0.tar.bz2" | sha256sum -c - && \
         tar -xjf jemalloc-5.1.0.tar.bz2 && cd jemalloc-5.1.0 && ./configure --prefix=/usr/local --with-install-suffix=5.1.0 && make build_lib && make install_lib && \
         cd / && rm -rf /jemalloc-new
 
