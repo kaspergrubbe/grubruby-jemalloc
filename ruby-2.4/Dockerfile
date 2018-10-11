@@ -57,10 +57,6 @@ ENV RUBY_DOWNLOAD_SHA256 1d0034071d675193ca769f64c91827e5f54cb3a7962316a41d5217c
 ENV RUBYGEMS_VERSION 2.7.7
 ENV BUNDLER_VERSION 1.16.6
 
-# Get SHA256 for ruby version
-# wget -O ruby.tar.xz "https://cache.ruby-lang.org/pub/ruby/${RUBY_MAJOR%-rc}/ruby-$RUBY_VERSION.tar.xz"
-# shasum -a 256 ruby.tar.xz
-
 # some of ruby's build scripts are written in ruby
 #   we purge system ruby later to make sure our final image uses what we just built
 RUN set -ex \
