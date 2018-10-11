@@ -12,7 +12,12 @@ FROM ruby:2.5.1 AS tooling
         cd / && rm -rf /jemalloc-stable && \
         mv /usr/local/lib/libjemalloc.so /usr/local/lib/libjemalloc3.6.0.so
 
-  ENV JEMALLOC_NEW_SHA256 5396e61cc6103ac393136c309fae09e44d74743c86f90e266948c50f3dbb7268
+  ENV JEMALLOC_4_SHA256 9409d85664b4f135b77518b0b118c549009dc10f6cba14557d170476611f6780
+  RUN mkdir /jemalloc-new && cd /jemalloc-new && \
+        wget https://github.com/jemalloc/jemalloc/releases/download/4.5.0/jemalloc-4.5.0.tar.bz2 && \
+        echo "$JEMALLOC_4_SHA256 *jemalloc-4.5.0.tar.bz2" | sha256sum -c - && \
+        tar -xjf jemalloc-4.5.0.tar.bz2 && cd jemalloc-4.5.0 && ./configure --prefix=/usr/local --with-install-suffix=4.5.0 && make build_lib && make install_lib && \
+        cd / && rm -rf /jemalloc-new
   RUN mkdir /jemalloc-new && cd /jemalloc-new && \
         wget https://github.com/jemalloc/jemalloc/releases/download/5.1.0/jemalloc-5.1.0.tar.bz2 && \
         echo "$JEMALLOC_NEW_SHA256 *jemalloc-5.1.0.tar.bz2" | sha256sum -c - && \
@@ -145,5 +150,6 @@ RUN mkdir -p "$GEM_HOME" "$BUNDLE_BIN" \
 COPY --from=tooling /usr/local/bin/thpoff              /usr/local/bin/thpoff
 COPY --from=tooling /usr/local/lib/libjemalloc3.6.0.so /usr/local/lib/libjemalloc3.6.0.so
 COPY --from=tooling /usr/local/lib/libjemalloc5.1.0.so /usr/local/lib/libjemalloc5.1.0.so
+COPY --from=tooling /usr/local/lib/libjemalloc4.5.0.so /usr/local/lib/libjemalloc4.so
 
 CMD [ "irb" ]
