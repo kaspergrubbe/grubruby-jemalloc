@@ -12,6 +12,6 @@ if [ ! -f $DOCKERFILE ]; then
 fi
 
 echo "Building and pushing ${REPOOWNER}/${REPONAME} version ${VERSION}" \
-&& docker build --tag ${REPONAME}:${VERSION} --file ${DOCKERFILE} . \
+&& docker build --compress --tag ${REPONAME}:${VERSION} --file ${DOCKERFILE} . \
 && docker tag ${REPONAME}:${VERSION} ${REPOOWNER}/${REPONAME}:${VERSION} \
 && docker push ${REPOOWNER}/${REPONAME}:${VERSION}
