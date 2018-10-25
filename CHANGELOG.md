@@ -29,6 +29,11 @@ And the following Ruby-versions:
 - Added Dockerfile for Ruby-2.3.
 
 ## [8001] - 2018-10-11
+Grubruby version `8001` ships with:
+- Rubygems `2.7.7`.
+- Bundler `1.16.6`.
+- Jemalloc `3.6.0`, `4.5.0` and `5.1.0`.
+
 ### Added
 - Added `Ruby 2.4.4.8001` and `Ruby 2.5.1.8001` images.
 - All images now include `Rubygems 2.7.7` and `Bundler 1.16.6`.
