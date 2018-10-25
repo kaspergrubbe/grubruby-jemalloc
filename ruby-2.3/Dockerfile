@@ -48,7 +48,7 @@ RUN apt-get update \
     ca-certificates \
     libffi-dev \
     libgdbm3 \
-    libssl-dev \
+    libssl1.0-dev \
     libyaml-dev \
     procps \
     zlib1g-dev \

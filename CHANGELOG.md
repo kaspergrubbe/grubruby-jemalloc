@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Updated `Bundler` to newest version of `1.17.0` (from `1.16.6`).
 ### Added
 - Added tool in `tools/ruby_sha256.rb` to download and calculate SHA256 hash for Ruby releases.
+- Added tool in `tools/build.rb` that builds all the supported Ruby versions and pushes them to Dockerhub.
+- Added Dockerfile for Ruby-2.3.
 
 ## [8001] - 2018-10-11
 ### Added
