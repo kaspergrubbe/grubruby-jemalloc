@@ -4,8 +4,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
-
-N/A
+### Added
+- Added tool in `tools/ruby_sha256.rb` to download and calculate SHA256 hash for Ruby releases.
 
 ## [8001] - 2018-10-11
 ### Added
