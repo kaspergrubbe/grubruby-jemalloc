@@ -12,6 +12,22 @@ def run_command(command)
   end
 end
 
+def build?
+  ARGV.include?('build')
+end
+
+def push?
+  ARGV.include?('push')
+end
+
+unless build?
+  abort [].tap { |errmsg|
+    errmsg << "Usage:"
+    errmsg << "build.rb build      - Builds all images, fails on errors."
+    errmsg << "build.rb build push - Builds all images, tags them, and pushes them to Dockerhub."
+  }.join("\n")
+end
+
 supported_versions = [
   ['2.3.7', 'c61f8f2b9d3ffff5567e186421fa191f0d5e7c2b189b426bb84498825d548edb'],
   ['2.3.8', '910f635d84fd0d81ac9bdee0731279e6026cb4cd1315bbbb5dfb22e09c5c1dfe'],
@@ -39,7 +55,7 @@ supported_versions.each do |ruby_version, sha256hash|
     dockerfile = "ruby-#{ruby_version_major}/Dockerfile"
 
     it << 'docker build --compress'
-    it << "--tag #{image_tag}"
+    it << "--tag #{image_tag}" if push?
     it << "--file #{dockerfile}"
     it << "--build-arg RUBY_MAJOR=#{ruby_version_major}"
     it << "--build-arg RUBY_VERSION=#{ruby_version}"
@@ -49,14 +65,15 @@ supported_versions.each do |ruby_version, sha256hash|
     it << '.'
   }.join(' ')
 
-
-  run_command(build_command)
-  after_commands << "docker push #{image_tag}"
+  if push?
+    run_command(build_command)
+    after_commands << "docker push #{image_tag}"
+  end
 end
 
-# after_commands.each do |command|
-#   run_command(command)
-# end
+after_commands.each do |command|
+  run_command(command)
+end
 
 # Release info
 puts 'MARKDOWN BUILD NOTES:'
