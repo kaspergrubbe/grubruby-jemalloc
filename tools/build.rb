@@ -40,7 +40,11 @@ supported_versions = [
 
 # Release info to be put into the CHANGELOG.md
 release_info = []
-release_info << "Grubruby version `#{grubruby_version}` comes with Rubygems `#{rubygems_version}`, Bundler `#{bundler_version}` with the following Ruby-versions:"
+release_info << "Grubruby version `#{grubruby_version}` ships with:"
+release_info << "- Rubygems `#{rubygems_version}`."
+release_info << "- Bundler `#{bundler_version}`."
+release_info << "- Jemalloc `3.6.0`, `4.5.0` and `5.1.0`."
+release_info << "\nAnd the following Ruby-versions:"
 
 # Commands to be run after main building block
 after_commands = []
@@ -48,7 +52,7 @@ after_commands = []
 supported_versions.each do |ruby_version, sha256hash|
   image_version = ruby_version.split('.').push(grubruby_version).join('.')
   image_tag     = "#{grubruby_repoowner}/#{grubruby_reponame}:#{image_version}"
-  release_info  << "- `#{ruby_version}` as `#{image_tag}`"
+  release_info  << "- `#{ruby_version}` as `#{image_tag}`."
 
   build_command = [].tap { |it|
     ruby_version_major = ruby_version[0..2]
