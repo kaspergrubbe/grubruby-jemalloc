@@ -65,8 +65,9 @@ supported_versions.each do |ruby_version, sha256hash|
     it << '.'
   }.join(' ')
 
+  run_command(build_command)
+
   if push?
-    run_command(build_command)
     after_commands << "docker push #{image_tag}"
   end
 end
