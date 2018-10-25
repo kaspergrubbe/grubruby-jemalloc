@@ -4,8 +4,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
-
-N/A
+### Changed
+- Updated `Bundler` to newest version of `1.17.0` (from `1.16.6`).
 
 ## [8001] - 2018-10-11
 ### Added
