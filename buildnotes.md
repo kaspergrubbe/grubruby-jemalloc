@@ -12,7 +12,7 @@
 - Update Dockerhub https://hub.docker.com/r/kaspergrubbe/grubruby-jemalloc/ with information from `CHANGELOG.md`.
 - Finally build and push everything: `ruby tools/build.rb build push`.
 
-# How to check a SHA256 for a Ruby version on OSX
+# How to check a SHA256 for a Ruby release
 
 ```bash
 ruby tools/ruby_sha256.rb 2.5.3
