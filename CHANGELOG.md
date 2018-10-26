@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
+N/A
+
+## [8003] - 2018-10-26
+Grubruby version `8003` ships with:
+- Rubygems `2.7.7`.
+- Bundler `1.17.1`.
+- Jemalloc `3.6.0`, `4.5.0` and `5.1.0`.
+
+And the following Ruby-versions:
+- `2.3.7` as `kaspergrubbe/grubruby-jemalloc:2.3.7.8003`.
+- `2.3.8` as `kaspergrubbe/grubruby-jemalloc:2.3.8.8003`.
+- `2.4.4` as `kaspergrubbe/grubruby-jemalloc:2.4.4.8003`.
+- `2.4.5` as `kaspergrubbe/grubruby-jemalloc:2.4.5.8003`.
+- `2.5.1` as `kaspergrubbe/grubruby-jemalloc:2.5.1.8003`.
+- `2.5.2` as `kaspergrubbe/grubruby-jemalloc:2.5.2.8003`.
+- `2.5.3` as `kaspergrubbe/grubruby-jemalloc:2.5.3.8003`.
+
 ### Changed
 - Updated Bundler to version `1.17.1` to prevent some path issues introduced in version `1.17.0`, https://github.com/bundler/bundler/releases/v1.17.1
 

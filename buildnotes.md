@@ -5,6 +5,7 @@
 - Jemalloc versions: https://github.com/jemalloc/jemalloc/releases
 
 # How to do a release
+- Update variable `grubruby_version` in `tools/build.rb`.
 - Test if everything builds by running `ruby tools/build.rb build`.
 - Update `CHANGELOG.md` with the new release and commit.
 - Git version tag the release with: `git_tag.rb vXXXX`.
