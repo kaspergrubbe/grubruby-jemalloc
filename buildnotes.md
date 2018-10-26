@@ -17,3 +17,9 @@
 ```bash
 ruby tools/ruby_sha256.rb 2.5.3
 ```
+
+# Test images
+
+```bash
+docker run --name grubruby_test --rm -i -t kaspergrubbe/grubruby-jemalloc:2.3.7.8002 /bin/bash
+```
