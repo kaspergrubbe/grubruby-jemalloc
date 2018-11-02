@@ -7,6 +7,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 N/A
 
 ## [8004] - 2018-11-2
+Grubruby version `8004` ships with:
+- Rubygems `2.7.8`.
+- Bundler `1.17.1`.
+- Jemalloc `3.6.0`, `4.5.0` and `5.1.0`.
+
+And the following Ruby-versions:
+- `2.3.7` as `kaspergrubbe/grubruby-jemalloc:2.3.7.8004`.
+- `2.3.8` as `kaspergrubbe/grubruby-jemalloc:2.3.8.8004`.
+- `2.4.4` as `kaspergrubbe/grubruby-jemalloc:2.4.4.8004`.
+- `2.4.5` as `kaspergrubbe/grubruby-jemalloc:2.4.5.8004`.
+- `2.5.1` as `kaspergrubbe/grubruby-jemalloc:2.5.1.8004`.
+- `2.5.2` as `kaspergrubbe/grubruby-jemalloc:2.5.2.8004`.
+- `2.5.3` as `kaspergrubbe/grubruby-jemalloc:2.5.3.8004`.
+
 ### Changed
 - Updated Rubygems to version `2.7.8`, which includes some minor enhancements and bug-fixes: http://blog.rubygems.org/2018/11/02/2.7.8-released.html,  [#4](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/4) [@kaspergrubbe](https://github.com/kaspergrubbe).
 
