@@ -4,7 +4,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
-N/A
+### Changed
+- Updated Rubygems to version `2.7.8`, which includes some minor enhancements and bug-fixes: http://blog.rubygems.org/2018/11/02/2.7.8-released.html. https://github.com/kaspergrubbe/grubruby-jemalloc/pull/4
 
 ## [8003] - 2018-10-26
 Grubruby version `8003` ships with:
