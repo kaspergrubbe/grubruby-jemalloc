@@ -1,6 +1,6 @@
 grubruby_repoowner = 'kaspergrubbe'
 grubruby_reponame  = 'grubruby-jemalloc'
-grubruby_version   = '8004'
+grubruby_version   = '8005'
 rubygems_version   = '2.7.8'
 bundler_version    = '1.17.2'
 
