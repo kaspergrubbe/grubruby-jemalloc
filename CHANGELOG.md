@@ -6,6 +6,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 N/A
 
+## [8006] - 2018-12-19
+
+Grubruby version `8006` ships with:
+- Rubygems `3.0.0`.
+- Bundler `1.17.2`.
+- Jemalloc `3.6.0`, `4.5.0` and `5.1.0`.
+
+And the following Ruby-versions:
+- `2.3.7` as `kaspergrubbe/grubruby-jemalloc:2.3.7.8006`.
+- `2.3.8` as `kaspergrubbe/grubruby-jemalloc:2.3.8.8006`.
+- `2.4.4` as `kaspergrubbe/grubruby-jemalloc:2.4.4.8006`.
+- `2.4.5` as `kaspergrubbe/grubruby-jemalloc:2.4.5.8006`.
+- `2.5.1` as `kaspergrubbe/grubruby-jemalloc:2.5.1.8006`.
+- `2.5.2` as `kaspergrubbe/grubruby-jemalloc:2.5.2.8006`.
+- `2.5.3` as `kaspergrubbe/grubruby-jemalloc:2.5.3.8006`.
+
+### Changed
+- Updated Rubygems to version `3.0.0` (from `2.7.8`), which is a majoer release, with lots of changes: https://blog.rubygems.org/2018/12/19/3.0.0-released.html
+
 ## [8005] - 2018-12-11
 Grubruby version `8005` ships with:
 - Rubygems `2.7.8`.
