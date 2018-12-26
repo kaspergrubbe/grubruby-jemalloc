@@ -4,7 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
-N/A
+### Changed
+- Updated Rubygems to version `3.0.1` (from `3.0.0`), which is a minor release, with a few fixes: https://blog.rubygems.org/2018/12/23/3.0.1-released.html, [#7](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/7) [@kaspergrubbe](https://github.com/kaspergrubbe).
+
 
 ## [8006] - 2018-12-19
 
