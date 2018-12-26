@@ -25,7 +25,7 @@ And the following Ruby-versions:
 - `2.5.3` as `kaspergrubbe/grubruby-jemalloc:2.5.3.8006`.
 
 ### Changed
-- Updated Rubygems to version `3.0.0` (from `2.7.8`), which is a majoer release, with lots of changes: https://blog.rubygems.org/2018/12/19/3.0.0-released.html
+- Updated Rubygems to version `3.0.0` (from `2.7.8`), which is a major release, with lots of changes: https://blog.rubygems.org/2018/12/19/3.0.0-released.html
 
 ## [8005] - 2018-12-11
 Grubruby version `8005` ships with:
