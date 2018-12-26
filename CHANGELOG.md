@@ -5,8 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 ## Added
-- Let `build.rb` write the tag for the image being built.
-- When `build.rb` isn't pushing the local tag will have the format of `#{grubruby_reponame}.local:#{image_version}`
+- Let `build.rb` write the tag for the image being built. [#8](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/8)
+- When `build.rb` isn't pushing the local tag will have the format of `#{grubruby_reponame}.local:#{image_version}`. [#8](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/8)
 
 ## [8006] - 2018-12-19
 
