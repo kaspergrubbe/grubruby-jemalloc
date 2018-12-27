@@ -30,11 +30,11 @@ To use Jemalloc in your `Dockerfile`, pick a version, and use `ENV LD_PRELOAD`:
 ENV LD_PRELOAD=/usr/local/lib/libjemalloc5.so
 ```
 
-## Thpoff
+## How to use thpoff (only if you are not using Ruby 2.6+)
 
-File location for thpoff is: `/usr/local/bin/thpoff` you can use it by prepending your command with the binary.
+Thpoff is baked into the images at this location: `/usr/local/bin/thpoff` you can use it by prepending your command with the binary.
 
-In docker-compose you can do the following:
+In `docker-compose.yml` you would do the following:
 
 ```yaml
 command: ["/usr/local/bin/thpoff", "bundle", "exec", "unicorn", "-c", "config/unicorn.rb"]
