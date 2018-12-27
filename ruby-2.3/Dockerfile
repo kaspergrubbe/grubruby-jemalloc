@@ -139,7 +139,7 @@ RUN set -ex \
   && rm -r /root/.gem/
 
 # TODO remove me before merging
-RUN ruby -r rbconfig -e "RbConfig::CONFIG['LIBS'].include?('jemalloc') ? puts('Ruby is compiled with jemalloc') : warn('JEMALLOC IS MISSING FROM RUBY')"
+RUN ruby -r rbconfig -e "RbConfig::CONFIG['LIBS'].include?('jemalloc') ? puts('Ruby is compiled with jemalloc') : warn('JEMALLOC IS MISSING FROM RUBY') && exit(1)"
 
 # install things globally, for great justice
 # and don't create ".bundle" in all our apps
