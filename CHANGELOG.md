@@ -5,6 +5,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+N/A
+
+## [8007] - 2018-12-27
+
+Grubruby version `8007` ships with:
+- Rubygems `3.0.1`.
+- Bundler `1.17.3`.
+- Jemalloc `3.6.0`, `4.5.0` and `5.1.0`.
+
+And the following Ruby-versions:
+- `2.3.7` as `kaspergrubbe/grubruby-jemalloc:2.3.7.8007`.
+- `2.3.8` as `kaspergrubbe/grubruby-jemalloc:2.3.8.8007`.
+- `2.4.4` as `kaspergrubbe/grubruby-jemalloc:2.4.4.8007`.
+- `2.4.5` as `kaspergrubbe/grubruby-jemalloc:2.4.5.8007`.
+- `2.5.1` as `kaspergrubbe/grubruby-jemalloc:2.5.1.8007`.
+- `2.5.2` as `kaspergrubbe/grubruby-jemalloc:2.5.2.8007`.
+- `2.5.3` as `kaspergrubbe/grubruby-jemalloc:2.5.3.8007`.
+- `2.6.0` as `kaspergrubbe/grubruby-jemalloc:2.6.0.8007`.
+
 ### Added
 - Let `build.rb` write the tag for the image being built. [#8](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/8)
 - When `build.rb` isn't pushing the local tag will have the format of `#{grubruby_reponame}.local:#{image_version}`. [#8](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/8)
