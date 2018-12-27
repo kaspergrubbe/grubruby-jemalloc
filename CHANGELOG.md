@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Added
 - Let `build.rb` write the tag for the image being built. [#8](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/8)
 - When `build.rb` isn't pushing the local tag will have the format of `#{grubruby_reponame}.local:#{image_version}`. [#8](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/8)
+- Added Ruby 2.6.0!!! [#10](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/10)
 
 ### Changed
 - Updated Rubygems to version `3.0.1` (from `3.0.0`), which is a minor release, with a few fixes: https://blog.rubygems.org/2018/12/23/3.0.1-released.html, [#7](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/7) [@kaspergrubbe](https://github.com/kaspergrubbe).

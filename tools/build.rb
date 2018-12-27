@@ -36,6 +36,7 @@ supported_versions = [
   ['2.5.1', '886ac5eed41e3b5fc699be837b0087a6a5a3d10f464087560d2d21b3e71b754d'],
   ['2.5.2', '8be6b6afdf09957a6e2c2a6ada4b1982a391a828b34e49072c4beb60febb678d'],
   ['2.5.3', '1cc9d0359a8ea35fc6111ec830d12e60168f3b9b305a3c2578357d360fcf306f'],
+  ['2.6.0', 'acb00f04374899ba8ee74bbbcb9b35c5c6b1fd229f1876554ee76f0f1710ff5f'],
 ]
 
 # Release info to be put into the CHANGELOG.md
@@ -67,6 +68,7 @@ supported_versions.each do |ruby_version, sha256hash|
       puts "Tag: #{image_tag_local}"
       it << "--tag #{image_tag_local}"
     end
+    # it << "--no-cache"
     it << "--file #{dockerfile}"
     it << "--build-arg RUBY_MAJOR=#{ruby_version_major}"
     it << "--build-arg RUBY_VERSION=#{ruby_version}"
