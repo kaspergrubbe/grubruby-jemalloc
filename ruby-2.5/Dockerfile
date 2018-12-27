@@ -33,7 +33,6 @@ FROM ruby:2.5.1 AS tooling
   ADD source/thpoff.c /src/thpoff.c
   RUN gcc -o /usr/local/bin/thpoff /src/thpoff.c && rm /src/thpoff.c
 
-
 ################################################################################
 # Normal Ruby-build blatantly stolen from:
 #   https://github.com/docker-library/ruby/blob/eca972d167cf4291de898e85aaf50d9a1929d4c7/2.5/stretch/slim/Dockerfile
