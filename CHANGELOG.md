@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 - Updated Bundler to version `2.0.1` (from `1.7.3`), which is a major release, https://github.com/bundler/bundler/releases/tag/v2.0.0 and https://github.com/bundler/bundler/releases/tag/v2.0.1, [#10](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/10).
+- Updated Rubygems to version `3.0.2` (from `3.0.1`), which is a minor release which includes minor enhancements and bug fixes, http://blog.rubygems.org/2019/01/01/3.0.2-released.html, [#12](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/12).
 
 ## [8007] - 2018-12-27
 
