@@ -5,7 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-N/A
+### Changed
+- Updated Bundler to version `2.0.1` (from `1.7.3`), which is a major release, https://github.com/bundler/bundler/releases/tag/v2.0.0 and https://github.com/bundler/bundler/releases/tag/v2.0.1, [#10](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/10).
 
 ## [8007] - 2018-12-27
 
