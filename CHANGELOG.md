@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Added
 - Added Ruby 2.6.1, which includes a few bugfixes, https://www.ruby-lang.org/en/news/2019/01/30/ruby-2-6-1-released/ [#13](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/13)
 
-## [8008] - 2018-01-04
+## [8008] - 2019-01-04
 
 Grubruby version `8008` ships with:
 - Rubygems `3.0.2`.
