@@ -5,7 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-N/A
+## Changed
+
+- Updated Rubygems to version 3.0.3 (from 3.0.3) because of multiple security fixes that have been fixed, more here: http://blog.rubygems.org/2019/03/05/security-advisories-2019-03.html [#14](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/14)
 
 ## [8009] - 2019-01-31
 
