@@ -5,7 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-N/A
+### Added
+- Added Ruby 2.5.4 and 2.6.2 that was released due to some security issues found in Rubygems, more information about that here: https://www.ruby-lang.org/en/news/2019/03/05/multiple-vulnerabilities-in-rubygems/ and here is the individual Ruby release announcements: https://www.ruby-lang.org/en/news/2019/03/13/ruby-2-5-4-released/ and https://www.ruby-lang.org/en/news/2019/03/13/ruby-2-6-2-released/
 
 ## [8010] - 2019-03-06
 
