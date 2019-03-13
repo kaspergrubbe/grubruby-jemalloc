@@ -5,8 +5,30 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+N/A
+
+## [8011] - 2019-03-13
+
+Grubruby version `8011` ships with:
+- Rubygems `3.0.3`.
+- Bundler `2.0.1`.
+- Jemalloc `3.6.0`, `4.5.0` and `5.1.0`.
+
+And the following Ruby-versions:
+- `2.3.7` as `kaspergrubbe/grubruby-jemalloc:2.3.7.8011`.
+- `2.3.8` as `kaspergrubbe/grubruby-jemalloc:2.3.8.8011`.
+- `2.4.4` as `kaspergrubbe/grubruby-jemalloc:2.4.4.8011`.
+- `2.4.5` as `kaspergrubbe/grubruby-jemalloc:2.4.5.8011`.
+- `2.5.1` as `kaspergrubbe/grubruby-jemalloc:2.5.1.8011`.
+- `2.5.2` as `kaspergrubbe/grubruby-jemalloc:2.5.2.8011`.
+- `2.5.3` as `kaspergrubbe/grubruby-jemalloc:2.5.3.8011`.
+- `2.5.4` as `kaspergrubbe/grubruby-jemalloc:2.5.4.8011`.
+- `2.6.0` as `kaspergrubbe/grubruby-jemalloc:2.6.0.8011`.
+- `2.6.1` as `kaspergrubbe/grubruby-jemalloc:2.6.1.8011`.
+- `2.6.2` as `kaspergrubbe/grubruby-jemalloc:2.6.2.8011`.
+
 ### Added
-- Added Ruby 2.5.4 and 2.6.2 that was released due to some security issues found in Rubygems, more information about that here: https://www.ruby-lang.org/en/news/2019/03/05/multiple-vulnerabilities-in-rubygems/ and here is the individual Ruby release announcements: https://www.ruby-lang.org/en/news/2019/03/13/ruby-2-5-4-released/ and https://www.ruby-lang.org/en/news/2019/03/13/ruby-2-6-2-released/
+- Added Ruby 2.5.4 and 2.6.2 that was released due to some security issues found in Rubygems, more information about that here: https://www.ruby-lang.org/en/news/2019/03/05/multiple-vulnerabilities-in-rubygems/ and here is the individual Ruby release announcements: https://www.ruby-lang.org/en/news/2019/03/13/ruby-2-5-4-released/ and https://www.ruby-lang.org/en/news/2019/03/13/ruby-2-6-2-released/ [#15](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/15)
 
 ## [8010] - 2019-03-06
 
