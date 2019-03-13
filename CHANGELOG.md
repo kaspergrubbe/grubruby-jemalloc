@@ -50,7 +50,7 @@ And the following Ruby-versions:
 
 ## Changed
 
-- Updated Rubygems to version 3.0.3 (from 3.0.3) because of multiple security fixes that have been fixed, more here: http://blog.rubygems.org/2019/03/05/security-advisories-2019-03.html [#14](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/14)
+- Updated Rubygems to version 3.0.3 (from 3.0.2) because of multiple security fixes that have been fixed, more here: http://blog.rubygems.org/2019/03/05/security-advisories-2019-03.html [#14](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/14)
 
 ## [8009] - 2019-01-31
 
