@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+N/A
+
+## [8012] - 2019-03-15
+
 ### Added
 - Added Ruby `2.5.5` that includes a one-line fix to `2.5.4` that caused deadlock issues for multi-thread+multi-process (using Process.fork) programs like Puma, https://www.ruby-lang.org/en/news/2019/03/15/ruby-2-5-5-released/ [#16](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/16)
 
