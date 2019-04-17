@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+- Added Ruby `2.4.6` this release includes about 20 bug fixes after the previous release, and also includes several security fixes. https://www.ruby-lang.org/en/news/2019/04/01/ruby-2-4-6-released/ [#18](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/18)
+
 - Added Ruby `2.6.3` this release adds support for New Japanese Era “令和” (Reiwa), it updates the Unicode version to 12.1 beta, and updates date library. https://www.ruby-lang.org/en/news/2019/04/17/ruby-2-6-3-released/ [#17](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/17)
 
 ## [8012] - 2019-03-15
