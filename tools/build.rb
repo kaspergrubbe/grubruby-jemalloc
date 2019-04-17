@@ -41,6 +41,7 @@ supported_versions = [
   ['2.6.0', 'acb00f04374899ba8ee74bbbcb9b35c5c6b1fd229f1876554ee76f0f1710ff5f'],
   ['2.6.1', '47b629808e9fd44ce1f760cdf3ed14875fc9b19d4f334e82e2cf25cb2898f2f2'],
   ['2.6.2', '91fcde77eea8e6206d775a48ac58450afe4883af1a42e5b358320beb33a445fa'],
+  ['2.6.3', '11a83f85c03d3f0fc9b8a9b6cad1b2674f26c5aaa43ba858d4b0fcc2b54171e1'],
 ]
 
 # Release info to be put into the CHANGELOG.md
