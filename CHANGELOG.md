@@ -9,6 +9,27 @@ N/A
 
 ## [8014] - 2019-06-13
 
+Grubruby version `8014` ships with:
+- Rubygems `3.0.3`.
+- Bundler `2.0.2`.
+- Jemalloc `3.6.0`, `4.5.0` and `5.2.0`.
+
+And the following Ruby-versions:
+- `2.3.7` as `kaspergrubbe/grubruby-jemalloc:2.3.7.8014`.
+- `2.3.8` as `kaspergrubbe/grubruby-jemalloc:2.3.8.8014`.
+- `2.4.4` as `kaspergrubbe/grubruby-jemalloc:2.4.4.8014`.
+- `2.4.5` as `kaspergrubbe/grubruby-jemalloc:2.4.5.8014`.
+- `2.4.6` as `kaspergrubbe/grubruby-jemalloc:2.4.6.8014`.
+- `2.5.1` as `kaspergrubbe/grubruby-jemalloc:2.5.1.8014`.
+- `2.5.2` as `kaspergrubbe/grubruby-jemalloc:2.5.2.8014`.
+- `2.5.3` as `kaspergrubbe/grubruby-jemalloc:2.5.3.8014`.
+- `2.5.4` as `kaspergrubbe/grubruby-jemalloc:2.5.4.8014`.
+- `2.5.5` as `kaspergrubbe/grubruby-jemalloc:2.5.5.8014`.
+- `2.6.0` as `kaspergrubbe/grubruby-jemalloc:2.6.0.8014`.
+- `2.6.1` as `kaspergrubbe/grubruby-jemalloc:2.6.1.8014`.
+- `2.6.2` as `kaspergrubbe/grubruby-jemalloc:2.6.2.8014`.
+- `2.6.3` as `kaspergrubbe/grubruby-jemalloc:2.6.3.8014`.
+
 ### Changed
 - Updated Bundler from version `2.0.1` to version `2.0.2`, this release includes lots of fixes but also getting rid of Ruby 1.x compatibility code, all changes are described here: https://github.com/bundler/bundler/releases/tag/v2.0.2 [#19](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/19)
 - Updated Jemalloc 5 from version `5.1.0` to version `5.2.0`, release notes here: https://github.com/jemalloc/jemalloc/releases/tag/5.2.0 [#20](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/20)
