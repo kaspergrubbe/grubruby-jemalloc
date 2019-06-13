@@ -19,11 +19,11 @@ FROM ruby:2.5.1 AS tooling
         tar -xjf jemalloc-4.5.0.tar.bz2 && cd jemalloc-4.5.0 && ./configure --prefix=/usr/local --with-install-suffix=4.5.0 && make build_lib && make install_lib && \
         cd / && rm -rf /jemalloc-new
 
-  ENV JEMALLOC_5_SHA256 5396e61cc6103ac393136c309fae09e44d74743c86f90e266948c50f3dbb7268
+  ENV JEMALLOC_5_SHA256 74be9f44a60d2a99398e706baa921e4efde82bf8fd16e5c0643c375c5851e3b4
   RUN mkdir /jemalloc-new && cd /jemalloc-new && \
-        wget https://github.com/jemalloc/jemalloc/releases/download/5.1.0/jemalloc-5.1.0.tar.bz2 && \
-        echo "$JEMALLOC_5_SHA256 *jemalloc-5.1.0.tar.bz2" | sha256sum -c - && \
-        tar -xjf jemalloc-5.1.0.tar.bz2 && cd jemalloc-5.1.0 && ./configure --prefix=/usr/local --with-install-suffix=5.1.0 && make build_lib && make install_lib && \
+        wget https://github.com/jemalloc/jemalloc/releases/download/5.2.0/jemalloc-5.2.0.tar.bz2 && \
+        echo "$JEMALLOC_5_SHA256 *jemalloc-5.2.0.tar.bz2" | sha256sum -c - && \
+        tar -xjf jemalloc-5.2.0.tar.bz2 && cd jemalloc-5.2.0 && ./configure --prefix=/usr/local --with-install-suffix=5.2.0 && make build_lib && make install_lib && \
         cd / && rm -rf /jemalloc-new
 
   # This tool allows us to disable huge page support for our current process
@@ -157,6 +157,6 @@ RUN mkdir -p "$GEM_HOME" "$BUNDLE_BIN" \
 COPY --from=tooling /usr/local/bin/thpoff              /usr/local/bin/thpoff
 COPY --from=tooling /usr/local/lib/libjemalloc3.6.0.so /usr/local/lib/libjemalloc3.so
 COPY --from=tooling /usr/local/lib/libjemalloc4.5.0.so /usr/local/lib/libjemalloc4.so
-COPY --from=tooling /usr/local/lib/libjemalloc5.1.0.so /usr/local/lib/libjemalloc5.so
+COPY --from=tooling /usr/local/lib/libjemalloc5.2.0.so /usr/local/lib/libjemalloc5.so
 
 CMD [ "irb" ]

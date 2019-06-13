@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 - Updated Bundler from version `2.0.1` to version `2.0.2`, this release includes lots of fixes but also getting rid of Ruby 1.x compatibility code, all changes are described here: https://github.com/bundler/bundler/releases/tag/v2.0.2 [#19](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/19)
+- Updated Jemalloc 5 from version `5.1.0` to version `5.2.0`, release notes here: https://github.com/jemalloc/jemalloc/releases/tag/5.2.0 [#20](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/20)
 
 ## [8013] - 2019-04-17
 
