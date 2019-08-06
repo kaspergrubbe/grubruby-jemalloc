@@ -50,7 +50,7 @@ release_info = []
 release_info << "Grubruby version `#{grubruby_version}` ships with:"
 release_info << "- Rubygems `#{rubygems_version}`."
 release_info << "- Bundler `#{bundler_version}`."
-release_info << "- Jemalloc `3.6.0`, `4.5.0` and `5.2.0`."
+release_info << "- Jemalloc `3.6.0`, `4.5.0` and `5.2.1`."
 release_info << "\nAnd the following Ruby-versions:"
 
 # Commands to be run after main building block
