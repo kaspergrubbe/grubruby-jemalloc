@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 - Updated Jemalloc from version `5.2.0` to `5.2.1`, it includes a few bugfixes: https://github.com/jemalloc/jemalloc/releases/tag/5.2.1
+- Update Rubygems to version `3.0.4` (from version `3.0.3`), it includes minor enhancements and bug fixes, https://blog.rubygems.org/2019/06/14/3.0.4-released.html
 
 ## [8014] - 2019-06-13
 
