@@ -1,7 +1,7 @@
 grubruby_repoowner = 'kaspergrubbe'
 grubruby_reponame  = 'grubruby-jemalloc'
 grubruby_version   = '8015'
-rubygems_version   = '3.0.4'
+rubygems_version   = '3.0.6'
 bundler_version    = '2.0.2'
 
 def run_command(command)
