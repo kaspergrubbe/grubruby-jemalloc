@@ -6,10 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
-- Added Ruby versions: `2.4.7`, `2.5.6` and `2.6.4` which fixes multiple jQuery vulnerabilites in RDoc: https://www.ruby-lang.org/en/news/2019/08/28/multiple-jquery-vulnerabilities-in-rdoc/
+- Added Ruby versions: `2.4.7`, `2.5.6` and `2.6.4` which fixes multiple jQuery vulnerabilites in RDoc: https://www.ruby-lang.org/en/news/2019/08/28/multiple-jquery-vulnerabilities-in-rdoc/ [#24](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/24)
 
 ### Changed
-- Update Rubygems to version `3.0.6` (from version `3.0.4`), it includes minor enhancements and bug fixes, https://blog.rubygems.org/2019/08/16/3.0.5-released.html and https://blog.rubygems.org/2019/08/16/3.0.6-released.html
+- Update Rubygems to version `3.0.6` (from version `3.0.4`), it includes minor enhancements and bug fixes, https://blog.rubygems.org/2019/08/16/3.0.5-released.html and https://blog.rubygems.org/2019/08/16/3.0.6-released.html [#23](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/23)
 
 ## [8015] - 2019-08-06
 
