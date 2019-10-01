@@ -5,6 +5,37 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+N/A
+
+## [8017] - 2019-10-01
+
+Grubruby version `8017` ships with:
+- Rubygems `3.0.6`.
+- Bundler `2.0.2`.
+- Jemalloc `3.6.0`, `4.5.0` and `5.2.1`.
+
+And the following Ruby-versions:
+- `2.3.7` as `kaspergrubbe/grubruby-jemalloc:2.3.7.8017`.
+- `2.3.8` as `kaspergrubbe/grubruby-jemalloc:2.3.8.8017`.
+- `2.4.4` as `kaspergrubbe/grubruby-jemalloc:2.4.4.8017`.
+- `2.4.5` as `kaspergrubbe/grubruby-jemalloc:2.4.5.8017`.
+- `2.4.6` as `kaspergrubbe/grubruby-jemalloc:2.4.6.8017`.
+- `2.4.7` as `kaspergrubbe/grubruby-jemalloc:2.4.7.8017`.
+- `2.4.8` as `kaspergrubbe/grubruby-jemalloc:2.4.8.8017`.
+- `2.5.1` as `kaspergrubbe/grubruby-jemalloc:2.5.1.8017`.
+- `2.5.2` as `kaspergrubbe/grubruby-jemalloc:2.5.2.8017`.
+- `2.5.3` as `kaspergrubbe/grubruby-jemalloc:2.5.3.8017`.
+- `2.5.4` as `kaspergrubbe/grubruby-jemalloc:2.5.4.8017`.
+- `2.5.5` as `kaspergrubbe/grubruby-jemalloc:2.5.5.8017`.
+- `2.5.6` as `kaspergrubbe/grubruby-jemalloc:2.5.6.8017`.
+- `2.5.7` as `kaspergrubbe/grubruby-jemalloc:2.5.7.8017`.
+- `2.6.0` as `kaspergrubbe/grubruby-jemalloc:2.6.0.8017`.
+- `2.6.1` as `kaspergrubbe/grubruby-jemalloc:2.6.1.8017`.
+- `2.6.2` as `kaspergrubbe/grubruby-jemalloc:2.6.2.8017`.
+- `2.6.3` as `kaspergrubbe/grubruby-jemalloc:2.6.3.8017`.
+- `2.6.4` as `kaspergrubbe/grubruby-jemalloc:2.6.4.8017`.
+- `2.6.5` as `kaspergrubbe/grubruby-jemalloc:2.6.5.8017`.
+
 ### Added
 - Added Ruby versions: `2.4.8`, `2.5.7` and `2.6.5` which fixes multiple vulnerabilites, https://www.ruby-lang.org/en/news/2019/10/01/ruby-2-4-8-released/ https://www.ruby-lang.org/en/news/2019/10/01/ruby-2-5-7-released/ https://www.ruby-lang.org/en/news/2019/10/01/ruby-2-6-5-released/
   - CVE-2019-16255: A code injection vulnerability of Shell#[] and Shell#test
