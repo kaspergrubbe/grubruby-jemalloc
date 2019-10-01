@@ -5,7 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-N/A
+### Added
+- Added Ruby versions: `2.4.8`, `2.5.7` and `2.6.5` which fixes multiple vulnerabilites, https://www.ruby-lang.org/en/news/2019/10/01/ruby-2-4-8-released/ https://www.ruby-lang.org/en/news/2019/10/01/ruby-2-5-7-released/ https://www.ruby-lang.org/en/news/2019/10/01/ruby-2-6-5-released/
+  - CVE-2019-16255: A code injection vulnerability of Shell#[] and Shell#test
+  - CVE-2019-16254: HTTP response splitting in WEBrick (Additional fix)
+  - CVE-2019-15845: A NUL injection vulnerability of File.fnmatch and File.fnmatch
+  - CVE-2019-16201: Regular Expression Denial of Service vulnerability of WEBrick’s Digest access authentication
 
 ## [8016] - 2019-08-29
 
