@@ -5,7 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-N/A
+### Added
+- Upgraded Bundler to version: `2.1.0` which turns on deprecations for upcoming breaking changes in bundler 3 by default. https://github.com/bundler/bundler/releases/tag/v2.1.0 [#26](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/26)
 
 ## [8017] - 2019-10-01
 
