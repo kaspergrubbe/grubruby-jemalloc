@@ -5,6 +5,38 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+N/A
+
+## [8018] - 2019-12-15
+
+Grubruby version `8018` ships with:
+- Rubygems `3.0.6`.
+- Bundler `2.1.0`.
+- Jemalloc `3.6.0`, `4.5.0` and `5.2.1`.
+
+And the following Ruby-versions:
+- `2.3.7` as `kaspergrubbe/grubruby-jemalloc:2.3.7.8018`.
+- `2.3.8` as `kaspergrubbe/grubruby-jemalloc:2.3.8.8018`.
+- `2.4.4` as `kaspergrubbe/grubruby-jemalloc:2.4.4.8018`.
+- `2.4.5` as `kaspergrubbe/grubruby-jemalloc:2.4.5.8018`.
+- `2.4.6` as `kaspergrubbe/grubruby-jemalloc:2.4.6.8018`.
+- `2.4.7` as `kaspergrubbe/grubruby-jemalloc:2.4.7.8018`.
+- `2.4.8` as `kaspergrubbe/grubruby-jemalloc:2.4.8.8018`.
+- `2.4.9` as `kaspergrubbe/grubruby-jemalloc:2.4.9.8018`.
+- `2.5.1` as `kaspergrubbe/grubruby-jemalloc:2.5.1.8018`.
+- `2.5.2` as `kaspergrubbe/grubruby-jemalloc:2.5.2.8018`.
+- `2.5.3` as `kaspergrubbe/grubruby-jemalloc:2.5.3.8018`.
+- `2.5.4` as `kaspergrubbe/grubruby-jemalloc:2.5.4.8018`.
+- `2.5.5` as `kaspergrubbe/grubruby-jemalloc:2.5.5.8018`.
+- `2.5.6` as `kaspergrubbe/grubruby-jemalloc:2.5.6.8018`.
+- `2.5.7` as `kaspergrubbe/grubruby-jemalloc:2.5.7.8018`.
+- `2.6.0` as `kaspergrubbe/grubruby-jemalloc:2.6.0.8018`.
+- `2.6.1` as `kaspergrubbe/grubruby-jemalloc:2.6.1.8018`.
+- `2.6.2` as `kaspergrubbe/grubruby-jemalloc:2.6.2.8018`.
+- `2.6.3` as `kaspergrubbe/grubruby-jemalloc:2.6.3.8018`.
+- `2.6.4` as `kaspergrubbe/grubruby-jemalloc:2.6.4.8018`.
+- `2.6.5` as `kaspergrubbe/grubruby-jemalloc:2.6.5.8018`.
+
 ### Added
 - Upgraded Bundler to version: `2.1.0` which turns on deprecations for upcoming breaking changes in bundler 3 by default. https://github.com/bundler/bundler/releases/tag/v2.1.0 [#26](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/26)
 - Added Ruby version `2.4.9` which were somehow missed earlier. [#27](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/27)
