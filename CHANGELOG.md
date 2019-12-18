@@ -5,7 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-N/A
+### Changed
+- Updated Rubygems to version `3.1.1`, https://blog.rubygems.org/2019/12/16/3.1.1-released.html
 
 ## [8018] - 2019-12-15
 
