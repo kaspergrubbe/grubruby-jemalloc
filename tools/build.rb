@@ -50,7 +50,7 @@ supported_versions = [
   ['2.6.3', '11a83f85c03d3f0fc9b8a9b6cad1b2674f26c5aaa43ba858d4b0fcc2b54171e1'],
   ['2.6.4', 'df593cd4c017de19adf5d0154b8391bb057cef1b72ecdd4a8ee30d3235c65f09'],
   ['2.6.5', 'd5d6da717fd48524596f9b78ac5a2eeb9691753da5c06923a6c31190abe01a62'],
-  ['2.7.0', '8c99aa93b5e2f1bc8437d1bbbefd27b13e7694025331f77245d0c068ef1f8cbe'],
+  ['2.7.0', '27d350a52a02b53034ca0794efe518667d558f152656c2baaf08f3d0c8b02343'],
 ]
 
 # Release info to be put into the CHANGELOG.md
