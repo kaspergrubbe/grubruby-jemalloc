@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+- Added Ruby `2.7.0`: https://www.ruby-lang.org/en/news/2019/12/25/ruby-2-7-0-released/, comprehensive changelog available at: https://rubyreferences.github.io/rubychanges/2.7.html [#32](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/32)
+
 ### Changed
 - Upgraded Rubygems to version `3.1.2` (was `3.1.1`), includes minor enhancements and bugfixes: https://blog.rubygems.org/2019/12/20/3.1.2-released.html [#30](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/30)
 - Upgraded Bundler to version `2.1.2` (was `2.1.1`), includes one minor bugfix: https://github.com/bundler/bundler/releases/tag/v2.1.2 [#31](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/31)
