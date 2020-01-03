@@ -22,5 +22,11 @@ ruby tools/ruby_sha256.rb 2.5.3
 # Test images
 
 ```bash
-docker run --name grubruby_test --rm -i -t kaspergrubbe/grubruby-jemalloc:2.3.7.8002 /bin/bash
+docker run --name grubruby_test --rm -i -t kaspergrubbe/grubruby-jemalloc:2.7.0.8020 /bin/bash
+```
+
+Or use the locally built versions:
+
+```bash
+docker run --name grubruby_test --rm -i -t grubruby-jemalloc.local:2.7.0.8020 /bin/bash
 ```
