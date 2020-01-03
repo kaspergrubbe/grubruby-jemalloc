@@ -5,7 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-N/A
+### Removed
+- Get rid of Ruby `2.3` as they are no longer supported.
 
 ## [8020] - 2020-01-03
 
