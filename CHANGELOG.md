@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+N/A
+
+## [8020] - 2020-01-03
+
 ### Added
 - Added Ruby `2.7.0`: https://www.ruby-lang.org/en/news/2019/12/25/ruby-2-7-0-released/, comprehensive changelog available at: https://rubyreferences.github.io/rubychanges/2.7.html [#32](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/32)
 
