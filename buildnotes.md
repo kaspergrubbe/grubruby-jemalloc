@@ -21,11 +21,13 @@ ruby tools/ruby_sha256.rb 2.5.3
 
 # Test images
 
+## Dockerhub
+
 ```bash
 docker run --name grubruby_test --rm -i -t kaspergrubbe/grubruby-jemalloc:2.7.0.8020 /bin/bash
 ```
 
-Or use the locally built versions:
+## Locally built
 
 ```bash
 docker run --name grubruby_test --rm -i -t grubruby-jemalloc.local:2.7.0.8020 /bin/bash
