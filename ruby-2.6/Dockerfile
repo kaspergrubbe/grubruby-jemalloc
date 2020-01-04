@@ -158,12 +158,15 @@ RUN set -eux && \
 # and don't create ".bundle" in all our apps
 ENV GEM_HOME /usr/local/bundle
 ENV BUNDLE_PATH="$GEM_HOME" \
+  BUNDLE_BIN="$GEM_HOME/bin" \
   BUNDLE_SILENCE_ROOT_WARNING=1 \
-  BUNDLE_APP_CONFIG="$GEM_HOME"
+  BUNDLE_APP_CONFIG="$GEM_HOME" \
+  PATH $BUNDLE_BIN:$PATH
 # path recommendation: https://github.com/bundler/bundler/pull/6469#issuecomment-383235438
 ENV PATH $GEM_HOME/bin:$BUNDLE_PATH/gems/bin:$PATH
 # adjust permissions of a few directories for running "gem install" as an arbitrary user
-RUN mkdir -p "$GEM_HOME" && chmod 777 "$GEM_HOME"
+RUN mkdir -p "$GEM_HOME" && chmod 777 "$GEM_HOME" && \
+  mkdir -p "$BUNDLE_BIN" && chmod 777 "$BUNDLE_BIN"
 # (BUNDLE_PATH = GEM_HOME, no need to mkdir/chown both)
 
 ################################################################################
