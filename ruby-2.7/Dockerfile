@@ -1,5 +1,5 @@
 ################################################################################
-# Jemalloc and Thpoff
+# Build and compile Jemalloc and Thpoff
 ################################################################################
 FROM debian:buster-slim AS tooling
   RUN apt-get update && apt-get install -qq -y build-essential wget ca-certificates --fix-missing --no-install-recommends
@@ -167,7 +167,7 @@ RUN mkdir -p "$GEM_HOME" && chmod 777 "$GEM_HOME"
 # (BUNDLE_PATH = GEM_HOME, no need to mkdir/chown both)
 
 ################################################################################
-#  Add in jemalloc libraries
+# Add in Jemalloc libraries
 ################################################################################
 COPY --from=tooling /usr/local/lib/libjemalloc3.6.0.so /usr/local/lib/libjemalloc3.so
 COPY --from=tooling /usr/local/lib/libjemalloc4.5.0.so /usr/local/lib/libjemalloc4.so
