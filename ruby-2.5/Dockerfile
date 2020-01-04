@@ -1,8 +1,8 @@
 ################################################################################
-# Essential runtime tools
+# Jemalloc and Thpoff
 ################################################################################
-FROM ruby:2.5.1 AS tooling
-  RUN apt-get update && apt-get install -qq -y build-essential --fix-missing --no-install-recommends
+FROM debian:buster-slim AS tooling
+  RUN apt-get update && apt-get install -qq -y build-essential wget ca-certificates --fix-missing --no-install-recommends
 
   ENV JEMALLOC_3_SHA256 e16c2159dd3c81ca2dc3b5c9ef0d43e1f2f45b04548f42db12e7c12d7bdf84fe
   RUN mkdir /jemalloc-stable && cd /jemalloc-stable && \
@@ -35,28 +35,30 @@ FROM ruby:2.5.1 AS tooling
 
 ################################################################################
 # Normal Ruby-build blatantly stolen from:
-#   https://github.com/docker-library/ruby/blob/eca972d167cf4291de898e85aaf50d9a1929d4c7/2.5/stretch/slim/Dockerfile
+#   https://github.com/docker-library/ruby/blob/defb10adcd6dd2178be3cd9c884fd035b52d42fb/2.4/buster/slim/Dockerfile
 #
 # .. but with added jemalloc!
 ################################################################################
-FROM debian:stretch
+FROM debian:buster-slim
 
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends \
+RUN set -eux && \
+  apt-get update && \
+  apt-get install -y --no-install-recommends \
     bzip2 \
     ca-certificates \
     libffi-dev \
-    libgdbm3 \
+    libgmp-dev \
     libssl-dev \
     libyaml-dev \
     procps \
     zlib1g-dev \
-    libjemalloc-dev \
-  && rm -rf /var/lib/apt/lists/*
+  && \
+  rm -rf /var/lib/apt/lists/*
 
 # skip installing gem documentation
-RUN mkdir -p /usr/local/etc \
-  && { \
+RUN set -eux && \
+  mkdir -p /usr/local/etc && \
+  { \
     echo 'install: --no-document'; \
     echo 'update: --no-document'; \
   } >> /usr/local/etc/gemrc
@@ -75,14 +77,16 @@ ENV BUNDLER_VERSION=${BUNDLER_VERSION}
 
 # some of ruby's build scripts are written in ruby
 #   we purge system ruby later to make sure our final image uses what we just built
-RUN set -ex \
-  \
-  && buildDeps=' \
+RUN set -eux && \
+  savedAptMark="$(apt-mark showmanual)" && \
+  apt-get update && \
+  apt-get install -y --no-install-recommends \
     autoconf \
     bison \
     dpkg-dev \
     gcc \
     libbz2-dev \
+    libgdbm-compat-dev \
     libgdbm-dev \
     libglib2.0-dev \
     libncurses-dev \
@@ -93,63 +97,81 @@ RUN set -ex \
     ruby \
     wget \
     xz-utils \
-  ' \
-  && apt-get update \
-  && apt-get install -y --no-install-recommends $buildDeps \
-  && rm -rf /var/lib/apt/lists/* \
+    libjemalloc-dev \
+  && \
+  rm -rf /var/lib/apt/lists/* && \
   \
-  && wget -O ruby.tar.xz "https://cache.ruby-lang.org/pub/ruby/${RUBY_MAJOR%-rc}/ruby-$RUBY_VERSION.tar.xz" \
-  && echo "$RUBY_DOWNLOAD_SHA256 *ruby.tar.xz" | sha256sum -c - \
+  wget -O ruby.tar.xz "https://cache.ruby-lang.org/pub/ruby/${RUBY_MAJOR%-rc}/ruby-$RUBY_VERSION.tar.xz" && \
+  echo "$RUBY_DOWNLOAD_SHA256 *ruby.tar.xz" | sha256sum --check --strict && \
   \
-  && mkdir -p /usr/src/ruby \
-  && tar -xJf ruby.tar.xz -C /usr/src/ruby --strip-components=1 \
-  && rm ruby.tar.xz \
+  mkdir -p /usr/src/ruby && \
+  tar -xJf ruby.tar.xz -C /usr/src/ruby --strip-components=1 && \
+  rm ruby.tar.xz && \
   \
-  && cd /usr/src/ruby \
+  cd /usr/src/ruby && \
   \
 # hack in "ENABLE_PATH_CHECK" disabling to suppress:
 #   warning: Insecure world writable dir
-  && { \
+  { \
     echo '#define ENABLE_PATH_CHECK 0'; \
     echo; \
     cat file.c; \
-  } > file.c.new \
-  && mv file.c.new file.c \
+  } > file.c.new && \
+  mv file.c.new file.c && \
   \
-  && autoconf \
-  && gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)" \
-  && ./configure \
+  autoconf && \
+  gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)" && \
+  ./configure \
     --build="$gnuArch" \
     --disable-install-doc \
     --enable-shared \
     --with-jemalloc \
-  && make -j "$(nproc)" \
-  && make install \
+  && \
+  make -j "$(nproc)" && \
+  make install && \
   \
-  && dpkg-query --show --showformat '${package}\n' \
-    | grep -P '^libreadline\d+$' \
-    | xargs apt-mark manual \
-  && apt-get purge -y --auto-remove $buildDeps \
-  && cd / \
-  && rm -r /usr/src/ruby \
+  apt-mark auto '.*' > /dev/null && \
+  apt-mark manual $savedAptMark > /dev/null && \
+  find /usr/local -type f -executable -not \( -name '*tkinter*' \) -exec ldd '{}' ';' \
+    | awk '/=>/ { print $(NF-1) }' \
+    | sort -u \
+    | xargs -r dpkg-query --search \
+    | cut -d: -f1 \
+    | sort -u \
+    | xargs -r apt-mark manual \
+  && \
+  apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
   \
-  && gem update --system "$RUBYGEMS_VERSION" \
-  && gem install bundler --version "$BUNDLER_VERSION" --force \
-  && rm -r /root/.gem/
-
-# TODO remove me before merging
-RUN ruby -r rbconfig -e "RbConfig::CONFIG['LIBS'].include?('jemalloc') ? puts('Ruby is compiled with jemalloc') : warn('JEMALLOC IS MISSING FROM RUBY') && exit(1)"
+  cd / && \
+  rm -r /usr/src/ruby && \
+# make sure bundled "rubygems" is older than RUBYGEMS_VERSION (https://github.com/docker-library/ruby/issues/246)
+  ruby -e "puts Gem::Version.create(ENV['RUBYGEMS_VERSION'])" && \
+  ruby -e "puts Gem::Version.create(Gem::VERSION)" && \
+  ruby -e 'exit(Gem::Version.create(ENV["RUBYGEMS_VERSION"]) > Gem::Version.create(Gem::VERSION))' && \
+  gem update --system "$RUBYGEMS_VERSION" && \
+  gem install bundler --version "$BUNDLER_VERSION" --force && \
+  rm -r /root/.gem/ && \
+# verify we have no "ruby" packages installed
+  ! dpkg -l | grep -i ruby && \
+  [ "$(command -v ruby)" = '/usr/local/bin/ruby' ] && \
+# rough smoke test
+  ruby --version && \
+  gem --version && \
+  bundle --version && \
+  ruby -r rbconfig -e "RbConfig::CONFIG['LIBS'].include?('jemalloc') ? puts('Ruby is compiled with jemalloc') : abort('JEMALLOC IS MISSING FROM RUBY')" && \
+  ruby -e "puts Integer::GMP_VERSION"
 
 # install things globally, for great justice
 # and don't create ".bundle" in all our apps
 ENV GEM_HOME /usr/local/bundle
 ENV BUNDLE_PATH="$GEM_HOME" \
-  BUNDLE_BIN="$GEM_HOME/bin" \
   BUNDLE_SILENCE_ROOT_WARNING=1 \
   BUNDLE_APP_CONFIG="$GEM_HOME"
-ENV PATH $BUNDLE_BIN:$PATH
-RUN mkdir -p "$GEM_HOME" "$BUNDLE_BIN" \
-  && chmod 777 "$GEM_HOME" "$BUNDLE_BIN"
+# path recommendation: https://github.com/bundler/bundler/pull/6469#issuecomment-383235438
+ENV PATH $GEM_HOME/bin:$BUNDLE_PATH/gems/bin:$PATH
+# adjust permissions of a few directories for running "gem install" as an arbitrary user
+RUN mkdir -p "$GEM_HOME" && chmod 777 "$GEM_HOME"
+# (BUNDLE_PATH = GEM_HOME, no need to mkdir/chown both)
 
 ################################################################################
 #  Add in thpoff and jemalloc libraries
