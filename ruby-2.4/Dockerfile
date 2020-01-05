@@ -147,7 +147,7 @@ RUN set -eux && \
 # make sure bundled "rubygems" is older than RUBYGEMS_VERSION (https://github.com/docker-library/ruby/issues/246)
   ruby -e "puts Gem::Version.create(ENV['RUBYGEMS_VERSION'])" && \
   ruby -e "puts Gem::Version.create(Gem::VERSION)" && \
-  ruby -e 'exit(Gem::Version.create(ENV["RUBYGEMS_VERSION"]) > Gem::Version.create(Gem::VERSION))' && \
+  ruby -e 'exit(Gem::Version.create(ENV["RUBYGEMS_VERSION"]) >= Gem::Version.create(Gem::VERSION))' && \
   gem update --system "$RUBYGEMS_VERSION" && \
   gem install bundler --version "$BUNDLER_VERSION" --force && \
   rm -r /root/.gem/ && \
