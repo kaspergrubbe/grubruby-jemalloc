@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Changed
+- Upgraded Bundler to version `2.1.4` (was `2.1.3`), includes some minor fixes: https://github.com/bundler/bundler/releases/tag/v2.1.4 [#35](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/35)
+
 ### Removed
 - Get rid of Ruby `2.3` as they are no longer supported.
 
