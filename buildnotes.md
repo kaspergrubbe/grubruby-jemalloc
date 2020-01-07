@@ -5,8 +5,9 @@
 - Jemalloc versions: https://github.com/jemalloc/jemalloc/releases
 
 # How to do a release
+- Test if everything is building and working by running `ruby tools/test.rb`.
 - Update variable `grubruby_version` with `+ 1` in `tools/vars.rb`.
-- Test if everything builds by running `ruby tools/build.rb build`.
+- Build all the images by running `ruby tools/build.rb build`.
 - Update `CHANGELOG.md` with the new release and commit.
 - Git version tag the release with: `git_tag.rb vXXXX`.
 - Paste the information from `CHANGELOG.md` to Github, by going to https://github.com/kaspergrubbe/grubruby-jemalloc/releases and clicking "Draft new release".
