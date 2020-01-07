@@ -48,6 +48,12 @@ def run_command(command, input = nil, allowed_exit_codes = [0])
   end
 
   unless allowed_exit_codes.include?(status)
+    puts "stdout:"
+    puts stdout.strip
+    puts
+    puts "stderr:"
+    puts stderr.strip
+    puts
     raise "`#{command}` failed with status=#{status}"
   end
 
