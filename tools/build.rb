@@ -31,7 +31,6 @@ after_commands = []
   image_version   = ruby_version.split('.').push(@grubruby_version).join('.')
   image_tag       = "#{@grubruby_repoowner}/#{@grubruby_reponame}:#{image_version}"
   image_tag_local = "#{@grubruby_reponame}.local:#{image_version}"
-  release_info   << "- `#{ruby_version}` as `#{image_tag}`."
 
   build_command = [].tap { |it|
     ruby_version_major = ruby_version[0..2]
@@ -56,6 +55,9 @@ after_commands = []
   }.join(' ')
 
   run_command(build_command)
+
+  size = bytes_to_megabytes(docker_image_size_in_bytes(image_tag))
+  release_info << "- `#{ruby_version}` as `#{image_tag}` (#{size} MB)."
 
   if push?
     after_commands << "docker push #{image_tag}"

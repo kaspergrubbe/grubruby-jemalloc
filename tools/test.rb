@@ -71,8 +71,8 @@ test_time = Time.now.utc.to_i
     it << "--build-arg BUNDLER_VERSION=#{@bundler_version}"
     it << "."
   }.join(" ")
-  $logger.debug "[#{ruby_version}] + #{build_command}" if debug?
   run_command(build_command)
+  $logger.info "[#{ruby_version}] .. size is #{bytes_to_megabytes(docker_image_size_in_bytes(base_image_tag))} MB"
 
   [ruby_version, needs_thpoff, rails_version, base_image_tag]
 }.map { |ruby_version, needs_thpoff, rails_version, base_image_tag|
