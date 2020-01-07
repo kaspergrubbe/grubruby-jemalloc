@@ -44,7 +44,7 @@ after_commands = []
       puts "Tag: #{image_tag_local}"
       it << "--tag #{image_tag_local}"
     end
-    # it << "--no-cache"
+    it << "--no-cache" if skip_cache?
     it << "--file #{dockerfile}"
     it << "--build-arg RUBY_MAJOR=#{ruby_version_major}"
     it << "--build-arg RUBY_VERSION=#{ruby_version}"
@@ -53,7 +53,6 @@ after_commands = []
     it << "--build-arg BUNDLER_VERSION=#{@bundler_version}"
     it << '.'
   }.join(' ')
-
   run_command(build_command)
 
   size = bytes_to_megabytes(docker_image_size_in_bytes(image_tag))
