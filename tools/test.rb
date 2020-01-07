@@ -93,7 +93,6 @@ test_time = Time.now.utc.to_i
     it << "--build-arg IMAGE=#{base_image_tag}"
     it << "spec/#{rails_version}"
   }.join(" ")
-  $logger.debug "[#{ruby_version}] + #{build_command}" if debug?
 
   run_command(build_command)
 
@@ -113,7 +112,6 @@ test_time = Time.now.utc.to_i
     it << "-p #{outside_port}:3000"
     it << "-t #{test_image_tag}"
   }.join(" ")
-  $logger.debug "[#{ruby_version}] + #{setup_command}" if debug?
   _, container_name, _ = run_command(setup_command)
 
   # Verify that the container is running
@@ -155,7 +153,6 @@ test_time = Time.now.utc.to_i
     it << "--signal=SIGTERM"
     it << container_name
   }.join(" ")
-  $logger.debug "[#{ruby_version}] + #{kill_command}" if debug?
   run_command(kill_command)
 
   # Delete Rails image
@@ -166,7 +163,6 @@ test_time = Time.now.utc.to_i
     it << "--force"
     it << test_image_tag
   }.join(" ")
-  $logger.debug "[#{ruby_version}] + #{delete_command}" if debug?
   run_command(delete_command)
 
   # Delete Base image
@@ -177,7 +173,6 @@ test_time = Time.now.utc.to_i
     it << "--force"
     it << base_image_tag
   }.join(" ")
-  $logger.debug "[#{ruby_version}] + #{delete_command}" if debug?
   run_command(delete_command)
 
   sleep(5)
