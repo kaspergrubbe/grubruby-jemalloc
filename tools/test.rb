@@ -1,4 +1,3 @@
-require "open3"
 require "json"
 require "net/http"
 require "bundler/inline"
@@ -10,63 +9,6 @@ gemfile do
 end
 
 require_relative "vars.rb"
-
-$logger = Yell.new do |l|
-  l.adapter STDOUT, level: [:debug, :info, :warn]
-  l.adapter STDERR, level: [:error, :fatal]
-end
-
-def run_command(command, input = nil, allowed_exit_codes = [0])
-  process, status, stdout, stderr = Open3.popen3(command) do |stdin, stdout, stderr, wait_thread|
-    if input
-      stdin.puts(input)
-    end
-    stdin.close
-
-    threads = {}.tap do |it|
-      it[:stdout] = Thread.new do
-        output = []
-        stdout.each do |l|
-          output << l
-          $logger.debug l.strip if debug?
-        end
-        Thread.current[:output] = output.join
-      end
-
-      it[:stderr] = Thread.new do
-        output = []
-        stderr.each do |l|
-          output << l
-          $logger.debug l.strip if debug?
-        end
-        Thread.current[:output] = output.join
-      end
-    end
-    threads.values.map(&:join)
-
-    [wait_thread.value, wait_thread.value.exitstatus, threads[:stdout][:output], threads[:stderr][:output]]
-  end
-
-  unless allowed_exit_codes.include?(status)
-    puts "stdout:"
-    puts stdout.strip
-    puts
-    puts "stderr:"
-    puts stderr.strip
-    puts
-    raise "`#{command}` failed with status=#{status}"
-  end
-
-  return [status, stdout.strip, stderr.strip]
-end
-
-def skip_cache?
-  false
-end
-
-def debug?
-  false
-end
 
 def docker_container_running?(container_name)
   check_command = [].tap { |it|

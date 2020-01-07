@@ -1,13 +1,5 @@
 require_relative "vars.rb"
 
-def run_command(command)
-  system(command)
-
-  unless $?.success?
-    abort ['COMMAND:', command, 'failed with error:', $?].join(' ')
-  end
-end
-
 def build?
   ARGV.include?('build')
 end
