@@ -1,4 +1,5 @@
 require_relative "vars.rb"
+require_relative "util.rb"
 
 def build?
   ARGV.include?('build')

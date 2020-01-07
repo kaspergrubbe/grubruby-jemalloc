@@ -1,14 +1,8 @@
 require "json"
 require "net/http"
-require "bundler/inline"
-
-gemfile do
-  source "https://rubygems.org"
-  gem "yell", "2.2.0"
-  gem "pry"
-end
 
 require_relative "vars.rb"
+require_relative "util.rb"
 
 def docker_container_running?(container_name)
   check_command = [].tap { |it|
