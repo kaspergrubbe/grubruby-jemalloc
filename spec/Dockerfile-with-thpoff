@@ -1,0 +1,52 @@
+ARG IMAGE=
+FROM $IMAGE AS bundler
+
+  # skip installing gem documentation
+  RUN mkdir -p /usr/local/etc \
+    && { \
+      echo 'install: --no-document'; \
+      echo 'update: --no-document'; \
+    } >> /usr/local/etc/gemrc
+
+  RUN mkdir /app
+  WORKDIR /app
+
+  COPY Gemfile Gemfile.lock /app/
+
+  # Install newest NodeJS from https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions
+  RUN apt-get update && apt-get install -qq -y curl
+  RUN curl -sL https://deb.nodesource.com/setup_13.x | bash -
+
+  ADD https://dl.yarnpkg.com/debian/pubkey.gpg /tmp/yarn-pubkey.gpg
+  RUN apt-key add /tmp/yarn-pubkey.gpg && rm /tmp/yarn-pubkey.gpg
+  RUN echo 'deb http://dl.yarnpkg.com/debian/ stable main' > /etc/apt/sources.list.d/yarn.list
+
+  # Install dependencies:
+  # - build-essential: To ensure certain gems can be compiled
+  # - nodejs: Compile assets
+  RUN apt-get update && apt-get install -qq -y build-essential yarn nodejs --fix-missing --no-install-recommends \
+      && bundle config set without 'development test' \
+      && bundle install -j 8
+
+  COPY . /app
+  RUN RAILS_ENV=production bundle exec rake assets:precompile
+
+FROM $IMAGE
+  COPY --from=bundler /app /app
+  COPY --from=bundler /usr/local/bundle/ /usr/local/bundle/
+
+  # Create a non-root user and a group with the same name
+  ENV USER_GROUP=railsapp
+  RUN groupadd -r ${USER_GROUP} && \
+      useradd --home-dir /home/${USER_GROUP} --create-home -g ${USER_GROUP} ${USER_GROUP}
+  RUN mkdir -p /app/logs
+  RUN chown -R ${USER_GROUP}:${USER_GROUP} /app/*
+
+  # From here onwards, any RUN, CMD, or ENTRYPOINT will be run under the following user instead of 'root'
+  USER ${USER_GROUP}
+
+  WORKDIR /app
+
+  ENV RAILS_ENV=production
+  ENV LD_PRELOAD=/usr/local/lib/libjemalloc3.so
+  CMD ["/usr/local/bin/thpoff", "bundle", "exec", "puma", "-C", "config/puma.rb"]
