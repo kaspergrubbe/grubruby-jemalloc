@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+N/A
+
+## [8021] - 2020-01-07
+
 ### Added
 - Added a rudimentary test-suite that builds a small Rails setup, starts a container, and sends a HTTP request to it. [#36](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/36)
 - Print image-sizes to our release notes and when we test newly built images [d46a59a](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/36/commits/d46a59aedfadc2da9606cf57377cf2dd24a642e2)
