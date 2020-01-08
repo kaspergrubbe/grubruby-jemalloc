@@ -30,9 +30,11 @@ To use Jemalloc in your `Dockerfile`, pick a version, and use `ENV LD_PRELOAD`:
 ENV LD_PRELOAD=/usr/local/lib/libjemalloc5.so
 ```
 
-## How to use thpoff (only if you are not using Ruby 2.6+)
+## How to use thpoff (only needed if you are not using Ruby 2.6+)
 
-Thpoff is baked into the images at this location: `/usr/local/bin/thpoff` you can use it by prepending your command with the binary.
+Thpoff is a tool that disables transparent hugepages for applications, and it can allow less memory consumption for forked processes, this is built-in Ruby 2.6 and newer.
+
+Thpoff is baked into the Grubruby images at this location: `/usr/local/bin/thpoff` you can use it by prepending your command with the binary.
 
 In `docker-compose.yml` you would do the following:
 
