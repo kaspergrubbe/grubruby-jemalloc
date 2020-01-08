@@ -9,6 +9,32 @@ N/A
 
 ## [8021] - 2020-01-07
 
+Grubruby version `8021` ships with:
+- Rubygems `3.1.2`.
+- Bundler `2.1.4`.
+- Jemalloc `3.6.0`, `4.5.0` and `5.2.1`.
+
+And the following Ruby-versions:
+- `2.4.4` as `kaspergrubbe/grubruby-jemalloc:2.4.4.8021` (189.98 MB).
+- `2.4.5` as `kaspergrubbe/grubruby-jemalloc:2.4.5.8021` (189.99 MB).
+- `2.4.6` as `kaspergrubbe/grubruby-jemalloc:2.4.6.8021` (189.99 MB).
+- `2.4.7` as `kaspergrubbe/grubruby-jemalloc:2.4.7.8021` (189.89 MB).
+- `2.4.8` as `kaspergrubbe/grubruby-jemalloc:2.4.8.8021` (189.9 MB).
+- `2.4.9` as `kaspergrubbe/grubruby-jemalloc:2.4.9.8021` (189.89 MB).
+- `2.5.1` as `kaspergrubbe/grubruby-jemalloc:2.5.1.8021` (190.49 MB).
+- `2.5.2` as `kaspergrubbe/grubruby-jemalloc:2.5.2.8021` (190.12 MB).
+- `2.5.3` as `kaspergrubbe/grubruby-jemalloc:2.5.3.8021` (190.51 MB).
+- `2.5.5` as `kaspergrubbe/grubruby-jemalloc:2.5.5.8021` (190.51 MB).
+- `2.5.6` as `kaspergrubbe/grubruby-jemalloc:2.5.6.8021` (190.41 MB).
+- `2.5.7` as `kaspergrubbe/grubruby-jemalloc:2.5.7.8021` (190.41 MB).
+- `2.6.0` as `kaspergrubbe/grubruby-jemalloc:2.6.0.8021` (193.29 MB).
+- `2.6.1` as `kaspergrubbe/grubruby-jemalloc:2.6.1.8021` (193.27 MB).
+- `2.6.2` as `kaspergrubbe/grubruby-jemalloc:2.6.2.8021` (193.28 MB).
+- `2.6.3` as `kaspergrubbe/grubruby-jemalloc:2.6.3.8021` (193.34 MB).
+- `2.6.4` as `kaspergrubbe/grubruby-jemalloc:2.6.4.8021` (193.26 MB).
+- `2.6.5` as `kaspergrubbe/grubruby-jemalloc:2.6.5.8021` (193.26 MB).
+- `2.7.0` as `kaspergrubbe/grubruby-jemalloc:2.7.0.8021` (209.72 MB).
+
 ### Added
 - Added a rudimentary test-suite that builds a small Rails setup, starts a container, and sends a HTTP request to it. [#36](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/36)
 - Print image-sizes to our release notes and when we test newly built images [d46a59a](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/36/commits/d46a59aedfadc2da9606cf57377cf2dd24a642e2)
