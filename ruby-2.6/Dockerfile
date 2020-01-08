@@ -45,6 +45,7 @@ RUN set -eux && \
     libyaml-dev \
     procps \
     zlib1g-dev \
+    libjemalloc-dev \
   && \
   rm -rf /var/lib/apt/lists/*
 
@@ -90,7 +91,6 @@ RUN set -eux && \
     ruby \
     wget \
     xz-utils \
-    libjemalloc-dev \
   && \
   rm -rf /var/lib/apt/lists/* && \
   \
