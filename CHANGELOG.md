@@ -5,7 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-N/A
+### Changed
+- Updated base-image from Debian 9 (stretch) to Debian 10 (buster). This means that **SOME THINGS MIGHT BREAK**, so please update carefully, there are newer packages and there might be updated package names. [#34](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/34)
 
 ## [8021] - 2020-01-07
 
