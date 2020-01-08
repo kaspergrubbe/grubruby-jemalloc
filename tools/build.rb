@@ -30,21 +30,19 @@ after_commands = []
 
 @supported_versions.each do |ruby_version, sha256hash, _, _|
   image_version   = ruby_version.split('.').push(@grubruby_version).join('.')
-  image_tag       = "#{@grubruby_repoowner}/#{@grubruby_reponame}:#{image_version}"
-  image_tag_local = "#{@grubruby_reponame}.local:#{image_version}"
+  image_tag = if push?
+    "#{@grubruby_repoowner}/#{@grubruby_reponame}:#{image_version}"
+  else
+    "#{@grubruby_reponame}.local:#{image_version}"
+  end
+  puts "Tag: #{image_tag}"
 
   build_command = [].tap { |it|
     ruby_version_major = ruby_version[0..2]
     dockerfile = "ruby-#{ruby_version_major}/Dockerfile"
 
     it << 'docker build --compress'
-    if push?
-      puts "Tag: #{image_tag}"
-      it << "--tag #{image_tag}"
-    else
-      puts "Tag: #{image_tag_local}"
-      it << "--tag #{image_tag_local}"
-    end
+    it << "--tag #{image_tag}"
     it << "--no-cache" if skip_cache?
     it << "--file #{dockerfile}"
     it << "--build-arg RUBY_MAJOR=#{ruby_version_major}"
