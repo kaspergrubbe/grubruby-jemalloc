@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
   def hello
-    render plain: "Hi!"
+    render json: {
+      message: "Hi!",
+      environment: ENV,
+    }
   end
 end
