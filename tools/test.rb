@@ -82,25 +82,34 @@ test_time = Time.now.utc.to_i
     "spec/Dockerfile-without-thpoff"
   end
 
-  $logger.info "[#{ruby_version}] Building Rails image on top of base image with name: #{test_image_tag}"
-  build_command = [].tap { |it|
-    it << "docker build --compress"
-    it << "--tag #{test_image_tag}"
-    it << "--no-cache" if skip_cache?
-    it << "--file #{dockerfile}"
-    it << "--build-arg IMAGE=#{base_image_tag}"
-    it << "spec/#{rails_version}"
-  }.join(" ")
+  flavours = [nil, "libjemalloc3.so", "libjemalloc4.so", "libjemalloc5.so"]
+  test_variants = []
 
-  run_command(build_command)
+  variants.each do |flavour|
+    variant_test_image_tag = [test_image_tag, flavour].compact.join("-")
 
-  [ruby_version, base_image_tag, test_image_tag]
-}.map { |ruby_version, base_image_tag, test_image_tag|
+    $logger.info "[#{ruby_version}] Building Rails image on top of base image with name: #{variant_test_image_tag}"
+    build_command = [].tap { |it|
+      it << "docker build --compress"
+      it << "--tag #{variant_test_image_tag}"
+      it << "--no-cache" if skip_cache?
+      it << "--file #{dockerfile}"
+      it << "--build-arg IMAGE=#{base_image_tag}"
+      it << "--build-arg LD_PRELOAD=/usr/local/lib/#{flavour}" if flavour
+      it << "spec/#{rails_version}"
+    }.join(" ")
+    run_command(build_command)
+
+    test_variants << [ruby_version, base_image_tag, variant_test_image_tag]
+  end
+
+  test_variants
+}.first.map { |ruby_version, base_image_tag, test_image_tag|
   outside_port = 3888
 
   # Boot image
   # -----------------------------------------------------------------
-  $logger.info "[#{ruby_version}] Booting Rails container on port #{outside_port}"
+  $logger.info "[#{ruby_version}] Booting Rails container #{test_image_tag} on port #{outside_port}"
   setup_command = [].tap { |it|
     it << "docker run"
     it << "--name grubruby_test"
@@ -163,6 +172,10 @@ test_time = Time.now.utc.to_i
   }.join(" ")
   run_command(delete_command)
 
+  sleep(5)
+
+  [ruby_version, base_image_tag]
+}.uniq.each { |ruby_version, base_image_tag|
   # Delete Base image
   # -----------------------------------------------------------------
   $logger.info "[#{ruby_version}] Cleaning up, deleting base-image: #{base_image_tag}"
@@ -172,6 +185,4 @@ test_time = Time.now.utc.to_i
     it << base_image_tag
   }.join(" ")
   run_command(delete_command)
-
-  sleep(5)
 }
