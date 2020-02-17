@@ -21,6 +21,9 @@ FROM $IMAGE AS bundler
   RUN apt-key add /tmp/yarn-pubkey.gpg && rm /tmp/yarn-pubkey.gpg
   RUN echo 'deb http://dl.yarnpkg.com/debian/ stable main' > /etc/apt/sources.list.d/yarn.list
 
+  ARG LD_PRELOAD=
+  ENV LD_PRELOAD=$LD_PRELOAD
+
   # Install dependencies:
   # - build-essential: To ensure certain gems can be compiled
   # - nodejs: Compile assets
@@ -48,5 +51,6 @@ FROM $IMAGE
   WORKDIR /app
 
   ENV RAILS_ENV=production
-  ENV LD_PRELOAD=/usr/local/lib/libjemalloc3.so
+  ARG LD_PRELOAD=
+  ENV LD_PRELOAD=$LD_PRELOAD
   CMD ["/usr/local/bin/thpoff", "bundle", "exec", "puma", "-C", "config/puma.rb"]
