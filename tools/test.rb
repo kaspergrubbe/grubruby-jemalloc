@@ -32,6 +32,10 @@ def healthy_server?(port)
 
   return case res.code.to_i
   when 200..299
+    if debug?
+      puts JSON.parse(res.body)
+    end
+
     true
   else
     false
