@@ -50,7 +50,7 @@ $logger.info "Building and testing images for the following Ruby-versions: #{@su
 $logger.info
 
 test_time = Time.now.utc.to_i
-@supported_versions.map { |ruby_version, sha256hash, needs_thpoff, rails_version|
+@supported_versions.map do |ruby_version, sha256hash, needs_thpoff, rails_version|
   base_image_tag = "#{@grubruby_reponame}.beta:#{test_time}-#{ruby_version}"
 
   $logger.info "[#{ruby_version}] Building base image for Ruby #{ruby_version} with name: #{base_image_tag}"
@@ -157,10 +157,21 @@ test_time = Time.now.utc.to_i
   $logger.info "[#{ruby_version}] Shutting down container"
   kill_command = [].tap { |it|
     it << "docker kill"
-    it << "--signal=SIGTERM"
+    # it << "--signal=SIGTERM"
     it << container_name
   }.join(" ")
   run_command(kill_command)
+
+  # Verify that the container is shutdown
+  # -----------------------------------------------------------------
+  $logger.info "[#{ruby_version}] Verifying that the container is shutdown"
+  shutdown = false
+  deadline = Time.now.utc + 60
+  until shutdown
+    shutdown = !docker_container_running?(container_name)
+    raise "[#{ruby_version}] Couldn't stop container #{container_name} running image #{test_image_tag} for Ruby #{ruby_version}" if Time.now.utc > deadline
+    sleep(1)
+  end
 
   # Delete Rails image
   # -----------------------------------------------------------------
@@ -172,10 +183,6 @@ test_time = Time.now.utc.to_i
   }.join(" ")
   run_command(delete_command)
 
-  sleep(5)
-
-  [ruby_version, base_image_tag]
-}.uniq.each { |ruby_version, base_image_tag|
   # Delete Base image
   # -----------------------------------------------------------------
   $logger.info "[#{ruby_version}] Cleaning up, deleting base-image: #{base_image_tag}"
@@ -185,4 +192,4 @@ test_time = Time.now.utc.to_i
     it << base_image_tag
   }.join(" ")
   run_command(delete_command)
-}
+end
