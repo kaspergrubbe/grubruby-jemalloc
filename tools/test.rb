@@ -9,7 +9,7 @@ def docker_container_running?(container_name)
     it << "docker inspect"
     it << container_name
   }.join(" ")
-  status, stdout, _ = run_command(check_command, allowed_exit_codes: [0,1])
+  status, stdout, _ = run_command(check_command, nil, [0,1])
 
   running = case status
   when 0
