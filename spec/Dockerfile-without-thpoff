@@ -2,6 +2,18 @@ ARG IMAGE=
 ARG LD_PRELOAD=
 
 FROM $IMAGE AS bundler
+  # Install newest NodeJS from https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions
+  RUN apt-get update && apt-get install -qq -y curl
+  RUN curl -sL https://deb.nodesource.com/setup_13.x | bash -
+
+  ADD https://dl.yarnpkg.com/debian/pubkey.gpg /tmp/yarn-pubkey.gpg
+  RUN apt-key add /tmp/yarn-pubkey.gpg && rm /tmp/yarn-pubkey.gpg
+  RUN echo 'deb http://dl.yarnpkg.com/debian/ stable main' > /etc/apt/sources.list.d/yarn.list
+
+  # Install dependencies:
+  # - build-essential: To ensure certain gems can be compiled
+  # - nodejs: Compile assets
+  RUN apt-get update && apt-get install -qq -y build-essential yarn nodejs --fix-missing --no-install-recommends
 
   # skip installing gem documentation
   RUN mkdir -p /usr/local/etc \
@@ -15,23 +27,9 @@ FROM $IMAGE AS bundler
 
   COPY Gemfile Gemfile.lock /app/
 
-  # Install newest NodeJS from https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions
-  RUN apt-get update && apt-get install -qq -y curl
-  RUN curl -sL https://deb.nodesource.com/setup_13.x | bash -
-
-  ADD https://dl.yarnpkg.com/debian/pubkey.gpg /tmp/yarn-pubkey.gpg
-  RUN apt-key add /tmp/yarn-pubkey.gpg && rm /tmp/yarn-pubkey.gpg
-  RUN echo 'deb http://dl.yarnpkg.com/debian/ stable main' > /etc/apt/sources.list.d/yarn.list
-
   ARG LD_PRELOAD
   ENV LD_PRELOAD=$LD_PRELOAD
-
-  # Install dependencies:
-  # - build-essential: To ensure certain gems can be compiled
-  # - nodejs: Compile assets
-  RUN apt-get update && apt-get install -qq -y build-essential yarn nodejs --fix-missing --no-install-recommends \
-      && bundle config set without 'development test' \
-      && bundle install -j 8
+  RUN bundle config set without 'development test' && bundle install -j 8
 
   COPY . /app
   RUN RAILS_ENV=production bundle exec rake assets:precompile
