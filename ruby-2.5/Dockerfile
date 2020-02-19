@@ -156,7 +156,6 @@ RUN set -eux && \
   ruby --version && \
   gem --version && \
   bundle --version && \
-  ruby -r rbconfig -e "RbConfig::CONFIG['LIBS'].include?('jemalloc') ? puts('Ruby is compiled with jemalloc') : abort('JEMALLOC IS MISSING FROM RUBY')" && \
   ruby -e "puts Integer::GMP_VERSION"
 
 # install things globally, for great justice
@@ -180,5 +179,16 @@ COPY --from=tooling /usr/local/bin/thpoff              /usr/local/bin/thpoff
 COPY --from=tooling /usr/local/lib/libjemalloc3.6.0.so /usr/local/lib/libjemalloc3.so
 COPY --from=tooling /usr/local/lib/libjemalloc4.5.0.so /usr/local/lib/libjemalloc4.so
 COPY --from=tooling /usr/local/lib/libjemalloc5.2.1.so /usr/local/lib/libjemalloc5.so
+
+# Test Jemalloc with LD_PRELOAD
+RUN MALLOC_CONF="stats_print:true" \
+  LD_PRELOAD="/usr/local/lib/libjemalloc3.so" \
+  ruby -e "exit" 2>&1 | grep "3.6.0-0"
+RUN MALLOC_CONF="stats_print:true" \
+  LD_PRELOAD="/usr/local/lib/libjemalloc4.so" \
+  ruby -e "exit" 2>&1 | grep "4.5.0-0"
+RUN MALLOC_CONF="stats_print:true" \
+  LD_PRELOAD="/usr/local/lib/libjemalloc5.so" \
+  ruby -e "exit" 2>&1 | grep "5.2.1-0"
 
 CMD [ "irb" ]
