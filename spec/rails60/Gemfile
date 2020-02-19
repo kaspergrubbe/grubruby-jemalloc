@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+# Test jemalloc compilation https://github.com/kaspergrubbe/grubruby-jemalloc/pull/38
+gem 'sq_mini_racer'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 # Use Puma as the app server
