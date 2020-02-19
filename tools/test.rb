@@ -181,4 +181,6 @@ test_time = Time.now.utc.to_i
     it << base_image_tag
   }.join(" ")
   run_command(delete_command)
+
+  $logger.info ""
 end
