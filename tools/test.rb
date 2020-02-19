@@ -72,44 +72,33 @@ test_time = Time.now.utc.to_i
   run_command(build_command)
   $logger.info "[#{ruby_version}] .. size is #{bytes_to_megabytes(docker_image_size_in_bytes(base_image_tag))} MB"
 
-  [ruby_version, needs_thpoff, rails_version, base_image_tag]
-}.map { |ruby_version, needs_thpoff, rails_version, base_image_tag|
-  test_image_tag = "#{@grubruby_reponame}.beta:#{test_time}-#{ruby_version}-webtest"
-
   dockerfile = if needs_thpoff
     "spec/Dockerfile-with-thpoff"
   else
     "spec/Dockerfile-without-thpoff"
   end
 
-  flavours = [nil, "libjemalloc3.so", "libjemalloc4.so", "libjemalloc5.so"]
-  test_variants = []
+  # Build image
+  # -----------------------------------------------------------------
+  test_image_tag = "#{@grubruby_reponame}.beta:#{test_time}-#{ruby_version}-webtest"
 
-  variants.each do |flavour|
-    variant_test_image_tag = [test_image_tag, flavour].compact.join("-")
-
-    $logger.info "[#{ruby_version}] Building Rails image on top of base image with name: #{variant_test_image_tag}"
-    build_command = [].tap { |it|
-      it << "docker build --compress"
-      it << "--tag #{variant_test_image_tag}"
-      it << "--no-cache" if skip_cache?
-      it << "--file #{dockerfile}"
-      it << "--build-arg IMAGE=#{base_image_tag}"
-      it << "--build-arg LD_PRELOAD=/usr/local/lib/#{flavour}" if flavour
-      it << "spec/#{rails_version}"
-    }.join(" ")
-    run_command(build_command)
-
-    test_variants << [ruby_version, base_image_tag, variant_test_image_tag]
-  end
-
-  test_variants
-}.first.map { |ruby_version, base_image_tag, test_image_tag|
-  outside_port = 3888
+  $logger.info "[#{ruby_version}] Building Rails image on top of base image with name: #{test_image_tag}"
+  build_command = [].tap { |it|
+    it << "docker build --compress"
+    it << "--tag #{test_image_tag}"
+    it << "--no-cache" if skip_cache?
+    it << "--file #{dockerfile}"
+    it << "--build-arg IMAGE=#{base_image_tag}"
+    it << "--build-arg LD_PRELOAD=/usr/local/lib/libjemalloc3.so"
+    it << "spec/#{rails_version}"
+  }.join(" ")
+  run_command(build_command)
 
   # Boot image
   # -----------------------------------------------------------------
+  outside_port = 3888
   $logger.info "[#{ruby_version}] Booting Rails container #{test_image_tag} on port #{outside_port}"
+
   setup_command = [].tap { |it|
     it << "docker run"
     it << "--name grubruby_test"
