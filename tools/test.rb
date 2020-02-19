@@ -9,7 +9,7 @@ def docker_container_running?(container_name)
     it << "docker inspect"
     it << container_name
   }.join(" ")
-  status, stdout, _ = run_command(check_command, allowed_exit_codes: [0,1])
+  status, stdout, _ = run_command(check_command, nil, [0,1])
 
   running = case status
   when 0
@@ -32,6 +32,10 @@ def healthy_server?(port)
 
   return case res.code.to_i
   when 200..299
+    if debug?
+      puts JSON.parse(res.body)
+    end
+
     true
   else
     false
@@ -46,7 +50,7 @@ $logger.info "Building and testing images for the following Ruby-versions: #{@su
 $logger.info
 
 test_time = Time.now.utc.to_i
-@supported_versions.map { |ruby_version, sha256hash, needs_thpoff, rails_version|
+@supported_versions.map do |ruby_version, sha256hash, needs_thpoff, rails_version|
   base_image_tag = "#{@grubruby_reponame}.beta:#{test_time}-#{ruby_version}"
 
   $logger.info "[#{ruby_version}] Building base image for Ruby #{ruby_version} with name: #{base_image_tag}"
@@ -68,15 +72,15 @@ test_time = Time.now.utc.to_i
   run_command(build_command)
   $logger.info "[#{ruby_version}] .. size is #{bytes_to_megabytes(docker_image_size_in_bytes(base_image_tag))} MB"
 
-  [ruby_version, needs_thpoff, rails_version, base_image_tag]
-}.map { |ruby_version, needs_thpoff, rails_version, base_image_tag|
-  test_image_tag = "#{@grubruby_reponame}.beta:#{test_time}-#{ruby_version}-webtest"
-
   dockerfile = if needs_thpoff
     "spec/Dockerfile-with-thpoff"
   else
     "spec/Dockerfile-without-thpoff"
   end
+
+  # Build image
+  # -----------------------------------------------------------------
+  test_image_tag = "#{@grubruby_reponame}.beta:#{test_time}-#{ruby_version}-webtest"
 
   $logger.info "[#{ruby_version}] Building Rails image on top of base image with name: #{test_image_tag}"
   build_command = [].tap { |it|
@@ -85,18 +89,16 @@ test_time = Time.now.utc.to_i
     it << "--no-cache" if skip_cache?
     it << "--file #{dockerfile}"
     it << "--build-arg IMAGE=#{base_image_tag}"
+    it << "--build-arg LD_PRELOAD=/usr/local/lib/libjemalloc3.so"
     it << "spec/#{rails_version}"
   }.join(" ")
-
   run_command(build_command)
-
-  [ruby_version, base_image_tag, test_image_tag]
-}.map { |ruby_version, base_image_tag, test_image_tag|
-  outside_port = 3888
 
   # Boot image
   # -----------------------------------------------------------------
-  $logger.info "[#{ruby_version}] Booting Rails container on port #{outside_port}"
+  outside_port = 3888
+  $logger.info "[#{ruby_version}] Booting Rails container #{test_image_tag} on port #{outside_port}"
+
   setup_command = [].tap { |it|
     it << "docker run"
     it << "--name grubruby_test"
@@ -144,10 +146,21 @@ test_time = Time.now.utc.to_i
   $logger.info "[#{ruby_version}] Shutting down container"
   kill_command = [].tap { |it|
     it << "docker kill"
-    it << "--signal=SIGTERM"
+    # it << "--signal=SIGTERM"
     it << container_name
   }.join(" ")
   run_command(kill_command)
+
+  # Verify that the container is shutdown
+  # -----------------------------------------------------------------
+  $logger.info "[#{ruby_version}] Verifying that the container is shutdown"
+  shutdown = false
+  deadline = Time.now.utc + 60
+  until shutdown
+    shutdown = !docker_container_running?(container_name)
+    raise "[#{ruby_version}] Couldn't stop container #{container_name} running image #{test_image_tag} for Ruby #{ruby_version}" if Time.now.utc > deadline
+    sleep(1)
+  end
 
   # Delete Rails image
   # -----------------------------------------------------------------
@@ -169,5 +182,5 @@ test_time = Time.now.utc.to_i
   }.join(" ")
   run_command(delete_command)
 
-  sleep(5)
-}
+  $logger.info ""
+end

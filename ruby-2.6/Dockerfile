@@ -45,7 +45,6 @@ RUN set -eux && \
     libyaml-dev \
     procps \
     zlib1g-dev \
-    libjemalloc-dev \
   && \
   rm -rf /var/lib/apt/lists/*
 
@@ -118,7 +117,6 @@ RUN set -eux && \
     --build="$gnuArch" \
     --disable-install-doc \
     --enable-shared \
-    --with-jemalloc \
   && \
   make -j "$(nproc)" && \
   make install && \
@@ -151,7 +149,6 @@ RUN set -eux && \
   ruby --version && \
   gem --version && \
   bundle --version && \
-  ruby -r rbconfig -e "RbConfig::CONFIG['MAINLIBS'].include?('jemalloc') ? puts('Ruby is compiled with jemalloc') : abort('JEMALLOC IS MISSING FROM RUBY')" && \
   ruby -e "puts Integer::GMP_VERSION"
 
 # install things globally, for great justice
@@ -174,5 +171,16 @@ RUN mkdir -p "$GEM_HOME" && chmod 777 "$GEM_HOME" && \
 COPY --from=tooling /usr/local/lib/libjemalloc3.6.0.so /usr/local/lib/libjemalloc3.so
 COPY --from=tooling /usr/local/lib/libjemalloc4.5.0.so /usr/local/lib/libjemalloc4.so
 COPY --from=tooling /usr/local/lib/libjemalloc5.2.1.so /usr/local/lib/libjemalloc5.so
+
+# Test Jemalloc with LD_PRELOAD
+RUN MALLOC_CONF="stats_print:true" \
+  LD_PRELOAD="/usr/local/lib/libjemalloc3.so" \
+  ruby -e "exit" 2>&1 | grep "3.6.0-0"
+RUN MALLOC_CONF="stats_print:true" \
+  LD_PRELOAD="/usr/local/lib/libjemalloc4.so" \
+  ruby -e "exit" 2>&1 | grep "4.5.0-0"
+RUN MALLOC_CONF="stats_print:true" \
+  LD_PRELOAD="/usr/local/lib/libjemalloc5.so" \
+  ruby -e "exit" 2>&1 | grep "5.2.1-0"
 
 CMD [ "irb" ]

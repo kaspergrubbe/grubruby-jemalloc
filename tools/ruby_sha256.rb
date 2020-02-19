@@ -3,7 +3,7 @@ def program_exists?(program)
   $?.success?
 end
 
-def run_command(command)
+def system_exec(command)
   system(command)
 
   unless $?.success?
@@ -27,6 +27,6 @@ unless ruby_version.split('.').size == 3
 end
 ruby_major   = ruby_version.split('.')[0..1].join('.')
 
-run_command "wget -O ruby.tar.xz \"https://cache.ruby-lang.org/pub/ruby/#{ruby_major}/ruby-#{ruby_version}.tar.xz\""
-run_command "shasum -a 256 ruby.tar.xz"
-run_command "rm ruby.tar.xz"
+syste_exec "wget -O ruby.tar.xz \"https://cache.ruby-lang.org/pub/ruby/#{ruby_major}/ruby-#{ruby_version}.tar.xz\""
+syste_exec "shasum -a 256 ruby.tar.xz"
+syste_exec "rm ruby.tar.xz"

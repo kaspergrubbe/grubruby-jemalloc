@@ -1,6 +1,6 @@
 # Grubruby-jemalloc
 
-This is a collection of Ruby images that builds Ruby with support for jemalloc (`--with-jemalloc`) and also bundles the images with stable releases of jemalloc.
+This is a collection of Ruby images that ships with stable releases of jemalloc.
 
 It is also bundled with `thpoff` which can disable huge page support which will be the default in Ruby 2.6 according to https://bugs.ruby-lang.org/issues/14705
 
