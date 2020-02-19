@@ -1,4 +1,6 @@
 ARG IMAGE=
+ARG LD_PRELOAD=
+
 FROM $IMAGE AS bundler
 
   # skip installing gem documentation
@@ -21,7 +23,7 @@ FROM $IMAGE AS bundler
   RUN apt-key add /tmp/yarn-pubkey.gpg && rm /tmp/yarn-pubkey.gpg
   RUN echo 'deb http://dl.yarnpkg.com/debian/ stable main' > /etc/apt/sources.list.d/yarn.list
 
-  ARG LD_PRELOAD=
+  ARG LD_PRELOAD
   ENV LD_PRELOAD=$LD_PRELOAD
 
   # Install dependencies:
@@ -51,6 +53,6 @@ FROM $IMAGE
   WORKDIR /app
 
   ENV RAILS_ENV=production
-  ARG LD_PRELOAD=
+  ARG LD_PRELOAD
   ENV LD_PRELOAD=$LD_PRELOAD
   CMD ["/usr/local/bin/thpoff", "bundle", "exec", "puma", "-C", "config/puma.rb"]
