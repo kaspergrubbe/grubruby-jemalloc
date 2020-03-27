@@ -5,6 +5,36 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+N/A
+
+## [9000] - 2020-03-27
+
+Grubruby version `9000` ships with:
+- Rubygems `3.1.2`.
+- Bundler `2.1.4`.
+- Jemalloc `3.6.0`, `4.5.0` and `5.2.1`.
+
+And the following Ruby-versions:
+- `2.4.4` as `kaspergrubbe/grubruby-jemalloc:2.4.4.9000` (164.06 MB).
+- `2.4.5` as `kaspergrubbe/grubruby-jemalloc:2.4.5.9000` (164.08 MB).
+- `2.4.6` as `kaspergrubbe/grubruby-jemalloc:2.4.6.9000` (164.08 MB).
+- `2.4.7` as `kaspergrubbe/grubruby-jemalloc:2.4.7.9000` (163.98 MB).
+- `2.4.8` as `kaspergrubbe/grubruby-jemalloc:2.4.8.9000` (163.99 MB).
+- `2.4.9` as `kaspergrubbe/grubruby-jemalloc:2.4.9.9000` (163.98 MB).
+- `2.5.1` as `kaspergrubbe/grubruby-jemalloc:2.5.1.9000` (164.7 MB).
+- `2.5.2` as `kaspergrubbe/grubruby-jemalloc:2.5.2.9000` (164.33 MB).
+- `2.5.3` as `kaspergrubbe/grubruby-jemalloc:2.5.3.9000` (164.72 MB).
+- `2.5.5` as `kaspergrubbe/grubruby-jemalloc:2.5.5.9000` (164.72 MB).
+- `2.5.6` as `kaspergrubbe/grubruby-jemalloc:2.5.6.9000` (164.63 MB).
+- `2.5.7` as `kaspergrubbe/grubruby-jemalloc:2.5.7.9000` (164.63 MB).
+- `2.6.0` as `kaspergrubbe/grubruby-jemalloc:2.6.0.9000` (167.76 MB).
+- `2.6.1` as `kaspergrubbe/grubruby-jemalloc:2.6.1.9000` (167.74 MB).
+- `2.6.2` as `kaspergrubbe/grubruby-jemalloc:2.6.2.9000` (167.75 MB).
+- `2.6.3` as `kaspergrubbe/grubruby-jemalloc:2.6.3.9000` (167.81 MB).
+- `2.6.4` as `kaspergrubbe/grubruby-jemalloc:2.6.4.9000` (167.72 MB).
+- `2.6.5` as `kaspergrubbe/grubruby-jemalloc:2.6.5.9000` (167.72 MB).
+- `2.7.0` as `kaspergrubbe/grubruby-jemalloc:2.7.0.9000` (163.06 MB).
+
 ### Changed
 - Updated base-image from Debian 9 (stretch) to Debian 10 (buster). This means that **SOME THINGS MIGHT BREAK**, so please update carefully, there are newer packages and there might be updated package names. [#34](https://github.com/kaspergrubbe/grubruby-jemalloc/pull/34)
 - We no longer compile Ruby with the `--with-jemalloc` flag, this means that `LD_PRELOAD` needs to be used if Jemalloc needs to be used.
