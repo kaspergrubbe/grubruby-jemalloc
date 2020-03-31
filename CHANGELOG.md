@@ -5,7 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-N/A
+- Add Ruby `2.5.8`, `2.6.6` and `2.7.1` that fixes CVE-2020-10933 which is related to a heap exposure vulnerability in the socket library, read more here: https://www.ruby-lang.org/en/news/2020/03/31/heap-exposure-in-socket-cve-2020-10933/
+- Add Ruby `2.4.10` that fixes CVE-2020-16255 which is related to Unsafe Object Creation Vulnerability in JSON, read more here: https://www.ruby-lang.org/en/news/2020/03/31/ruby-2-4-10-released/
 
 ## [9000] - 2020-03-27
 
