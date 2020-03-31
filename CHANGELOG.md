@@ -5,6 +5,42 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+N/A
+
+## [9001] - 2020-03-31
+
+Grubruby version `9000` ships with:
+- Rubygems `3.1.2`.
+- Bundler `2.1.4`.
+- Jemalloc `3.6.0`, `4.5.0` and `5.2.1`.
+
+And the following Ruby-versions:
+- `2.4.4` as `grubruby-jemalloc.local:2.4.4.9001` (164.06 MB).
+- `2.4.5` as `grubruby-jemalloc.local:2.4.5.9001` (164.08 MB).
+- `2.4.6` as `grubruby-jemalloc.local:2.4.6.9001` (164.08 MB).
+- `2.4.7` as `grubruby-jemalloc.local:2.4.7.9001` (163.98 MB).
+- `2.4.8` as `grubruby-jemalloc.local:2.4.8.9001` (163.99 MB).
+- `2.4.9` as `grubruby-jemalloc.local:2.4.9.9001` (163.98 MB).
+- `2.4.10` as `grubruby-jemalloc.local:2.4.10.9001` (163.98 MB).
+- `2.5.1` as `grubruby-jemalloc.local:2.5.1.9001` (164.7 MB).
+- `2.5.2` as `grubruby-jemalloc.local:2.5.2.9001` (164.33 MB).
+- `2.5.3` as `grubruby-jemalloc.local:2.5.3.9001` (164.72 MB).
+- `2.5.5` as `grubruby-jemalloc.local:2.5.5.9001` (164.72 MB).
+- `2.5.6` as `grubruby-jemalloc.local:2.5.6.9001` (164.63 MB).
+- `2.5.7` as `grubruby-jemalloc.local:2.5.7.9001` (164.63 MB).
+- `2.5.8` as `grubruby-jemalloc.local:2.5.8.9001` (164.64 MB).
+- `2.6.0` as `grubruby-jemalloc.local:2.6.0.9001` (167.76 MB).
+- `2.6.1` as `grubruby-jemalloc.local:2.6.1.9001` (167.74 MB).
+- `2.6.2` as `grubruby-jemalloc.local:2.6.2.9001` (167.75 MB).
+- `2.6.3` as `grubruby-jemalloc.local:2.6.3.9001` (167.81 MB).
+- `2.6.4` as `grubruby-jemalloc.local:2.6.4.9001` (167.72 MB).
+- `2.6.5` as `grubruby-jemalloc.local:2.6.5.9001` (167.72 MB).
+- `2.6.6` as `grubruby-jemalloc.local:2.6.6.9001` (167.72 MB).
+- `2.7.0` as `grubruby-jemalloc.local:2.7.0.9001` (163.06 MB).
+- `2.7.1` as `grubruby-jemalloc.local:2.7.1.9001` (163.08 MB).
+
+### Added
+
 - Add Ruby `2.5.8`, `2.6.6` and `2.7.1` that fixes CVE-2020-10933 which is related to a heap exposure vulnerability in the socket library, read more here: https://www.ruby-lang.org/en/news/2020/03/31/heap-exposure-in-socket-cve-2020-10933/
 - Add Ruby `2.4.10` that fixes CVE-2020-16255 which is related to Unsafe Object Creation Vulnerability in JSON, read more here: https://www.ruby-lang.org/en/news/2020/03/31/ruby-2-4-10-released/
 
