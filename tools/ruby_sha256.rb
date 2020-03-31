@@ -27,6 +27,6 @@ unless ruby_version.split('.').size == 3
 end
 ruby_major   = ruby_version.split('.')[0..1].join('.')
 
-syste_exec "wget -O ruby.tar.xz \"https://cache.ruby-lang.org/pub/ruby/#{ruby_major}/ruby-#{ruby_version}.tar.xz\""
-syste_exec "shasum -a 256 ruby.tar.xz"
-syste_exec "rm ruby.tar.xz"
+system_exec "wget -O ruby.tar.xz \"https://cache.ruby-lang.org/pub/ruby/#{ruby_major}/ruby-#{ruby_version}.tar.xz\""
+system_exec "shasum -a 256 ruby.tar.xz"
+system_exec "rm ruby.tar.xz"
