@@ -5,12 +5,46 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+N/A
+
+## [9002] - 2020-05-09
+
+Grubruby version `9002` ships with:
+- Rubygems `3.1.3`.
+- Bundler `2.1.4`.
+- Jemalloc `3.6.0`, `4.5.0` and `5.2.1`.
+
+And the following Ruby-versions:
+- `2.4.4` as `kaspergrubbe/grubruby-jemalloc:2.4.4.9002` (164.07 MB).
+- `2.4.5` as `kaspergrubbe/grubruby-jemalloc:2.4.5.9002` (164.09 MB).
+- `2.4.6` as `kaspergrubbe/grubruby-jemalloc:2.4.6.9002` (164.09 MB).
+- `2.4.7` as `kaspergrubbe/grubruby-jemalloc:2.4.7.9002` (163.99 MB).
+- `2.4.8` as `kaspergrubbe/grubruby-jemalloc:2.4.8.9002` (164.0 MB).
+- `2.4.9` as `kaspergrubbe/grubruby-jemalloc:2.4.9.9002` (163.99 MB).
+- `2.4.10` as `kaspergrubbe/grubruby-jemalloc:2.4.10.9002` (163.99 MB).
+- `2.5.1` as `kaspergrubbe/grubruby-jemalloc:2.5.1.9002` (164.71 MB).
+- `2.5.2` as `kaspergrubbe/grubruby-jemalloc:2.5.2.9002` (164.34 MB).
+- `2.5.3` as `kaspergrubbe/grubruby-jemalloc:2.5.3.9002` (164.72 MB).
+- `2.5.5` as `kaspergrubbe/grubruby-jemalloc:2.5.5.9002` (164.73 MB).
+- `2.5.6` as `kaspergrubbe/grubruby-jemalloc:2.5.6.9002` (164.64 MB).
+- `2.5.7` as `kaspergrubbe/grubruby-jemalloc:2.5.7.9002` (164.64 MB).
+- `2.5.8` as `kaspergrubbe/grubruby-jemalloc:2.5.8.9002` (164.64 MB).
+- `2.6.0` as `kaspergrubbe/grubruby-jemalloc:2.6.0.9002` (167.77 MB).
+- `2.6.1` as `kaspergrubbe/grubruby-jemalloc:2.6.1.9002` (167.74 MB).
+- `2.6.2` as `kaspergrubbe/grubruby-jemalloc:2.6.2.9002` (167.76 MB).
+- `2.6.3` as `kaspergrubbe/grubruby-jemalloc:2.6.3.9002` (167.81 MB).
+- `2.6.4` as `kaspergrubbe/grubruby-jemalloc:2.6.4.9002` (167.73 MB).
+- `2.6.5` as `kaspergrubbe/grubruby-jemalloc:2.6.5.9002` (167.73 MB).
+- `2.6.6` as `kaspergrubbe/grubruby-jemalloc:2.6.6.9002` (167.73 MB).
+- `2.7.0` as `kaspergrubbe/grubruby-jemalloc:2.7.0.9002` (169.84 MB).
+- `2.7.1` as `kaspergrubbe/grubruby-jemalloc:2.7.1.9002` (169.86 MB).
+
 ### Changed
 - Updated Rubygems to version `3.1.3` (from `3.1.2`) that includes a couple of smaller fixes: https://blog.rubygems.org/2020/05/05/3.1.3-released.html
 
 ## [9001] - 2020-03-31
 
-Grubruby version `9000` ships with:
+Grubruby version `9001` ships with:
 - Rubygems `3.1.2`.
 - Bundler `2.1.4`.
 - Jemalloc `3.6.0`, `4.5.0` and `5.2.1`.
