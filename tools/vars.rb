@@ -3,7 +3,7 @@ require "open3"
 @grubruby_repoowner = 'kaspergrubbe'
 @grubruby_reponame  = 'grubruby-jemalloc'
 @grubruby_version   = '9002'
-@rubygems_version   = '3.1.3'
+@rubygems_version   = '3.1.4'
 @bundler_version    = '2.1.4'
 
 # VERSION, HASH, NEEDS_THPOFF, RAILS_VERSION
