@@ -5,6 +5,41 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+N/A
+
+## [9003] - 2020-10-02
+
+Grubruby version `9003` ships with:
+- Rubygems `3.1.4`.
+- Bundler `2.1.4`.
+- Jemalloc `3.6.0`, `4.5.0` and `5.2.1`.
+
+And the following Ruby-versions:
+- `2.4.4` as `grubruby-jemalloc.local:2.4.4.9003` (164.09 MB).
+- `2.4.5` as `grubruby-jemalloc.local:2.4.5.9003` (164.1 MB).
+- `2.4.6` as `grubruby-jemalloc.local:2.4.6.9003` (164.1 MB).
+- `2.4.7` as `grubruby-jemalloc.local:2.4.7.9003` (164.0 MB).
+- `2.4.8` as `grubruby-jemalloc.local:2.4.8.9003` (164.01 MB).
+- `2.4.9` as `grubruby-jemalloc.local:2.4.9.9003` (164.0 MB).
+- `2.4.10` as `grubruby-jemalloc.local:2.4.10.9003` (164.0 MB).
+- `2.5.1` as `grubruby-jemalloc.local:2.5.1.9003` (164.72 MB).
+- `2.5.2` as `grubruby-jemalloc.local:2.5.2.9003` (164.35 MB).
+- `2.5.3` as `grubruby-jemalloc.local:2.5.3.9003` (164.74 MB).
+- `2.5.5` as `grubruby-jemalloc.local:2.5.5.9003` (164.74 MB).
+- `2.5.6` as `grubruby-jemalloc.local:2.5.6.9003` (164.65 MB).
+- `2.5.7` as `grubruby-jemalloc.local:2.5.7.9003` (164.65 MB).
+- `2.5.8` as `grubruby-jemalloc.local:2.5.8.9003` (164.66 MB).
+- `2.6.0` as `grubruby-jemalloc.local:2.6.0.9003` (167.78 MB).
+- `2.6.1` as `grubruby-jemalloc.local:2.6.1.9003` (167.76 MB).
+- `2.6.2` as `grubruby-jemalloc.local:2.6.2.9003` (167.77 MB).
+- `2.6.3` as `grubruby-jemalloc.local:2.6.3.9003` (167.83 MB).
+- `2.6.4` as `grubruby-jemalloc.local:2.6.4.9003` (167.74 MB).
+- `2.6.5` as `grubruby-jemalloc.local:2.6.5.9003` (167.74 MB).
+- `2.6.6` as `grubruby-jemalloc.local:2.6.6.9003` (167.74 MB).
+- `2.7.0` as `grubruby-jemalloc.local:2.7.0.9003` (169.85 MB).
+- `2.7.1` as `grubruby-jemalloc.local:2.7.1.9003` (169.87 MB).
+- `2.7.2` as `grubruby-jemalloc.local:2.7.2.9003` (163.11 MB).
+
 ### Added
 - Added Ruby `2.7.2` that disables deprecated warnings by default fixes, it also includes a new version of WEBrick that fixes [CVE-2020-25613](https://www.ruby-lang.org/en/news/2020/09/29/http-request-smuggling-cve-2020-25613/), read more here: https://www.ruby-lang.org/en/news/2020/10/02/ruby-2-7-2-released/
 
