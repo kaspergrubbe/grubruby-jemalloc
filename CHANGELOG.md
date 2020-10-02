@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+- Added Ruby `2.7.2` that disables deprecated warnings by default fixes, it also includes a new version of WEBrick that fixes [CVE-2020-25613](https://www.ruby-lang.org/en/news/2020/09/29/http-request-smuggling-cve-2020-25613/), read more here: https://www.ruby-lang.org/en/news/2020/10/02/ruby-2-7-2-released/
+
 ### Changed
 - Updated Rubygems to version `3.1.4` (from version `3.1.3`) which is a very small release: https://github.com/rubygems/rubygems/releases/tag/v3.1.4
 

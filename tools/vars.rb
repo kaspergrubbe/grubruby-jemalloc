@@ -31,4 +31,5 @@ require "open3"
   ["2.6.6", "5db187882b7ac34016cd48d7032e197f07e4968f406b0690e20193b9b424841f",  false, "rails60"],
   ["2.7.0", "27d350a52a02b53034ca0794efe518667d558f152656c2baaf08f3d0c8b02343",  false, "rails60"],
   ["2.7.1", "b224f9844646cc92765df8288a46838511c1cec5b550d8874bd4686a904fcee7",  false, "rails60"],
+  ["2.7.2", "1b95ab193cc8f5b5e59d2686cb3d5dcf1ddf2a86cb6950e0b4bdaae5040ec0d6",  false, "rails60"],
 ]
