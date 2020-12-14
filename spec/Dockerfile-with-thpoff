@@ -4,7 +4,7 @@ ARG LD_PRELOAD=
 FROM $IMAGE AS bundler
   # Install newest NodeJS from https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions
   RUN apt-get update && apt-get install -qq -y curl
-  RUN curl -sL https://deb.nodesource.com/setup_13.x | bash -
+  RUN curl -sL https://deb.nodesource.com/setup_15.x | bash -
 
   ADD https://dl.yarnpkg.com/debian/pubkey.gpg /tmp/yarn-pubkey.gpg
   RUN apt-key add /tmp/yarn-pubkey.gpg && rm /tmp/yarn-pubkey.gpg
