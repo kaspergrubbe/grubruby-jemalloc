@@ -82,7 +82,10 @@ test_time = Time.now.utc.to_i
   # -----------------------------------------------------------------
   test_image_tag = "#{@grubruby_reponame}.beta:#{test_time}-#{ruby_version}-webtest"
 
-  $logger.info "[#{ruby_version}] Building Rails image on top of base image with name: #{test_image_tag}"
+  $logger.info "[#{ruby_version}] Building Rails image on top of base image:"
+  $logger.info "[#{ruby_version}] .. base-image: #{base_image_tag}"
+  $logger.info "[#{ruby_version}] .. test-image: #{test_image_tag}"
+
   build_command = [].tap { |it|
     it << "docker build --compress"
     it << "--tag #{test_image_tag}"
@@ -118,8 +121,10 @@ test_time = Time.now.utc.to_i
   until running
     running = docker_container_running?(container_name)
     raise "[#{ruby_version}] Couldn't start container #{container_name} running image #{test_image_tag} for Ruby #{ruby_version}" if Time.now.utc > deadline
+    print '.'
     sleep(1)
   end
+  print "\n"
 
   # Verify that the container is responding on specified port
   # -----------------------------------------------------------------
