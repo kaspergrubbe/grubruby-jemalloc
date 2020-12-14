@@ -25,7 +25,8 @@ FROM $IMAGE AS bundler
   RUN mkdir /app
   WORKDIR /app
 
-  COPY Gemfile Gemfile.lock /app/
+  COPY Gemfile /app/
+  COPY Gemfile.lock /app/
 
   ARG LD_PRELOAD
   ENV LD_PRELOAD=$LD_PRELOAD
