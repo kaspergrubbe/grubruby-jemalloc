@@ -188,4 +188,6 @@ test_time = Time.now.utc.to_i
   run_command(delete_command)
 
   $logger.info ""
+  $logger.info "-" * 80
+  $logger.info ""
 end
