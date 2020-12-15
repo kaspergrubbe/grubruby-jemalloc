@@ -30,7 +30,10 @@ FROM $IMAGE AS bundler
 
   ARG LD_PRELOAD
   ENV LD_PRELOAD=$LD_PRELOAD
-  RUN bundle config set without 'development test' && bundle install -j 8
+
+  RUN bundle config --local set jobs 8
+  RUN bundle config --local set without 'development test'
+  RUN bundle install
 
   COPY . /app
   RUN RAILS_ENV=production bundle exec rake assets:precompile
