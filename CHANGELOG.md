@@ -6,8 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Changed
-- Upgraded Bundler to version `2.2.0` (was `2.1.4`), includes some major fixes and enhancements: https://github.com/rubygems/rubygems/releases/tag/bundler-v2.2.0
-- Updated Rubygems to version `3.2.0` (from version `3.1.4`)
+- Upgraded Bundler to version `2.2.1` (was `2.1.4`), includes some major fixes and enhancements: https://github.com/rubygems/rubygems/releases/tag/bundler-v2.2.0 and https://github.com/rubygems/rubygems/releases/tag/bundler-v2.2.1
+- Updated Rubygems to version `3.2.1` (from version `3.1.4`)
 
 ## [9003] - 2020-10-02
 
