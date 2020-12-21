@@ -5,6 +5,41 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+N/A
+
+## [9005] - 2020-12-21
+
+Grubruby version `9005` ships with:
+- Rubygems `3.2.2`.
+- Bundler `2.2.2`.
+- Jemalloc `3.6.0`, `4.5.0` and `5.2.1`.
+
+And the following Ruby-versions:
+- `2.4.4` as `grubruby-jemalloc.local:2.4.4.9005` (165.27 MB).
+- `2.4.5` as `grubruby-jemalloc.local:2.4.5.9005` (165.29 MB).
+- `2.4.6` as `grubruby-jemalloc.local:2.4.6.9005` (165.29 MB).
+- `2.4.7` as `grubruby-jemalloc.local:2.4.7.9005` (165.19 MB).
+- `2.4.8` as `grubruby-jemalloc.local:2.4.8.9005` (165.2 MB).
+- `2.4.9` as `grubruby-jemalloc.local:2.4.9.9005` (165.19 MB).
+- `2.4.10` as `grubruby-jemalloc.local:2.4.10.9005` (165.19 MB).
+- `2.5.1` as `grubruby-jemalloc.local:2.5.1.9005` (165.91 MB).
+- `2.5.2` as `grubruby-jemalloc.local:2.5.2.9005` (165.54 MB).
+- `2.5.3` as `grubruby-jemalloc.local:2.5.3.9005` (165.93 MB).
+- `2.5.5` as `grubruby-jemalloc.local:2.5.5.9005` (165.93 MB).
+- `2.5.6` as `grubruby-jemalloc.local:2.5.6.9005` (165.84 MB).
+- `2.5.7` as `grubruby-jemalloc.local:2.5.7.9005` (165.84 MB).
+- `2.5.8` as `grubruby-jemalloc.local:2.5.8.9005` (165.85 MB).
+- `2.6.0` as `grubruby-jemalloc.local:2.6.0.9005` (168.86 MB).
+- `2.6.1` as `grubruby-jemalloc.local:2.6.1.9005` (168.84 MB).
+- `2.6.2` as `grubruby-jemalloc.local:2.6.2.9005` (168.85 MB).
+- `2.6.3` as `grubruby-jemalloc.local:2.6.3.9005` (168.91 MB).
+- `2.6.4` as `grubruby-jemalloc.local:2.6.4.9005` (168.83 MB).
+- `2.6.5` as `grubruby-jemalloc.local:2.6.5.9005` (168.82 MB).
+- `2.6.6` as `grubruby-jemalloc.local:2.6.6.9005` (168.82 MB).
+- `2.7.0` as `grubruby-jemalloc.local:2.7.0.9005` (170.93 MB).
+- `2.7.1` as `grubruby-jemalloc.local:2.7.1.9005` (170.95 MB).
+- `2.7.2` as `grubruby-jemalloc.local:2.7.2.9005` (170.97 MB).
+
 ### Changed
 - Upgraded Bundler to version `2.2.2` (was `2.2.1`)
 - Updated Rubygems to version `3.2.2` (was `3.2.1`)
