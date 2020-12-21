@@ -50,27 +50,51 @@ $logger.info "Building and testing images for the following Ruby-versions: #{@su
 $logger.info
 
 test_time = Time.now.utc.to_i
-@supported_versions.map do |ruby_version, sha256hash, needs_thpoff, rails_version|
-  base_image_tag = "#{@grubruby_reponame}.beta:#{test_time}-#{ruby_version}"
 
-  $logger.info "[#{ruby_version}] Building base image for Ruby #{ruby_version} with name: #{base_image_tag}"
+base_image_tag = "#{@grubruby_reponame}.beta:#{test_time}-base"
+base_command = [].tap { |it|
+  it << 'docker build --compress'
+  it << "--tag #{base_image_tag}"
+  it << "--no-cache" if skip_cache?
+  it << "--file base/Dockerfile"
+  it << '.'
+}.join(' ')
+run_command(base_command)
+
+buildjemalloc_tag = "#{@grubruby_reponame}.beta:#{test_time}-buildjemalloc" 
+buildjemalloc_command = [].tap { |it|
+  it << 'docker build --compress'
+  it << "--tag #{buildjemalloc_tag}"
+  it << "--no-cache" if skip_cache?
+  it << "--file buildjemalloc/Dockerfile"
+  it << "--build-arg BASE_IMAGE=#{base_image_tag}"
+  it << '.'
+}.join(' ')
+run_command(buildjemalloc_command)
+
+@supported_versions.map do |ruby_version, sha256hash, needs_thpoff, rails_version|
+  base_ruby_image_tag = "#{@grubruby_reponame}.beta:#{test_time}-#{ruby_version}"
+
+  $logger.info "[#{ruby_version}] Building base image for Ruby #{ruby_version} with name: #{base_ruby_image_tag}"
   build_command = [].tap { |it|
     ruby_version_major = ruby_version[0..2]
     dockerfile = "ruby-#{ruby_version_major}/Dockerfile"
 
     it << "docker build --compress"
-    it << "--tag #{base_image_tag}"
+    it << "--tag #{base_ruby_image_tag}"
     it << "--no-cache" if skip_cache?
     it << "--file #{dockerfile}"
-    it << "--build-arg RUBY_MAJOR=#{ruby_version_major}"
+    it << "--build-arg BASE_IMAGE=#{base_image_tag}"
+    it << "--build-arg BUILDJEMALLOC_IMAGE=#{buildjemalloc_tag}"
     it << "--build-arg RUBY_VERSION=#{ruby_version}"
+    it << "--build-arg RUBY_MAJOR=#{ruby_version_major}"
     it << "--build-arg RUBY_DOWNLOAD_SHA256=#{sha256hash}"
     it << "--build-arg RUBYGEMS_VERSION=#{@rubygems_version}"
     it << "--build-arg BUNDLER_VERSION=#{@bundler_version}"
     it << "."
   }.join(" ")
   run_command(build_command)
-  $logger.info "[#{ruby_version}] .. size is #{bytes_to_megabytes(docker_image_size_in_bytes(base_image_tag))} MB"
+  $logger.info "[#{ruby_version}] .. size is #{bytes_to_megabytes(docker_image_size_in_bytes(base_ruby_image_tag))} MB"
 
   dockerfile = if needs_thpoff
     "spec/Dockerfile-with-thpoff"
@@ -83,7 +107,7 @@ test_time = Time.now.utc.to_i
   test_image_tag = "#{@grubruby_reponame}.beta:#{test_time}-#{ruby_version}-webtest"
 
   $logger.info "[#{ruby_version}] Building Rails image on top of base image:"
-  $logger.info "[#{ruby_version}] .. base-image: #{base_image_tag}"
+  $logger.info "[#{ruby_version}] .. base-image: #{base_ruby_image_tag}"
   $logger.info "[#{ruby_version}] .. test-image: #{test_image_tag}"
 
   build_command = [].tap { |it|
@@ -91,7 +115,7 @@ test_time = Time.now.utc.to_i
     it << "--tag #{test_image_tag}"
     it << "--no-cache" if skip_cache?
     it << "--file #{dockerfile}"
-    it << "--build-arg IMAGE=#{base_image_tag}"
+    it << "--build-arg IMAGE=#{base_ruby_image_tag}"
     it << "--build-arg LD_PRELOAD=/usr/local/lib/libjemalloc3.so"
     it << "spec/#{rails_version}"
   }.join(" ")
@@ -177,13 +201,13 @@ test_time = Time.now.utc.to_i
   }.join(" ")
   run_command(delete_command)
 
-  # Delete Base image
+  # Delete Ruby Base image
   # -----------------------------------------------------------------
-  $logger.info "[#{ruby_version}] Cleaning up, deleting base-image: #{base_image_tag}"
+  $logger.info "[#{ruby_version}] Cleaning up, deleting ruby-base-image: #{base_ruby_image_tag}"
   delete_command = [].tap { |it|
     it << "docker image rm"
     it << "--force"
-    it << base_image_tag
+    it << base_ruby_image_tag 
   }.join(" ")
   run_command(delete_command)
 

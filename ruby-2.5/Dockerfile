@@ -1,45 +1,15 @@
 ################################################################################
-# Build and compile Jemalloc and Thpoff
-################################################################################
-FROM debian:buster-slim AS tooling
-  RUN apt-get update && apt-get install -qq -y build-essential wget ca-certificates --fix-missing --no-install-recommends
-
-  ENV JEMALLOC_3_SHA256 e16c2159dd3c81ca2dc3b5c9ef0d43e1f2f45b04548f42db12e7c12d7bdf84fe
-  RUN mkdir /jemalloc-stable && cd /jemalloc-stable && \
-        wget https://github.com/jemalloc/jemalloc/releases/download/3.6.0/jemalloc-3.6.0.tar.bz2 && \
-        echo "$JEMALLOC_3_SHA256 *jemalloc-3.6.0.tar.bz2" | sha256sum -c - && \
-        tar -xjf jemalloc-3.6.0.tar.bz2 && cd jemalloc-3.6.0 && ./configure --prefix=/usr/local && make && make install && \
-        cd / && rm -rf /jemalloc-stable && \
-        mv /usr/local/lib/libjemalloc.so /usr/local/lib/libjemalloc3.6.0.so
-
-  ENV JEMALLOC_4_SHA256 9409d85664b4f135b77518b0b118c549009dc10f6cba14557d170476611f6780
-  RUN mkdir /jemalloc-new && cd /jemalloc-new && \
-        wget https://github.com/jemalloc/jemalloc/releases/download/4.5.0/jemalloc-4.5.0.tar.bz2 && \
-        echo "$JEMALLOC_4_SHA256 *jemalloc-4.5.0.tar.bz2" | sha256sum -c - && \
-        tar -xjf jemalloc-4.5.0.tar.bz2 && cd jemalloc-4.5.0 && ./configure --prefix=/usr/local --with-install-suffix=4.5.0 && make build_lib && make install_lib && \
-        cd / && rm -rf /jemalloc-new
-
-  ENV JEMALLOC_5_SHA256 34330e5ce276099e2e8950d9335db5a875689a4c6a56751ef3b1d8c537f887f6
-  RUN mkdir /jemalloc-new && cd /jemalloc-new && \
-        wget https://github.com/jemalloc/jemalloc/releases/download/5.2.1/jemalloc-5.2.1.tar.bz2 && \
-        echo "$JEMALLOC_5_SHA256 *jemalloc-5.2.1.tar.bz2" | sha256sum -c - && \
-        tar -xjf jemalloc-5.2.1.tar.bz2 && cd jemalloc-5.2.1 && ./configure --prefix=/usr/local --with-install-suffix=5.2.1 && make build_lib && make install_lib && \
-        cd / && rm -rf /jemalloc-new
-
-  # This tool allows us to disable huge page support for our current process
-  # since the flag is preserved through forks and execs it can be used on any
-  # process
-  # Obsolete with Ruby 2.6, according to https://bugs.ruby-lang.org/issues/14705
-  ADD source/thpoff.c /src/thpoff.c
-  RUN gcc -o /usr/local/bin/thpoff /src/thpoff.c && rm /src/thpoff.c
-
-################################################################################
 # Normal Ruby-build blatantly stolen from:
 #   https://github.com/docker-library/ruby/blob/defb10adcd6dd2178be3cd9c884fd035b52d42fb/2.4/buster/slim/Dockerfile
 #
 # .. but with added jemalloc!
 ################################################################################
-FROM debian:buster-slim
+ARG BASE_IMAGE=
+
+ARG BUILDJEMALLOC_IMAGE=
+FROM $BUILDJEMALLOC_IMAGE as buildjemalloc_image
+
+FROM $BASE_IMAGE
 
 RUN set -eux && \
   apt-get update && \
@@ -175,10 +145,10 @@ RUN mkdir -p "$GEM_HOME" && chmod 777 "$GEM_HOME" && \
 ################################################################################
 # Add in Thpoff and Jemalloc libraries
 ################################################################################
-COPY --from=tooling /usr/local/bin/thpoff              /usr/local/bin/thpoff
-COPY --from=tooling /usr/local/lib/libjemalloc3.6.0.so /usr/local/lib/libjemalloc3.so
-COPY --from=tooling /usr/local/lib/libjemalloc4.5.0.so /usr/local/lib/libjemalloc4.so
-COPY --from=tooling /usr/local/lib/libjemalloc5.2.1.so /usr/local/lib/libjemalloc5.so
+COPY --from=buildjemalloc_image /usr/local/bin/thpoff              /usr/local/bin/thpoff
+COPY --from=buildjemalloc_image /usr/local/lib/libjemalloc3.6.0.so /usr/local/lib/libjemalloc3.so
+COPY --from=buildjemalloc_image /usr/local/lib/libjemalloc4.5.0.so /usr/local/lib/libjemalloc4.so
+COPY --from=buildjemalloc_image /usr/local/lib/libjemalloc5.2.1.so /usr/local/lib/libjemalloc5.so
 
 # Test Jemalloc with LD_PRELOAD
 RUN MALLOC_CONF="stats_print:true" \

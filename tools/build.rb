@@ -28,8 +28,37 @@ release_info << "\nAnd the following Ruby-versions:"
 # Commands to be run after main building block
 after_commands = []
 
+base_image_tag = if push?
+  "#{@grubruby_repoowner}/#{@grubruby_reponame}:#{@grubruby_version}-base"
+else
+  "#{@grubruby_reponame}.local:#{@grubruby_version}-base"
+end
+base_command = [].tap { |it|
+  it << 'docker build --compress'
+  it << "--tag #{base_image_tag}"
+  it << "--no-cache" if skip_cache?
+  it << "--file base/Dockerfile"
+  it << '.'
+}.join(' ')
+run_command(base_command)
+
+buildjemalloc_tag = if push?
+  "#{@grubruby_repoowner}/#{@grubruby_reponame}:#{@grubruby_version}-buildjemalloc"
+else
+  "#{@grubruby_reponame}.local:#{@grubruby_version}-buildjemalloc"
+end
+buildjemalloc_command = [].tap { |it|
+  it << 'docker build --compress'
+  it << "--tag #{buildjemalloc_tag}"
+  it << "--no-cache" if skip_cache?
+  it << "--file buildjemalloc/Dockerfile"
+  it << "--build-arg BASE_IMAGE=#{base_image_tag}"
+  it << '.'
+}.join(' ')
+run_command(buildjemalloc_command)
+
 @supported_versions.each do |ruby_version, sha256hash, _, _|
-  image_version   = ruby_version.split('.').push(@grubruby_version).join('.')
+  image_version = ruby_version.split('.').push(@grubruby_version).join('.')
   image_tag = if push?
     "#{@grubruby_repoowner}/#{@grubruby_reponame}:#{image_version}"
   else
@@ -45,10 +74,13 @@ after_commands = []
     it << "--tag #{image_tag}"
     it << "--no-cache" if skip_cache?
     it << "--file #{dockerfile}"
+    it << "--build-arg BASE_IMAGE=#{base_image_tag}"
+    it << "--build-arg BUILDJEMALLOC_IMAGE=#{buildjemalloc_tag}"
     it << "--build-arg RUBY_MAJOR=#{ruby_version_major}"
     it << "--build-arg RUBY_VERSION=#{ruby_version}"
     it << "--build-arg RUBY_DOWNLOAD_SHA256=#{sha256hash}"
     it << "--build-arg RUBYGEMS_VERSION=#{@rubygems_version}"
+    it << "--build-arg BUNDLER_VERSION=#{@bundler_version}"
     it << "--build-arg BUNDLER_VERSION=#{@bundler_version}"
     it << '.'
   }.join(' ')
