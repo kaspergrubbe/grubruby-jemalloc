@@ -139,7 +139,6 @@ ENV PATH $BUNDLE_BIN:$PATH
 # adjust permissions of a few directories for running "gem install" as an arbitrary user
 RUN mkdir -p "$GEM_HOME" && chmod 777 "$GEM_HOME" && \
   mkdir -p "$BUNDLE_BIN" && chmod 777 "$BUNDLE_BIN"
-# (BUNDLE_PATH = GEM_HOME, no need to mkdir/chown both)
 
 ################################################################################
 # Add in Jemalloc libraries

@@ -132,16 +132,14 @@ RUN set -eux && \
 # install things globally, for great justice
 # and don't create ".bundle" in all our apps
 ENV GEM_HOME /usr/local/bundle
-ENV BUNDLE_PATH="$GEM_HOME" \
-  BUNDLE_BIN="$GEM_HOME/bin" \
+ENV BUNDLE_BIN="$GEM_HOME/bin" \
   BUNDLE_SILENCE_ROOT_WARNING=1 \
   BUNDLE_APP_CONFIG="$GEM_HOME"
 # path recommendation: https://github.com/bundler/bundler/pull/6469#issuecomment-383235438
-ENV PATH $BUNDLE_BIN:$BUNDLE_PATH/gems/bin:$PATH
+ENV PATH $BUNDLE_BIN:$PATH
 # adjust permissions of a few directories for running "gem install" as an arbitrary user
 RUN mkdir -p "$GEM_HOME" && chmod 777 "$GEM_HOME" && \
   mkdir -p "$BUNDLE_BIN" && chmod 777 "$BUNDLE_BIN"
-# (BUNDLE_PATH = GEM_HOME, no need to mkdir/chown both)
 
 ################################################################################
 # Add in Jemalloc libraries
