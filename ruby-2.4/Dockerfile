@@ -11,29 +11,6 @@ FROM $BUILDJEMALLOC_IMAGE as buildjemalloc_image
 
 FROM $BASE_IMAGE
 
-RUN set -eux && \
-  apt-get update && \
-  apt-get install -y --no-install-recommends \
-    bzip2 \
-    ca-certificates \
-    libffi-dev \
-    libgmp-dev \
-    libssl-dev \
-    libyaml-dev \
-    procps \
-    zlib1g-dev \
-  && \
-  apt-get -y clean && \
-  rm -rf /var/lib/apt/lists/*
-
-# skip installing gem documentation
-RUN set -eux && \
-  mkdir -p /usr/local/etc && \
-  { \
-    echo 'install: --no-document'; \
-    echo 'update: --no-document'; \
-  } >> /usr/local/etc/gemrc
-
 ARG RUBY_MAJOR
 ARG RUBY_VERSION
 ARG RUBY_DOWNLOAD_SHA256
