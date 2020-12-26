@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+N/A
+
+[9006] - 2020-12-26
+
 ### Added
 - Added `ENV LANG C.UTF-8` to all images.
 - Added Ruby 3.0.0. Comprehensive changelog available here: https://rubyreferences.github.io/rubychanges/3.0.html
@@ -12,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 - Upgraded Bundler to version `2.2.3` (was `2.2.2`)
 - Updated Rubygems to version `3.2.3` (was `3.2.2`)
+- No longer setting `ENV BUNDLE_PATH`.
 
 ## [9005] - 2020-12-21
 
