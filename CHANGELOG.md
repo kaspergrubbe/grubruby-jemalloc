@@ -5,7 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-N/A
+### Changed
+- Upgraded Bundler to version `2.2.3` (was `2.2.2`)
 
 ## [9005] - 2020-12-21
 
