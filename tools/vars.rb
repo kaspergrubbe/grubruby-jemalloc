@@ -33,4 +33,5 @@ require 'open3'
   ['2.7.0', '27d350a52a02b53034ca0794efe518667d558f152656c2baaf08f3d0c8b02343',  false, 'rails60'],
   ['2.7.1', 'b224f9844646cc92765df8288a46838511c1cec5b550d8874bd4686a904fcee7',  false, 'rails60'],
   ['2.7.2', '1b95ab193cc8f5b5e59d2686cb3d5dcf1ddf2a86cb6950e0b4bdaae5040ec0d6',  false, 'rails60'],
+  ['3.0.0', '68bfaeef027b6ccd0032504a68ae69721a70e97d921ff328c0c8836c798f6cb1',  false, 'rails61'],
 ]

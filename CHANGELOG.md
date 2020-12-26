@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 - Added `ENV LANG C.UTF-8` to all images.
+- Added Ruby 3.0.0. Comprehensive changelog available here: https://rubyreferences.github.io/rubychanges/3.0.html
 
 ### Changed
 - Upgraded Bundler to version `2.2.3` (was `2.2.2`)
