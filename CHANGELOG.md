@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+- Added `ENV LANG C.UTF-8` to all images.
+
 ### Changed
 - Upgraded Bundler to version `2.2.3` (was `2.2.2`)
 - Updated Rubygems to version `3.2.3` (was `3.2.2`)

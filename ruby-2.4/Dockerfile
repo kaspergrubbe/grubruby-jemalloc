@@ -40,6 +40,7 @@ ARG RUBY_DOWNLOAD_SHA256
 ARG RUBYGEMS_VERSION
 ARG BUNDLER_VERSION
 
+ENV LANG C.UTF-8
 ENV RUBY_MAJOR=${RUBY_MAJOR}
 ENV RUBY_VERSION=${RUBY_VERSION}
 ENV RUBY_DOWNLOAD_SHA256=${RUBY_DOWNLOAD_SHA256}
@@ -110,7 +111,7 @@ RUN set -eux && \
     | xargs -r apt-mark manual \
   && \
   apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
-  apt-get -y clean && \ 
+  apt-get -y clean && \
   \
   cd / && \
   rm -r /usr/src/ruby && \
