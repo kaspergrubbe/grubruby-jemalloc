@@ -5,9 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-N/A
+### Changed
 
-[9006] - 2020-12-26
+- Upgraded Bundler to version 2.2.7 (from version 2.2.3).
+
+## [9006] - 2020-12-26
 
 Grubruby version `9006` ships with:
 - Rubygems `3.2.3`.
