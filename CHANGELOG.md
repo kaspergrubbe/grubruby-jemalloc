@@ -7,8 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
-- Upgraded Bundler to version 2.2.7 (from version 2.2.3).
-- Upgraded Rubygems to version 3.2.7 (from version 3.2.3).
+- Upgraded Bundler to version 2.2.11 (from version 2.2.3).
+- Upgraded Rubygems to version 3.2.11 (from version 3.2.3).
 
 ## [9006] - 2020-12-26
 
