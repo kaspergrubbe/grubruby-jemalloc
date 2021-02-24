@@ -2,7 +2,7 @@ require 'open3'
 
 @grubruby_repoowner = 'kaspergrubbe'
 @grubruby_reponame  = 'grubruby-jemalloc'
-@grubruby_version   = '9006'
+@grubruby_version   = '9007'
 
 @rubygems_version   = '3.2.11'
 @bundler_version    = '2.2.11'
