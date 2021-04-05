@@ -5,7 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-N/A
+### Changed
+
+- Upgraded Bundler to version 2.2.15 (from version 2.2.11).
+- Upgraded Rubygems to version 3.2.15 (from version 3.2.11).
 
 ## [9007] - 2021-02-24
 
