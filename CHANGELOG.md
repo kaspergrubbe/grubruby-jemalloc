@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+N/A
+
+## [9008] - 2021-04-06
+
 ### Added
 - Added Ruby `3.0.1` that fixes multiple CVEs: https://www.ruby-lang.org/en/news/2021/04/05/ruby-3-0-1-released/
 - Added Ruby `2.7.3` that fixes multiple CVEs: https://www.ruby-lang.org/en/news/2021/04/05/ruby-2-7-3-released/
