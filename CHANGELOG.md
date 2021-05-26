@@ -5,8 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-- Update Bundler to `2.2.16`, it includes minor enhancements and one bugfix: https://github.com/rubygems/rubygems/blob/7f90d53c3e2a95946892053cd9b84743005cbe41/bundler/CHANGELOG.md#2216-april-8-2021
 - Update Rubygems to `3.2.16`, it includes a simple bugfix related to symlinks: https://github.com/rubygems/rubygems/blob/7f90d53c3e2a95946892053cd9b84743005cbe41/CHANGELOG.md#3216--2021-04-08
+- Update Bundler to `2.2.18` (from `2.2.15`), it includes bugfixes and enhancements: https://github.com/rubygems/rubygems/blob/608c4e4ef1d908f08b1b51dbb901956bed00be5b/bundler/CHANGELOG.md#2218-may-25-2021
 
 ## [9008] - 2021-04-06
 
