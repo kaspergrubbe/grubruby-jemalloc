@@ -2,10 +2,10 @@ require 'open3'
 
 @grubruby_repoowner = 'kaspergrubbe'
 @grubruby_reponame  = 'grubruby-jemalloc'
-@grubruby_version   = '9008'
+@grubruby_version   = '9009'
 
-@rubygems_version   = '3.2.18'
-@bundler_version    = '2.2.18'
+@rubygems_version   = '3.2.19'
+@bundler_version    = '2.2.19'
 
 # VERSION, HASH, NEEDS_THPOFF, RAILS_VERSION
 @supported_versions = [
