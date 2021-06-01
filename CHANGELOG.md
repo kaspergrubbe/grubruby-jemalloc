@@ -45,6 +45,8 @@ And the following Ruby-versions:
 - `3.0.0` as `kaspergrubbe/grubruby-jemalloc:3.0.0.9009` (194.72 MB).
 - `3.0.1` as `kaspergrubbe/grubruby-jemalloc:3.0.1.9009` (195.09 MB).
 
+### Changed
+
 - Update Bundler to `2.2.19` (from `2.2.15`), it includes bugfixes and enhancements: https://github.com/rubygems/rubygems/blob/bundler-v2.2.19/bundler/CHANGELOG.md
 - Update Rubygems to `3.2.19` (from `3.2.15`), it incudes multiple bugfixes and enhancements: https://github.com/rubygems/rubygems/blob/v3.2.19/bundler/CHANGELOG.md
 
