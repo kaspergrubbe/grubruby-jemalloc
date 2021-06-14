@@ -44,9 +44,15 @@ rescue
   false
 end
 
+tested_versions = if(ARGV[0])
+  @supported_versions.select{|version, _, _, _| version.start_with?(ARGV[0])}
+else
+  @supported_versions
+end
+
 $logger.info "Grubruby test-suite"
 $logger.info "-" * 80
-$logger.info "Building and testing images for the following Ruby-versions: #{@supported_versions.map(&:first).join(", ")}"
+$logger.info "Building and testing images for the following Ruby-versions: #{tested_versions.map(&:first).join(", ")}"
 $logger.info
 
 test_time = Time.now.utc.to_i
@@ -72,7 +78,7 @@ buildjemalloc_command = [].tap { |it|
 }.join(' ')
 run_command(buildjemalloc_command)
 
-@supported_versions.map do |ruby_version, sha256hash, needs_thpoff, rails_version|
+tested_versions.map do |ruby_version, sha256hash, needs_thpoff, rails_version|
   base_ruby_image_tag = "#{@grubruby_reponame}.beta:#{test_time}-#{ruby_version}"
 
   $logger.info "[#{ruby_version}] Building base image for Ruby #{ruby_version} with name: #{base_ruby_image_tag}"
