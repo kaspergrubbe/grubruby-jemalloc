@@ -5,7 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-N/A
+### Changed
+
+- Update Rubygems to `3.2.20` (from `3.2.19`), it incudes multiple bugfixes and enhancements: https://github.com/rubygems/rubygems/blob/v3.2.20/CHANGELOG.md#3220--2021-06-11
 
 ## [9009] - 2021-06-01
 
