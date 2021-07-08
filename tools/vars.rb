@@ -39,5 +39,6 @@ require 'open3'
   ['2.7.3', '5e91d1650857d43cd6852e05ac54683351e9c301811ee0bef43a67c4605e7db1',  false, 'rails60'],
   ['2.7.4', '2a80824e0ad6100826b69b9890bf55cfc4cf2b61a1e1330fccbcb30c46cef8d7',  false, 'rails60'],
   ['3.0.0', '68bfaeef027b6ccd0032504a68ae69721a70e97d921ff328c0c8836c798f6cb1',  false, 'rails61'],
-  ['3.0.1', 'd06bccd382d03724b69f674bc46cd6957ba08ed07522694ce44b9e8ffc9c48e2',  false, 'rails61']
+  ['3.0.1', 'd06bccd382d03724b69f674bc46cd6957ba08ed07522694ce44b9e8ffc9c48e2',  false, 'rails61'],
+  ['3.0.2', '570e7773100f625599575f363831166d91d49a1ab97d3ab6495af44774155c40',  false, 'rails61']
 ]
