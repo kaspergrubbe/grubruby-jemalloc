@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Update Bundler to `2.2.22` (from `2.2.19`), it includes bugfixes and enhancements: https://github.com/rubygems/rubygems/blob/bundler-v2.2.22/bundler/CHANGELOG.md#2222-july-6-2021
 - Update Rubygems to `3.2.22` (from `3.2.19`), it incudes multiple bugfixes and enhancements: https://github.com/rubygems/rubygems/blob/v3.2.22/CHANGELOG.md#3222--2021-07-06
+- Added Ruby 2.6.8 that was introduced due to several security issues: https://www.ruby-lang.org/en/news/2021/07/07/ruby-2-6-8-released/
 
 ## [9009] - 2021-06-01
 
