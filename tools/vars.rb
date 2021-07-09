@@ -4,8 +4,8 @@ require 'open3'
 @grubruby_reponame  = 'grubruby-jemalloc'
 @grubruby_version   = '9009'
 
-@rubygems_version   = '3.2.20'
-@bundler_version    = '2.2.20'
+@rubygems_version   = '3.2.22'
+@bundler_version    = '2.2.22'
 
 # VERSION, HASH, NEEDS_THPOFF, RAILS_VERSION
 @supported_versions = [
@@ -32,10 +32,13 @@ require 'open3'
   ['2.6.5', 'd5d6da717fd48524596f9b78ac5a2eeb9691753da5c06923a6c31190abe01a62',  false, 'rails60'],
   ['2.6.6', '5db187882b7ac34016cd48d7032e197f07e4968f406b0690e20193b9b424841f',  false, 'rails60'],
   ['2.6.7', 'f43ead5626202d5432d2050eeab606e547f0554299cc1e5cf573d45670e59611',  false, 'rails60'],
+  ['2.6.8', '8262e4663169c85787fdc9bfbd04d9eb86eb2a4b56d7f98373a8fcaa18e593eb',  false, 'rails60'],
   ['2.7.0', '27d350a52a02b53034ca0794efe518667d558f152656c2baaf08f3d0c8b02343',  false, 'rails60'],
   ['2.7.1', 'b224f9844646cc92765df8288a46838511c1cec5b550d8874bd4686a904fcee7',  false, 'rails60'],
   ['2.7.2', '1b95ab193cc8f5b5e59d2686cb3d5dcf1ddf2a86cb6950e0b4bdaae5040ec0d6',  false, 'rails60'],
   ['2.7.3', '5e91d1650857d43cd6852e05ac54683351e9c301811ee0bef43a67c4605e7db1',  false, 'rails60'],
+  ['2.7.4', '2a80824e0ad6100826b69b9890bf55cfc4cf2b61a1e1330fccbcb30c46cef8d7',  false, 'rails60'],
   ['3.0.0', '68bfaeef027b6ccd0032504a68ae69721a70e97d921ff328c0c8836c798f6cb1',  false, 'rails61'],
-  ['3.0.1', 'd06bccd382d03724b69f674bc46cd6957ba08ed07522694ce44b9e8ffc9c48e2',  false, 'rails61']
+  ['3.0.1', 'd06bccd382d03724b69f674bc46cd6957ba08ed07522694ce44b9e8ffc9c48e2',  false, 'rails61'],
+  ['3.0.2', '570e7773100f625599575f363831166d91d49a1ab97d3ab6495af44774155c40',  false, 'rails61']
 ]
