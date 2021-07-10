@@ -5,7 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-N/A
+### Changed
+
+- Update Bundler to `2.2.23` (from `2.2.22`), it includes bugfixes and enhancements: https://github.com/rubygems/rubygems/blob/bundler-v2.2.23/bundler/CHANGELOG.md#2223-july-9-2021
 
 ## [9010] - 2021-07-09
 
