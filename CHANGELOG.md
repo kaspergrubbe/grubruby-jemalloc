@@ -7,8 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
-- Update Bundler to `2.2.23` (from `2.2.22`), it includes bugfixes and enhancements: https://github.com/rubygems/rubygems/blob/bundler-v2.2.23/bundler/CHANGELOG.md#2223-july-9-2021
 - Update Rubygems to `3.2.23` (from `3.2.22`), it incudes a single bugfixes: https://github.com/rubygems/rubygems/blob/v3.2.23/CHANGELOG.md#3223--2021-07-09
+- Update Bundler to `2.2.24` (from `2.2.22`), it includes bugfixes and enhancements: https://github.com/rubygems/rubygems/blob/bundler-v2.2.24/bundler/CHANGELOG.md#2224-july-15-2021
 
 ## [9010] - 2021-07-09
 

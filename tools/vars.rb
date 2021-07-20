@@ -5,7 +5,7 @@ require 'open3'
 @grubruby_version   = '9010'
 
 @rubygems_version   = '3.2.23'
-@bundler_version    = '2.2.23'
+@bundler_version    = '2.2.24'
 
 # VERSION, HASH, NEEDS_THPOFF, RAILS_VERSION
 @supported_versions = [
