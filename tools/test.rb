@@ -134,7 +134,7 @@ tested_versions.map do |ruby_version, sha256hash, needs_thpoff, rails_version|
 
   setup_command = [].tap { |it|
     it << "docker run"
-    it << "--name grubruby_test"
+    it << "--name grubruby_test-#{Process.pid}"
     it << "-d=true" # detach, run in background
     it << "--rm"
     it << "-i"
