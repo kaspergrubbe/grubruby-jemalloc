@@ -4,7 +4,7 @@ require 'open3'
 @grubruby_reponame  = 'grubruby-jemalloc'
 @grubruby_version   = '9010'
 
-@rubygems_version   = '3.2.28'
+@rubygems_version   = '3.2.29'
 @bundler_version    = '2.2.29'
 
 # VERSION, HASH, NEEDS_THPOFF, RAILS_VERSION
