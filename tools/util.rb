@@ -32,7 +32,7 @@ end
 def run_command(command, input = nil, allowed_exit_codes = [0])
   $logger.debug "+ #{command}" if debug?
 
-  process, status, stdout, stderr = Open3.popen3(command) do |stdin, stdout, stderr, wait_thread|
+  _process, status, stdout, stderr = Open3.popen3(command) do |stdin, stdout, stderr, wait_thread|
     stdin.puts(input) if input
     stdin.close
 
