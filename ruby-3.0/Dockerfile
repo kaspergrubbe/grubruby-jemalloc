@@ -104,7 +104,8 @@ RUN set -eux && \
   ruby --version && \
   gem --version && \
   bundle --version && \
-  ruby -e "puts Integer::GMP_VERSION"
+  ruby -e "puts Integer::GMP_VERSION" && \
+  ruby -r rbconfig -e 'puts (RbConfig::CONFIG["CFLAGS"].split - RbConfig::CONFIG["warnflags"].split).join(", ")'
 
 # install things globally, for great justice
 # and don't create ".bundle" in all our apps
