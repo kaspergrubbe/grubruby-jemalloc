@@ -1,11 +1,24 @@
 require 'open3'
 
-@grubruby_repoowner = 'kaspergrubbe'
-@grubruby_reponame  = 'grubruby-jemalloc'
-@grubruby_version   = '9010'
+class Grubruby
+  def initialize(repo_owner, repo_name, version, rubygems_version, bundler_version)
+    @repo_owner = repo_owner
+    @repo_name = repo_name
+    @version = version
+    @rubygems_version = rubygems_version
+    @bundler_version = bundler_version
+  end
 
-@rubygems_version   = '3.2.30'
-@bundler_version    = '2.2.30'
+  attr_reader :repo_owner, :repo_name, :version, :rubygems_version, :bundler_version
+end
+
+repo_owner = 'kaspergrubbe'
+repo_name  = 'grubruby-jemalloc'
+version    = '9010'
+rubygems   = '3.2.30'
+bundler    = '2.2.30'
+
+@grubruby = Grubruby.new(repo_owner, repo_name, version, rubygems, bundler)
 
 # VERSION, HASH, NEEDS_THPOFF, RAILS_VERSION
 @supported_versions = [
