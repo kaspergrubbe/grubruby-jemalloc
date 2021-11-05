@@ -17,6 +17,9 @@ ARG RUBY_DOWNLOAD_SHA256
 ARG RUBYGEMS_VERSION
 ARG BUNDLER_VERSION
 
+ARG CUSTOM_OPTFLAGS=default
+ARG CUSTOM_DEBUGFLAGS=default
+
 ENV LANG C.UTF-8
 ENV RUBY_MAJOR=${RUBY_MAJOR}
 ENV RUBY_VERSION=${RUBY_VERSION}
@@ -67,6 +70,12 @@ RUN set -eux && \
   } > file.c.new && \
   mv file.c.new file.c && \
   \
+  if [ "$CUSTOM_OPTFLAGS" != "default" ]; \
+    then export optflags=$CUSTOM_OPTFLAGS; \
+  fi && \
+  if [ "$CUSTOM_DEBUGFLAGS" != "default" ]; \
+    then export debugflags=$CUSTOM_DEBUGFLAGS; \
+  fi && \ 
   autoconf && \
   gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)" && \
   ./configure \
