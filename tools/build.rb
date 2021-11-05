@@ -60,7 +60,7 @@ def build_jemalloc_image(grubruby, base_image_tag)
   buildjemalloc_tag
 end
 
-def build_ruby_image(grubruby, base_image_tag, buildjemalloc_tag, ruby_version, sha256hash)
+def build_ruby_image(grubruby, base_image_tag, buildjemalloc_tag, ruby_version, sha256hash, debugflags: nil, optflags: nil)
   image_tag_name = image_tag_name(grubruby, ruby_version)
 
   build_command = [].tap do |it|
@@ -68,18 +68,24 @@ def build_ruby_image(grubruby, base_image_tag, buildjemalloc_tag, ruby_version, 
     dockerfile = "ruby-#{ruby_version_major}/Dockerfile"
 
     it << 'docker build --compress'
+
     it << "--tag #{image_tag_name}"
     it << '--no-cache' if skip_cache?
     it << "--file #{dockerfile}"
+
     it << "--build-arg BASE_IMAGE=#{base_image_tag}"
     it << "--build-arg BUILDJEMALLOC_IMAGE=#{buildjemalloc_tag}"
+
     it << "--build-arg RUBY_MAJOR=#{ruby_version_major}"
     it << "--build-arg RUBY_VERSION=#{ruby_version}"
     it << "--build-arg RUBY_DOWNLOAD_SHA256=#{sha256hash}"
+
     it << "--build-arg RUBYGEMS_VERSION=#{grubruby.rubygems_version}"
     it << "--build-arg BUNDLER_VERSION=#{grubruby.bundler_version}"
-    it << '--build-arg CUSTOM_DEBUGFLAGS='
-    it << '--build-arg CUSTOM_OPTFLAGS=-Os'
+
+    it << "--build-arg CUSTOM_DEBUGFLAGS=#{debugflags}" if debugflags
+    it << "--build-arg CUSTOM_OPTFLAGS=#{optflags}" if optflags
+
     it << '.'
   end
   run_command(build_command.join(' '))
