@@ -1,5 +1,5 @@
-require_relative "vars.rb"
-require_relative "util.rb"
+require_relative 'vars'
+require_relative 'util'
 
 def build?
   ARGV.include?('build')
@@ -64,7 +64,6 @@ run_command(buildjemalloc_command)
   else
     "#{@grubruby_reponame}.local:#{image_version}"
   end
-  puts "Tag: #{image_tag}"
 
   build_command = [].tap { |it|
     ruby_version_major = ruby_version[0..2]
@@ -89,9 +88,7 @@ run_command(buildjemalloc_command)
   size = bytes_to_megabytes(docker_image_size_in_bytes(image_tag))
   release_info << "- `#{ruby_version}` as `#{image_tag}` (#{size} MB)."
 
-  if push?
-    after_commands << "docker push #{image_tag}"
-  end
+  after_commands.push("docker push #{image_tag}") if push?
 end
 
 after_commands.each do |command|
@@ -99,5 +96,4 @@ after_commands.each do |command|
 end
 
 # Release info
-puts 'MARKDOWN BUILD NOTES:'
 puts release_info.join("\n")
