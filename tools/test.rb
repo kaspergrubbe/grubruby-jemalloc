@@ -3,42 +3,7 @@ require 'net/http'
 
 require_relative 'vars'
 require_relative 'util'
-
-def docker_container_running?(container_name)
-  check_command = [].tap do |it|
-    it << 'docker inspect'
-    it << container_name
-  end
-  status, stdout, = run_command(check_command.join(' '), nil, [0, 1])
-
-  case status
-  when 0
-    container_data = JSON.parse(stdout).first
-    container_data['State']['Running']
-  else
-    false
-  end
-end
-
-def healthy_server?(port)
-  uri = URI("http://localhost:#{port}")
-  http = Net::HTTP.new(uri.host, uri.port)
-  req =  Net::HTTP::Get.new(uri)
-  req.add_field('Accept-Encoding', 'gzip, deflate')
-
-  res = http.request(req)
-
-  case res.code.to_i
-  when 200..299
-    puts JSON.parse(res.body) if debug?
-
-    true
-  else
-    false
-  end
-rescue
-  false
-end
+require_relative 'helpers'
 
 tested_versions = if ARGV[0]
                     @supported_versions.select { |version, _, _, _| version.start_with?(ARGV[0]) }
@@ -53,7 +18,7 @@ $logger.info
 
 test_time = Time.now.utc.to_i
 
-base_image_tag = "#{@grubruby_reponame}.beta:#{test_time}-base"
+base_image_tag = "#{@grubruby.repo_name}.beta:#{test_time}-base"
 base_command = [].tap do |it|
   it << 'docker build --compress'
   it << "--tag #{base_image_tag}"
@@ -63,7 +28,7 @@ base_command = [].tap do |it|
 end
 run_command(base_command.join(' '))
 
-buildjemalloc_tag = "#{@grubruby_reponame}.beta:#{test_time}-buildjemalloc"
+buildjemalloc_tag = "#{@grubruby.repo_name}.beta:#{test_time}-buildjemalloc"
 buildjemalloc_command = [].tap do |it|
   it << 'docker build --compress'
   it << "--tag #{buildjemalloc_tag}"
@@ -75,32 +40,16 @@ end
 run_command(buildjemalloc_command.join(' '))
 
 tested_versions.map do |ruby_version, sha256hash, needs_thpoff, rails_version|
-  base_ruby_image_tag = "#{@grubruby_reponame}.beta:#{test_time}-#{ruby_version}"
+  base_ruby_image_tag = "#{@grubruby.repo_name}.beta:#{test_time}-#{ruby_version}"
 
   $logger.info "[#{ruby_version}] Building base image for Ruby #{ruby_version} with name: #{base_ruby_image_tag}"
-  build_command = [].tap do |it|
-    ruby_version_major = ruby_version[0..2]
-    dockerfile = "ruby-#{ruby_version_major}/Dockerfile"
 
-    it << 'docker build --compress'
-    it << "--tag #{base_ruby_image_tag}"
-    it << '--no-cache' if skip_cache?
-    it << "--file #{dockerfile}"
-    it << "--build-arg BASE_IMAGE=#{base_image_tag}"
-    it << "--build-arg BUILDJEMALLOC_IMAGE=#{buildjemalloc_tag}"
-    it << "--build-arg RUBY_VERSION=#{ruby_version}"
-    it << "--build-arg RUBY_MAJOR=#{ruby_version_major}"
-    it << "--build-arg RUBY_DOWNLOAD_SHA256=#{sha256hash}"
-    it << "--build-arg RUBYGEMS_VERSION=#{@rubygems_version}"
-    it << "--build-arg BUNDLER_VERSION=#{@bundler_version}"
-    it << '.'
-  end
-  run_command(build_command.join(' '))
+  build_ruby_image(base_ruby_image_tag, @grubruby, base_image_tag, buildjemalloc_tag, ruby_version, sha256hash)
   $logger.info "[#{ruby_version}] .. size is #{bytes_to_megabytes(docker_image_size_in_bytes(base_ruby_image_tag))} MB"
 
   # Build image
   # -----------------------------------------------------------------
-  test_image_tag = "#{@grubruby_reponame}.beta:#{test_time}-#{ruby_version}-webtest"
+  test_image_tag = "#{@grubruby.repo_name}.beta:#{test_time}-#{ruby_version}-webtest"
 
   $logger.info "[#{ruby_version}] Building Rails image on top of base image:"
   $logger.info "[#{ruby_version}] .. base-image: #{base_ruby_image_tag}"
