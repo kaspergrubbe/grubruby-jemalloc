@@ -98,12 +98,6 @@ tested_versions.map do |ruby_version, sha256hash, needs_thpoff, rails_version|
   run_command(build_command.join(' '))
   $logger.info "[#{ruby_version}] .. size is #{bytes_to_megabytes(docker_image_size_in_bytes(base_ruby_image_tag))} MB"
 
-  dockerfile = if needs_thpoff
-                 'spec/Dockerfile-with-thpoff'
-               else
-                 'spec/Dockerfile-without-thpoff'
-               end
-
   # Build image
   # -----------------------------------------------------------------
   test_image_tag = "#{@grubruby_reponame}.beta:#{test_time}-#{ruby_version}-webtest"
@@ -111,6 +105,12 @@ tested_versions.map do |ruby_version, sha256hash, needs_thpoff, rails_version|
   $logger.info "[#{ruby_version}] Building Rails image on top of base image:"
   $logger.info "[#{ruby_version}] .. base-image: #{base_ruby_image_tag}"
   $logger.info "[#{ruby_version}] .. test-image: #{test_image_tag}"
+
+  dockerfile = if needs_thpoff
+                 'spec/Dockerfile-with-thpoff'
+               else
+                 'spec/Dockerfile-without-thpoff'
+               end
 
   build_command = [].tap do |it|
     it << 'docker build --compress'
@@ -146,7 +146,7 @@ tested_versions.map do |ruby_version, sha256hash, needs_thpoff, rails_version|
   deadline = Time.now.utc + 60
   until running
     running = docker_container_running?(container_name)
-    
+
     if Time.now.utc > deadline
       raise "[#{ruby_version}] Couldn't start container #{container_name} running image #{test_image_tag} for Ruby #{ruby_version}"
     end
@@ -180,7 +180,6 @@ tested_versions.map do |ruby_version, sha256hash, needs_thpoff, rails_version|
   $logger.info "[#{ruby_version}] Shutting down container"
   kill_command = [].tap do |it|
     it << 'docker kill'
-    # it << "--signal=SIGTERM"
     it << container_name
   end
 
