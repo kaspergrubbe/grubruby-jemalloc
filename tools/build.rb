@@ -33,7 +33,8 @@ buildjemalloc_tag = build_jemalloc_image(@grubruby, base_image_tag)
 after_commands = []
 
 @supported_versions.each do |ruby_version, sha256hash, _, _|
-  image_tag = build_ruby_image(@grubruby, base_image_tag, buildjemalloc_tag, ruby_version, sha256hash)
+  image_tag = image_tag_name(@grubruby, ruby_version)
+  build_ruby_image(image_tag, @grubruby, base_image_tag, buildjemalloc_tag, ruby_version, sha256hash)
 
   size = bytes_to_megabytes(docker_image_size_in_bytes(image_tag))
   release_info << "- `#{ruby_version}` as `#{image_tag}` (#{size} MB)."
