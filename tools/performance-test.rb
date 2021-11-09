@@ -55,5 +55,17 @@ combinations.each do |combination|
                    debugflags: debugflags.map(&:flag).join(' '),
                    optflags: optflags.map(&:flag).join(' '))
 
+  # Install benchmark-suite with Ruby variant
+  # -----------------------------------------------------------------
+  bench_image_tag = tag_name_variant(@grubruby, "bench-#{Time.now.to_i}")
+  build_command = [].tap do |it|
+    it << 'docker build --compress'
+    it << "--tag #{bench_image_tag}"
+    it << '--no-cache' if skip_cache?
+    it << '--file spec/performance/Dockerfile'
+    it << "--build-arg IMAGE=#{variant_image_tag}"
+    it << 'spec/yjit-bench'
+  end
+  status, stdout, stderr = run_command(build_command.join(' '))
   require 'pry'; binding.pry
 end
