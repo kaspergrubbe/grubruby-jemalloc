@@ -37,15 +37,23 @@ ggdb = RubyFlagCollection.new([nil, '-g', '-ggdb3'], :debugflag)
 combinations = o.flags.product(march.flags, sem.flags, ggdb.flags).map { |fl| fl.delete_if { |f| f.flag.nil? } }
 
 combinations.each do |combination|
-  combination_name = combination.map(&:flag).join
+  variant_image_tag = tag_name_variant(@grubruby, "variant-#{Time.now.to_i}")
 
   optflags = [].tap do |d|
     d.concat(combination.select { |c| c.group == :cflag })
   end
-
   debugflags = [].tap do |d|
     d.concat(combination.select { |c| c.group == :debugflag })
   end
+
+  # Build Ruby variant
+  # -----------------------------------------------------------------
+  $logger.info "Building a version of #{ruby_version} with name: #{variant_image_tag}"
+  $logger.info "- optflags: #{optflags.map(&:flag).join(' ')}" if optflags.any?
+  $logger.info "- debugflags: #{debugflags.map(&:flag).join(' ')}" if debugflags.any?
+  build_ruby_image(variant_image_tag, @grubruby, build_image_tag, buildjemalloc_tag, ruby_version, sha256hash,
+                   debugflags: debugflags.map(&:flag).join(' '),
+                   optflags: optflags.map(&:flag).join(' '))
 
   require 'pry'; binding.pry
 end
