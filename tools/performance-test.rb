@@ -1,3 +1,7 @@
+require_relative 'vars'
+require_relative 'util'
+require_relative 'helpers'
+
 class RubyFlag
   def initialize(flag, group)
     @flag = flag
@@ -14,6 +18,14 @@ class RubyFlagCollection
 
   attr_reader :flags
 end
+
+def push?
+  false
+end
+
+build_image_tag = build_base_image(@grubruby)
+buildjemalloc_tag = build_jemalloc_image(@grubruby, build_image_tag)
+ruby_version, sha256hash, = @supported_versions.last
 
 # -0s: Enables all -O2 optimizations except those that often increase code size
 # -Ofast: Disregard strict standards compliance. -Ofast enables all -O3 optimizations
