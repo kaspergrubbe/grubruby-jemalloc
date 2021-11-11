@@ -36,7 +36,7 @@ ggdb = RubyFlagCollection.new([nil, '-g', '-ggdb3'], :debugflag)
 
 combinations = o.flags.product(march.flags, sem.flags, ggdb.flags).map { |fl| fl.delete_if { |f| f.flag.nil? } }
 
-combinations.each do |combination|
+combinations.each.with_index(1) do |combination, index|
   variant_image_tag = tag_name_variant(@grubruby, "variant-#{Time.now.to_i}")
 
   optflags = [].tap do |d|
@@ -48,9 +48,10 @@ combinations.each do |combination|
 
   # Build Ruby variant
   # -----------------------------------------------------------------
-  $logger.info "Building a version of #{ruby_version} with name: #{variant_image_tag}"
-  $logger.info "- optflags: #{optflags.map(&:flag).join(' ')}" if optflags.any?
-  $logger.info "- debugflags: #{debugflags.map(&:flag).join(' ')}" if debugflags.any?
+  logger_header = "[#{index}/#{combinations.size}]"
+  $logger.info "#{logger_header} Building a version of #{ruby_version} with name: #{variant_image_tag}"
+  $logger.info "#{logger_header} - optflags: #{optflags.map(&:flag).join(' ')}" if optflags.any?
+  $logger.info "#{logger_header} - debugflags: #{debugflags.map(&:flag).join(' ')}" if debugflags.any?
   build_ruby_image(variant_image_tag, @grubruby, build_image_tag, buildjemalloc_tag, ruby_version, sha256hash,
                    debugflags: debugflags.map(&:flag).join(' '),
                    optflags: optflags.map(&:flag).join(' '))
@@ -58,6 +59,7 @@ combinations.each do |combination|
   # Install benchmark-suite with Ruby variant
   # -----------------------------------------------------------------
   bench_image_tag = tag_name_variant(@grubruby, "bench-#{Time.now.to_i}")
+  $logger.info "#{logger_header} Building a variant with benchmark suite with name of: #{bench_image_tag}"
   build_command = [].tap do |it|
     it << 'docker build --compress'
     it << "--tag #{bench_image_tag}"
