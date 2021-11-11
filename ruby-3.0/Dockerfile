@@ -71,10 +71,10 @@ RUN set -eux && \
   mv file.c.new file.c && \
   \
   if [ "$CUSTOM_OPTFLAGS" != "default" ]; \
-    then export optflags=$CUSTOM_OPTFLAGS; \
+    then export optflags="$CUSTOM_OPTFLAGS"; \
   fi && \
   if [ "$CUSTOM_DEBUGFLAGS" != "default" ]; \
-    then export debugflags=$CUSTOM_DEBUGFLAGS; \
+    then export debugflags="$CUSTOM_DEBUGFLAGS"; \
   fi && \ 
   autoconf && \
   gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)" && \
