@@ -1,7 +1,9 @@
 require_relative 'vars'
 require_relative 'util'
 require_relative 'helpers'
+
 require 'json'
+require 'fileutils'
 
 class RubyFlag
   def initialize(flag, group)
@@ -73,7 +75,7 @@ combinations.each.with_index(1) do |combination, index|
 
   # Run benchmarks
   # ------------------------------------------------------------------
-  $logger.info "#{logger_header} Running benchmark-suite!"
+  $logger.info "#{logger_header} .. running benchmark-suite!"
   build_command = [].tap do |it|
     it << 'docker run'
     it << '--privileged'
@@ -91,5 +93,11 @@ combinations.each.with_index(1) do |combination, index|
     'optflags' => optflags.map(&:flag),
   }
   benchmark_scores = JSON.parse(stdout.lines.select{|l| l.start_with?('json=') }.first.split('=').last).merge({'ruby_details' => ruby_details})
-  require 'pry'; binding.pry
+  FileUtils.mkdir_p('benchmark_results')
+
+  $logger.info "#{logger_header} .. writing results to file"
+  File.open("benchmark_results/benchmark-#{Time.now.to_i}.json", "w") do |f|
+    f.write(JSON.pretty_generate(benchmark_scores))
+  end
+  $logger.info ''
 end
