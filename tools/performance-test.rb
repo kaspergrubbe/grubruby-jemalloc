@@ -69,9 +69,6 @@ combinations.each.with_index(1) do |combination, index|
     it << 'spec/yjit-bench'
   end
   status, stdout, stderr = run_command(build_command.join(' '))
-  puts bench_image_tag
-  puts "docker run --privileged --name grubruby_test --rm -i -t #{bench_image_tag} /bin/bash"
-  puts "docker run --privileged --name grubruby_test --rm -i -t #{bench_image_tag} ruby run_benchmarks.rb railsbench"
 
   require 'pry'; binding.pry
 end
