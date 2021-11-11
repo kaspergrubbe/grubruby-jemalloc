@@ -40,8 +40,6 @@ ggdb = RubyFlagCollection.new([nil, '-g', '-ggdb3'], :debugflag)
 combinations = o.flags.product(march.flags, sem.flags, ggdb.flags).map { |fl| fl.delete_if { |f| f.flag.nil? } }
 
 combinations.each.with_index(1) do |combination, index|
-  variant_image_tag = tag_name_variant(@grubruby, "variant-#{Time.now.to_i}")
-
   optflags = [].tap do |d|
     d.concat(combination.select { |c| c.group == :cflag })
   end
@@ -51,6 +49,7 @@ combinations.each.with_index(1) do |combination, index|
 
   # Build Ruby variant
   # -----------------------------------------------------------------
+  variant_image_tag = tag_name_variant(@grubruby, "variant-#{Time.now.to_i}")
   logger_header = "[#{index}/#{combinations.size}]"
   $logger.info "#{logger_header} Building a version of #{ruby_version} with name: #{variant_image_tag}"
   $logger.info "#{logger_header} - optflags: #{optflags.map(&:flag).join(' ')}" if optflags.any?
@@ -99,5 +98,12 @@ combinations.each.with_index(1) do |combination, index|
   File.open("benchmark_results/benchmark-#{Time.now.to_i}.json", "w") do |f|
     f.write(JSON.pretty_generate(benchmark_scores))
   end
+
+  # Cleaning up
+  # ------------------------------------------------------------------
+  $logger.info "#{logger_header} .. cleaning up images"
+  run_command("docker image rm #{variant_image_tag}")
+  run_command("docker image rm #{bench_image_tag}")
+  
   $logger.info ''
 end
