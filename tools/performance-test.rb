@@ -1,6 +1,7 @@
 require_relative 'vars'
 require_relative 'util'
 require_relative 'helpers'
+require 'json'
 
 class RubyFlag
   def initialize(flag, group)
@@ -70,5 +71,25 @@ combinations.each.with_index(1) do |combination, index|
   end
   status, stdout, stderr = run_command(build_command.join(' '))
 
+  # Run benchmarks
+  # ------------------------------------------------------------------
+  $logger.info "#{logger_header} Running benchmark-suite!"
+  build_command = [].tap do |it|
+    it << 'docker run'
+    it << '--privileged'
+    it << "--name rubybench#{Time.now.to_i}"
+    it << '--rm'
+    it << "-t #{bench_image_tag}"
+    it << 'ruby run_benchmarks.rb railsbench'
+  end
+  status, stdout, stderr = run_command(build_command.join(' '))
+
+  # Parse benchmark data
+  # ------------------------------------------------------------------
+  ruby_details = {
+    'debugflags' => debugflags.map(&:flag),
+    'optflags' => optflags.map(&:flag),
+  }
+  benchmark_scores = JSON.parse(stdout.lines.select{|l| l.start_with?('json=') }.first.split('=').last).merge({'ruby_details' => ruby_details})
   require 'pry'; binding.pry
 end
