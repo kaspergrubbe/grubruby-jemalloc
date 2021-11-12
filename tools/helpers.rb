@@ -112,5 +112,7 @@ def healthy_server?(port)
   else
     false
   end
+rescue
+  false
 end
 
