@@ -74,7 +74,7 @@ tested_versions.map do |ruby_version, sha256hash, needs_thpoff, rails_version|
 
   # Boot image
   # -----------------------------------------------------------------
-  outside_port = 3888
+  outside_port = ENV.fetch('WEB_PORT', 3888)
   $logger.info "[#{ruby_version}] Booting Rails container #{test_image_tag} on port #{outside_port}"
 
   setup_command = [].tap do |it|
