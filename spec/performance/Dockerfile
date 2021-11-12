@@ -1,5 +1,5 @@
 ARG IMAGE=
-FROM $IMAGE AS bundler
+FROM $IMAGE
 
 # skip installing gem documentation
 RUN mkdir -p /usr/local/etc \
@@ -13,20 +13,18 @@ WORKDIR /app
 
 # Install dependencies:
 # - build-essential: To ensure certain gems can be compiled
-RUN apt-get update && apt-get install -qq -y build-essential git --fix-missing --no-install-recommends && \
-git clone http://github.com/mame/optcarrot.git
+RUN apt-get update && apt-get install -qq -y build-essential git libsqlite3-dev --fix-missing --no-install-recommends
 
-COPY scripts/run180frames-none.sh run180frames-none.sh
-COPY scripts/run180frames-opt.sh  run180frames-opt.sh
+COPY . .
 
 # Create a non-root user and a group with the same name
-ENV USER_GROUP=optcarrot
+ENV USER_GROUP=benchmark
 RUN groupadd -r ${USER_GROUP} && \
     useradd --home-dir /home/${USER_GROUP} --create-home -g ${USER_GROUP} ${USER_GROUP}
-RUN chown -R ${USER_GROUP}:${USER_GROUP} /app/*
+RUN chown -R ${USER_GROUP}:${USER_GROUP} /app && \
+  chown -R ${USER_GROUP}:${USER_GROUP} /app/*
 
 # From here onwards, any RUN, CMD, or ENTRYPOINT will be run under the following user instead of 'root'
 USER ${USER_GROUP}
 
-ENV LD_PRELOAD=/usr/local/lib/libjemalloc3.so
 CMD ["irb"]
