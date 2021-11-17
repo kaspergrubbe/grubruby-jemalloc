@@ -45,6 +45,8 @@ ggdb = RubyFlagCollection.new([nil, '-g', '-ggdb3'], :debugflag)
 combinations = o.flags.product(march.flags, sem.flags, ggdb.flags).map { |fl| fl.delete_if { |f| f.flag.nil? } }
 
 combinations.each.with_index(1) do |combination, index|
+  combination_name = combination.map(&:flag).join(' ')
+
   optflags = [].tap do |d|
     d.concat(combination.select { |c| c.group == :cflag })
   end
@@ -93,6 +95,7 @@ combinations.each.with_index(1) do |combination, index|
   # Parse benchmark data
   # ------------------------------------------------------------------
   ruby_details = {
+    'combination_name' => combination_name,
     'debugflags' => debugflags.map(&:flag),
     'optflags' => optflags.map(&:flag),
   }
