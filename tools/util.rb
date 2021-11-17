@@ -2,7 +2,6 @@ require 'bundler/inline'
 
 gemfile do
   source 'https://rubygems.org'
-  gem 'yell', '2.2.0'
   gem 'pry'
 end
 
@@ -73,7 +72,9 @@ def run_command(command, input = nil, allowed_exit_codes = [0])
   [status, stdout.strip, stderr.strip]
 end
 
-$logger = Yell.new do |l|
-  l.adapter STDOUT, level: %i[debug info warn]
-  l.adapter STDERR, level: %i[error fatal]
+class PutsLogger
+  def info(message)
+    puts "[#{Time.now}] #{message}"
+  end
 end
+$logger = PutsLogger.new
