@@ -5,10 +5,12 @@ require_relative 'helpers'
 require 'json'
 require 'fileutils'
 
-run_command('wget https://github.com/kaspergrubbe/yjit-bench/archive/refs/heads/main.zip')
-run_command('unzip main.zip -d spec/')
-run_command('rm main.zip')
-run_command('mv spec/yjit-bench-main spec/yjit-bench')
+unless Dir.exist?('spec/yjit-bench')
+  run_command('wget https://github.com/kaspergrubbe/yjit-bench/archive/refs/heads/main.zip')
+  run_command('unzip main.zip -d spec/')
+  run_command('rm main.zip')
+  run_command('mv spec/yjit-bench-main spec/yjit-bench')
+end
 
 class RubyFlag
   def initialize(flag, group)
