@@ -86,7 +86,7 @@ combinations.each.with_index(1) do |combination, index|
     it << "--name rubybench#{Time.now.to_i}"
     it << '--rm'
     it << "-t #{bench_image_tag}"
-    it << 'ruby run_benchmarks.rb railsbench'
+    it << 'ruby run_benchmarks.rb'
   end
   status, stdout, stderr = run_command(build_command.join(' '))
 
