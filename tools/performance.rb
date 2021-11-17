@@ -95,6 +95,7 @@ combinations.each.with_index(1) do |combination, index|
   # Parse benchmark data
   # ------------------------------------------------------------------
   ruby_details = {
+    'index' => index,
     'combination_name' => combination_name,
     'debugflags' => debugflags.map(&:flag),
     'optflags' => optflags.map(&:flag),
