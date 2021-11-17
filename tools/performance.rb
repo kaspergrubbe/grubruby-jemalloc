@@ -104,7 +104,7 @@ combinations.each.with_index(1) do |combination, index|
   FileUtils.mkdir_p('benchmark_results')
 
   $logger.info "#{logger_header} .. writing results to file"
-  File.open("benchmark_results/benchmark-#{Time.now.to_i}.json", "w") do |f|
+  File.open("benchmark_results/benchmark-#{index}.json", 'w') do |f|
     f.write(JSON.pretty_generate(benchmark_scores))
   end
 
@@ -113,6 +113,6 @@ combinations.each.with_index(1) do |combination, index|
   $logger.info "#{logger_header} .. cleaning up images"
   run_command("docker image rm #{variant_image_tag}")
   run_command("docker image rm #{bench_image_tag}")
-  
+
   $logger.info ''
 end
