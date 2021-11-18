@@ -39,7 +39,7 @@ ruby_version, sha256hash, = @supported_versions.last
 
 # -0s: Enables all -O2 optimizations except those that often increase code size
 # -Ofast: Disregard strict standards compliance. -Ofast enables all -O3 optimizations
-o = RubyFlagCollection.new(['-O1', '-O2', '-O3', '-Ofast'], :cflag)
+o = RubyFlagCollection.new(['-O1', '-O2', '-O3', '-Ofast -fno-fast-math'], :cflag)
 march = RubyFlagCollection.new([nil, '-march=x86-64', '-march=native'], :cflag)
 sem = RubyFlagCollection.new([nil, '-fno-semantic-interposition'], :cflag)
 ggdb = RubyFlagCollection.new([nil, '-g', '-ggdb3'], :debugflag)
