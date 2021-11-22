@@ -43,8 +43,10 @@ o = RubyFlagCollection.new(['-O2', '-O3'], :cflag)
 march = RubyFlagCollection.new([nil, '-march=x86-64', '-march=native'], :cflag)
 sem = RubyFlagCollection.new([nil, '-fno-semantic-interposition'], :cflag)
 ggdb = RubyFlagCollection.new([nil, '-g', '-ggdb3'], :debugflag)
+linktime = RubyFlagCollection.new([nil, '-flto'], :cflag)
+finl = RubyFlagCollection.new([nil, '-finline-limit=10000', '-finline-limit=7500', '-finline-limit=5000', '-finline-limit=2500', '-finline-limit=1500'], :cflag)
 
-combinations = o.flags.product(march.flags, sem.flags, ggdb.flags).map { |fl| fl.delete_if { |f| f.flag.nil? } }
+combinations = o.flags.product(march.flags, sem.flags, ggdb.flags, linktime.flags, finl.flags).map { |fl| fl.delete_if { |f| f.flag.nil? } }
 
 combinations.each.with_index(1) do |combination, index|
   combination_name = combination.map(&:flag).join(' ')
