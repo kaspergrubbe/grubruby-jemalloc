@@ -42,7 +42,7 @@ ruby_version, sha256hash, = @supported_versions.last
 o = RubyFlagCollection.new(['-O2', '-O3'], :cflag)
 march = RubyFlagCollection.new([nil, '-march=x86-64', '-march=native'], :cflag)
 sem = RubyFlagCollection.new([nil, '-fno-semantic-interposition'], :cflag)
-ggdb = RubyFlagCollection.new([nil, '-g', '-ggdb3'], :debugflag)
+ggdb = RubyFlagCollection.new([nil], :debugflag)
 linktime = RubyFlagCollection.new([nil, '-flto'], :cflag)
 finl = RubyFlagCollection.new([nil, '-finline-limit=10000', '-finline-limit=7500', '-finline-limit=5000', '-finline-limit=2500', '-finline-limit=1500'], :cflag)
 
