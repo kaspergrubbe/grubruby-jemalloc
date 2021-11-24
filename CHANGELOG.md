@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 - Added Ruby `2.6.9` that was released because of security issues: https://www.ruby-lang.org/en/news/2021/11/24/ruby-2-6-9-released/
+- Added Ruby `2.7.5` that was released because of security issues: https://www.ruby-lang.org/en/news/2021/11/24/ruby-2-7-5-released/
 ## [9011] - 2021-11-12
 
 Grubruby version `9011` ships with:
