@@ -9,6 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Update Bundler to `2.2.32` (from `2.2.31`), it includes multiple bugfixes and enhancements: https://github.com/rubygems/rubygems/blob/bundler-v2.2.32/bundler/CHANGELOG.md#2232-november-23-2021
 - Update Rubygems to `3.2.32` (from `3.2.31`), it incudes multiple bugfixes and enhancements: https://github.com/rubygems/rubygems/blob/v3.2.32/CHANGELOG.md#3232--2021-11-23
 
+### Added
+- Added Ruby `2.6.9` that was released because of security issues: https://www.ruby-lang.org/en/news/2021/11/24/ruby-2-6-9-released/
 ## [9011] - 2021-11-12
 
 Grubruby version `9011` ships with:
