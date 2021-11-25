@@ -73,7 +73,7 @@ def run_command(command, input = nil, allowed_exit_codes = [0])
 end
 
 class PutsLogger
-  def info(message)
+  def info(message = '')
     puts "[#{Time.now}] #{message}"
   end
 end
