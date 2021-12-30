@@ -106,7 +106,13 @@ RUN set -eux && \
   ruby --version && \
   gem --version && \
   bundle --version && \
-  ruby -e "puts Integer::GMP_VERSION"
+  ruby -e "puts Integer::GMP_VERSION" && \
+# inspiration from https://github.com/rubygems/ruby-ssl-check/blob/master/check.rb
+  ruby -r openssl -e 'puts "Compiled with:  %s" % OpenSSL::OPENSSL_VERSION' && \
+  ruby -r openssl -e 'puts "Loaded version: %s" % OpenSSL::OPENSSL_LIBRARY_VERSION if defined?(OpenSSL::OPENSSL_LIBRARY_VERSION)' && \
+  ruby -r openssl -e 'puts "SSL_CERT_FILE:  %s" % OpenSSL::X509::DEFAULT_CERT_FILE' && \
+  ruby -r openssl -e 'puts "SSL_CERT_DIR:   %s" % OpenSSL::X509::DEFAULT_CERT_DIR' && \
+  ruby -r openssl -e 'puts "Compiled with:  %s" % OpenSSL::OPENSSL_VERSION'
 
 # install things globally, for great justice
 # and don't create ".bundle" in all our apps
