@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Added
 - Added Ruby `3.1.0`, happy holidays!
 
+### Changed
+- Update Rubygems to `3.3.5` (from `3.2.32`), it incudes multiple bugfixes and enhancements: https://github.com/rubygems/rubygems/blob/v3.3.5/CHANGELOG.md#335--2022-01-12
 ## [9012] - 2021-11-29
 
 Grubruby version `9012` ships with:
