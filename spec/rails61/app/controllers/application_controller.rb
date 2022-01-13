@@ -1,14 +1,14 @@
-require "sq_mini_racer"
+require 'mini_racer'
 
 class ApplicationController < ActionController::Base
   def hello
-    miniracer_context = Sqreen::MiniRacer::Context.new
-    miniracer_context.eval "var adder = (a,b)=>a+b;"
+    miniracer_context = MiniRacer::Context.new
+    miniracer_context.eval 'var adder = (a,b)=>a+b;'
 
     render json: {
-      message: "Hi!",
+      message: 'Hi!',
       environment: ENV,
-      javascript: miniracer_context.eval("adder(20,22)"),
+      javascript: miniracer_context.eval('adder(20,22)')
     }
   end
 end
