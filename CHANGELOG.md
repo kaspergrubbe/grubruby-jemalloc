@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Added
 - Added Ruby `3.1.1`!
 
+### Changed
+- Update Rubygems to `3.3.8` (from `3.3.5`), it incudes multiple bugfixes and enhancements: https://github.com/rubygems/rubygems/blob/v3.3.8/CHANGELOG.md#338--2022-02-23
 
 ## [9013] - 2022-01-14
 
