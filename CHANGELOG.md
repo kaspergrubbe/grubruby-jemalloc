@@ -5,7 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-N/A
+### Changed
+- Update Bundler to `2.3.9` (from `2.3.8`), it includes multiple bugfixes and enhancements: https://github.com/rubygems/rubygems/blob/bundler-v2.3.9/bundler/CHANGELOG.md#239-march-9-2022
+- Update Rubygems to `3.3.9` (from `3.3.8`), it installs Bundler `2.3.9` as a default gem: https://github.com/rubygems/rubygems/blob/v3.3.9/CHANGELOG.md#339--2022-03-09
 
 ## [9014] - 2022-03-07
 
