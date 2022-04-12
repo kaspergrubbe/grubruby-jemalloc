@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+- Ruby `3.1.2` due to vulnerability CVE-2022-28738 and CVE-2022-28739.
 - Ruby `3.0.4` due to vulnerability CVE-2022-28738 and CVE-2022-28739.
 - Ruby `2.7.6` due to vulnerability CVE-2022-28739, this marks maintenance phase of `2.7` meaning that it will only receive security updates, https://www.ruby-lang.org/en/news/2022/04/12/ruby-2-7-6-released/
 - Ruby `2.6.10` due to vulnerability CVE-2022-28739, it also includes a regression in the date library, this marks the EOL of `2.6`, https://www.ruby-lang.org/en/news/2022/04/12/ruby-2-6-10-released/
