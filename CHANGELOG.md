@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+- Ruby `2.6.10` due to vulnerability CVE-2022-28739, it also includes a regression in the date library, this marks the EOL of `2.6`, https://www.ruby-lang.org/en/news/2022/04/12/ruby-2-6-10-released/
+
 ### Changed
 - Update Bundler to `2.3.11` (from `2.3.8`), it includes multiple bugfixes and enhancements: https://github.com/rubygems/rubygems/blob/bundler-v2.3.11/bundler/CHANGELOG.md#2311-april-7-2022
 - Update Rubygems to `3.3.11` (from `3.3.8`), it installs Bundler `2.3.9` as a default gem: https://github.com/rubygems/rubygems/blob/v3.3.11/CHANGELOG.md#3311--2022-04-07
