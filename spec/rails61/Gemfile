@@ -25,6 +25,9 @@ gem 'net-pop'
 # Test jemalloc compilation https://github.com/kaspergrubbe/grubruby-jemalloc/pull/38
 gem 'mini_racer'
 
+# Test compilation of native gems 
+gem 'pg'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
