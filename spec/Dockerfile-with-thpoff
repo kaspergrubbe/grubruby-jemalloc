@@ -31,8 +31,8 @@ FROM $IMAGE AS bundler
   ARG LD_PRELOAD
   ENV LD_PRELOAD=$LD_PRELOAD
 
-  RUN bundle config --local set jobs 8
-  RUN bundle config --local set without 'development test'
+  RUN bundle config set --local jobs 8
+  RUN bundle config set --local without 'development test'
   RUN bundle install
 
   COPY . /app
