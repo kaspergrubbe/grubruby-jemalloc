@@ -6,14 +6,13 @@ FROM $IMAGE AS bundler
   RUN apt-get update && apt-get install -qq -y curl
   RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 
-  ADD https://dl.yarnpkg.com/debian/pubkey.gpg /tmp/yarn-pubkey.gpg
-  RUN apt-key add /tmp/yarn-pubkey.gpg && rm /tmp/yarn-pubkey.gpg
-  RUN echo 'deb http://dl.yarnpkg.com/debian/ stable main' > /etc/apt/sources.list.d/yarn.list
+  RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | tee /usr/share/keyrings/yarnkey.gpg >/dev/null
+  RUN echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | tee /etc/apt/sources.list.d/yarn.list
 
   # Install dependencies:
   # - build-essential: To ensure certain gems can be compiled
   # - nodejs: Compile assets
-  RUN apt-get update && apt-get install -qq -y build-essential yarn nodejs python libpq-dev --fix-missing --no-install-recommends
+  RUN apt-get update && apt-get install -qq -y build-essential nodejs yarn python libpq-dev --fix-missing --no-install-recommends
 
   # skip installing gem documentation
   RUN mkdir -p /usr/local/etc \
