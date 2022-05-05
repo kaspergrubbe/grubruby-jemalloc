@@ -31,6 +31,10 @@ FROM $IMAGE AS bundler
   ARG LD_PRELOAD
   ENV LD_PRELOAD=$LD_PRELOAD
 
+  RUN ruby --version
+  RUN gem --version
+  RUN bundle --version
+
   RUN bundle config set --local jobs 8
   RUN bundle config set --local without 'development test'
   RUN bundle install
