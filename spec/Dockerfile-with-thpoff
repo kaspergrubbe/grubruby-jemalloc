@@ -34,6 +34,7 @@ FROM $IMAGE AS bundler
   RUN ruby --version
   RUN gem --version
   RUN bundle --version
+  RUN cat Gemfile.lock | grep -A 2 "BUNDLED WITH"
 
   RUN bundle config set --local jobs 8
   RUN bundle config set --local without 'development test'
