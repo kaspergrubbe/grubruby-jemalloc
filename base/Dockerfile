@@ -1,4 +1,4 @@
-FROM debian:buster-slim
+FROM debian:bullseye-slim
   ARG DEBIAN_FRONTEND=noninteractive
   RUN set -eux && \
     apt-get update \

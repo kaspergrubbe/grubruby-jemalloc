@@ -5,7 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-N/A
+### Changed
+- **Upgrade from Debian Buster to Debian Bullseye:** Please test your builds when upgrading!
 
 ## [9015] - 2022-04-14
 
