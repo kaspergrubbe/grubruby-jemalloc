@@ -48,7 +48,7 @@ FROM $IMAGE
 
   # For some reason a Rails installation that doesn't serve assets need
   # a javascript engine through ExecJS, let's use Node.
-  RUN apt-get update && apt-get install -y nodejs
+  RUN apt-get update && apt-get install -y nodejs libpq-dev
 
   # Create a non-root user and a group with the same name
   ENV USER_GROUP=railsapp
