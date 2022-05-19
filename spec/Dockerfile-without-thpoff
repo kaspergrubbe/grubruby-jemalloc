@@ -4,16 +4,15 @@ ARG LD_PRELOAD=
 FROM $IMAGE AS bundler
   # Install newest NodeJS from https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions
   RUN apt-get update && apt-get install -qq -y curl
-  RUN curl -sL https://deb.nodesource.com/setup_15.x | bash -
+  RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 
-  ADD https://dl.yarnpkg.com/debian/pubkey.gpg /tmp/yarn-pubkey.gpg
-  RUN apt-key add /tmp/yarn-pubkey.gpg && rm /tmp/yarn-pubkey.gpg
-  RUN echo 'deb http://dl.yarnpkg.com/debian/ stable main' > /etc/apt/sources.list.d/yarn.list
+  RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | tee /usr/share/keyrings/yarnkey.gpg >/dev/null
+  RUN echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | tee /etc/apt/sources.list.d/yarn.list
 
   # Install dependencies:
   # - build-essential: To ensure certain gems can be compiled
   # - nodejs: Compile assets
-  RUN apt-get update && apt-get install -qq -y build-essential yarn nodejs python --fix-missing --no-install-recommends
+  RUN apt-get update && apt-get install -qq -y build-essential nodejs yarn python libpq-dev --fix-missing --no-install-recommends
 
   # skip installing gem documentation
   RUN mkdir -p /usr/local/etc \
@@ -31,8 +30,13 @@ FROM $IMAGE AS bundler
   ARG LD_PRELOAD
   ENV LD_PRELOAD=$LD_PRELOAD
 
-  RUN bundle config --local set jobs 8
-  RUN bundle config --local set without 'development test'
+  RUN ruby --version
+  RUN gem --version
+  RUN bundle --version
+  RUN cat Gemfile.lock | grep -A 2 "BUNDLED WITH"
+
+  RUN bundle config set --local jobs 8
+  RUN bundle config set --local without 'development test'
   RUN bundle install
 
   COPY . /app
@@ -44,7 +48,7 @@ FROM $IMAGE
 
   # For some reason a Rails installation that doesn't serve assets need
   # a javascript engine through ExecJS, let's use Node.
-  RUN apt-get update && apt-get install -y nodejs
+  RUN apt-get update && apt-get install -y nodejs libpq-dev
 
   # Create a non-root user and a group with the same name
   ENV USER_GROUP=railsapp

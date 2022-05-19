@@ -76,5 +76,9 @@ class PutsLogger
   def info(message = '')
     puts "[#{Time.now}] #{message}"
   end
+
+  def debug(message = '')
+    puts "[#{Time.now}] #{message}"
+  end
 end
 $logger = PutsLogger.new
