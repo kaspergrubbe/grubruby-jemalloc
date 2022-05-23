@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 - **Upgrade from Debian Buster to Debian Bullseye:** Please test your builds when upgrading!
-- Update Rubygems to `3.3.13` (from `3.3.11`), it installs Bundler `2.3.11` as a default gem, it also fixes an issue with resolving: https://github.com/rubygems/rubygems/blob/v3.3.13/CHANGELOG.md#3313--2022-05-04
+- Update Rubygems to `3.3.14` (from `3.3.11`), it installs Bundler `2.3.14` as a default gem, it also fixes an issue with resolving: https://github.com/rubygems/rubygems/blob/v3.3.14/CHANGELOG.md#3314--2022-05-18
 
 ## [9015] - 2022-04-14
 
