@@ -5,6 +5,58 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+N/A
+
+## [9016] - 2022-05-25
+
+Grubruby version `9016` ships with:
+- Rubygems `3.3.14`.
+- Bundler `2.3.14`.
+- Jemalloc `3.6.0`, `4.5.0` and `5.2.1`.
+
+And the following Ruby-versions:
+- `2.4.4` as `kaspergrubbe/grubruby-jemalloc:2.4.4.9016` (174.24 MB).
+- `2.4.5` as `kaspergrubbe/grubruby-jemalloc:2.4.5.9016` (174.25 MB).
+- `2.4.6` as `kaspergrubbe/grubruby-jemalloc:2.4.6.9016` (174.25 MB).
+- `2.4.7` as `kaspergrubbe/grubruby-jemalloc:2.4.7.9016` (174.16 MB).
+- `2.4.8` as `kaspergrubbe/grubruby-jemalloc:2.4.8.9016` (174.16 MB).
+- `2.4.9` as `kaspergrubbe/grubruby-jemalloc:2.4.9.9016` (174.16 MB).
+- `2.4.10` as `kaspergrubbe/grubruby-jemalloc:2.4.10.9016` (174.16 MB).
+- `2.5.1` as `kaspergrubbe/grubruby-jemalloc:2.5.1.9016` (174.91 MB).
+- `2.5.2` as `kaspergrubbe/grubruby-jemalloc:2.5.2.9016` (174.54 MB).
+- `2.5.3` as `kaspergrubbe/grubruby-jemalloc:2.5.3.9016` (174.93 MB).
+- `2.5.5` as `kaspergrubbe/grubruby-jemalloc:2.5.5.9016` (174.93 MB).
+- `2.5.6` as `kaspergrubbe/grubruby-jemalloc:2.5.6.9016` (174.84 MB).
+- `2.5.7` as `kaspergrubbe/grubruby-jemalloc:2.5.7.9016` (174.84 MB).
+- `2.5.8` as `kaspergrubbe/grubruby-jemalloc:2.5.8.9016` (174.85 MB).
+- `2.5.9` as `kaspergrubbe/grubruby-jemalloc:2.5.9.9016` (174.85 MB).
+- `2.6.0` as `kaspergrubbe/grubruby-jemalloc:2.6.0.9016` (178.05 MB).
+- `2.6.1` as `kaspergrubbe/grubruby-jemalloc:2.6.1.9016` (178.09 MB).
+- `2.6.2` as `kaspergrubbe/grubruby-jemalloc:2.6.2.9016` (178.1 MB).
+- `2.6.3` as `kaspergrubbe/grubruby-jemalloc:2.6.3.9016` (178.17 MB).
+- `2.6.4` as `kaspergrubbe/grubruby-jemalloc:2.6.4.9016` (178.07 MB).
+- `2.6.5` as `kaspergrubbe/grubruby-jemalloc:2.6.5.9016` (178.07 MB).
+- `2.6.6` as `kaspergrubbe/grubruby-jemalloc:2.6.6.9016` (178.07 MB).
+- `2.6.7` as `kaspergrubbe/grubruby-jemalloc:2.6.7.9016` (178.12 MB).
+- `2.6.8` as `kaspergrubbe/grubruby-jemalloc:2.6.8.9016` (178.12 MB).
+- `2.6.9` as `kaspergrubbe/grubruby-jemalloc:2.6.9.9016` (178.15 MB).
+- `2.6.10` as `kaspergrubbe/grubruby-jemalloc:2.6.10.9016` (178.15 MB).
+- `2.7.0` as `kaspergrubbe/grubruby-jemalloc:2.7.0.9016` (180.32 MB).
+- `2.7.1` as `kaspergrubbe/grubruby-jemalloc:2.7.1.9016` (180.35 MB).
+- `2.7.2` as `kaspergrubbe/grubruby-jemalloc:2.7.2.9016` (180.37 MB).
+- `2.7.3` as `kaspergrubbe/grubruby-jemalloc:2.7.3.9016` (180.42 MB).
+- `2.7.4` as `kaspergrubbe/grubruby-jemalloc:2.7.4.9016` (171.46 MB).
+- `2.7.5` as `kaspergrubbe/grubruby-jemalloc:2.7.5.9016` (171.5 MB).
+- `2.7.6` as `kaspergrubbe/grubruby-jemalloc:2.7.6.9016` (171.5 MB).
+- `3.0.0` as `kaspergrubbe/grubruby-jemalloc:3.0.0.9016` (205.91 MB).
+- `3.0.1` as `kaspergrubbe/grubruby-jemalloc:3.0.1.9016` (206.31 MB).
+- `3.0.2` as `kaspergrubbe/grubruby-jemalloc:3.0.2.9016` (206.33 MB).
+- `3.0.3` as `kaspergrubbe/grubruby-jemalloc:3.0.3.9016` (207.11 MB).
+- `3.0.4` as `kaspergrubbe/grubruby-jemalloc:3.0.4.9016` (207.14 MB).
+- `3.1.0` as `kaspergrubbe/grubruby-jemalloc:3.1.0.9016` (215.46 MB).
+- `3.1.1` as `kaspergrubbe/grubruby-jemalloc:3.1.1.9016` (216.97 MB).
+- `3.1.2` as `kaspergrubbe/grubruby-jemalloc:3.1.2.9016` (216.97 MB).
+
 ### Changed
 - **Upgrade from Debian Buster to Debian Bullseye:** Please test your builds when upgrading!
 - Update Rubygems to `3.3.14` (from `3.3.11`), it installs Bundler `2.3.14` as a default gem, it also fixes an issue with resolving: https://github.com/rubygems/rubygems/blob/v3.3.14/CHANGELOG.md#3314--2022-05-18
