@@ -6,8 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Changed
-- Updated Bundler to `2.3.17` (from `2.3.14`) that includes enhancements and bug fixes, https://github.com/rubygems/rubygems/blob/bundler-v2.3.17/bundler/CHANGELOG.md
 - Updated Rubygems to `3.3.24` (from `3.3.14`) that includes a few enhancements and bug fixes, https://github.com/rubygems/rubygems/blob/v3.3.24/CHANGELOG.md
+- Updated Bundler to `2.3.24` (from `2.3.14`) that includes enhancements and bug fixes, https://github.com/rubygems/rubygems/blob/bundler-v2.3.24/bundler/CHANGELOG.md
 
 ## [9016] - 2022-05-25
 
