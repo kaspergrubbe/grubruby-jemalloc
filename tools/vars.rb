@@ -14,7 +14,7 @@ end
 
 repo_owner = 'kaspergrubbe'
 repo_name  = 'grubruby-jemalloc'
-version    = '9016'
+version    = '9017'
 rubygems   = '3.3.24'
 bundler    = '2.3.24'
 
