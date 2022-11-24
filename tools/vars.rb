@@ -64,5 +64,6 @@ bundler    = '2.3.26'
   ['3.0.5', 'cf7cb5ba2030fe36596a40980cdecfd79a0337d35860876dc2b10a38675bddde',  false, 'rails61'],
   ['3.1.0', '1a0e0b69b9b062b6299ff1f6c6d77b66aff3995f63d1d8b8771e7a113ec472e2',  false, 'rails61'],
   ['3.1.1', '7aefaa6b78b076515d272ec59c4616707a54fc9f2391239737d5f10af7a16caa',  false, 'rails61'],
-  ['3.1.2', 'ca10d017f8a1b6d247556622c841fc56b90c03b1803f87198da1e4fd3ec3bf2a',  false, 'rails61']
+  ['3.1.2', 'ca10d017f8a1b6d247556622c841fc56b90c03b1803f87198da1e4fd3ec3bf2a',  false, 'rails61'],
+  ['3.1.3', '4ee161939826bcdfdafa757cf8e293a7f14e357f62be7144f040335cc8c7371a',  false, 'rails61']
 ]
