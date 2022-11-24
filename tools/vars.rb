@@ -15,8 +15,8 @@ end
 repo_owner = 'kaspergrubbe'
 repo_name  = 'grubruby-jemalloc'
 version    = '9017'
-bundler    = '2.3.24'
 rubygems   = '3.3.26'
+bundler    = '2.3.26'
 
 @grubruby = Grubruby.new(repo_owner, repo_name, version, rubygems, bundler)
 
