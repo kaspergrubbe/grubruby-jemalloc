@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+- Added Ruby `3.2.0`! Happy holidays! No YJIT yet, as our version of Debian don't have the right version of Rust https://www.ruby-lang.org/en/news/2022/12/25/ruby-3-2-0-released/
+
 ### Changed
 - Updated Rubygems to `3.4.1` (from `3.3.26`) which **drops supports for Ruby 2.3, 2.4 and 2.5**, https://github.com/rubygems/rubygems/blob/v3.4.1/CHANGELOG.md
 - Updated Bundler to `2.4.1` (from `2.3.26`) which **drops supports for Ruby 2.3, 2.4 and 2.5**, https://github.com/rubygems/rubygems/blob/bundler-v2.4.1/bundler/CHANGELOG.md
