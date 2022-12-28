@@ -39,7 +39,7 @@ buildjemalloc_command = [].tap do |it|
 end
 run_command(buildjemalloc_command.join(' '))
 
-tested_versions.map do |ruby_version, sha256hash, needs_thpoff, rails_version|
+tested_versions.map do |ruby_version, sha256hash, rails_version|
   base_ruby_image_tag = "#{@grubruby.repo_name}.beta:#{test_time}-#{ruby_version}"
 
   $logger.info "[#{ruby_version}] Building base image for Ruby #{ruby_version} with name: #{base_ruby_image_tag}"
@@ -55,17 +55,11 @@ tested_versions.map do |ruby_version, sha256hash, needs_thpoff, rails_version|
   $logger.info "[#{ruby_version}] .. base-image: #{base_ruby_image_tag}"
   $logger.info "[#{ruby_version}] .. test-image: #{test_image_tag}"
 
-  dockerfile = if needs_thpoff
-                 'spec/Dockerfile-with-thpoff'
-               else
-                 'spec/Dockerfile-without-thpoff'
-               end
-
   build_command = [].tap do |it|
     it << 'docker build --compress'
     it << "--tag #{test_image_tag}"
     it << '--no-cache' if skip_cache?
-    it << "--file #{dockerfile}"
+    it << "--file spec/Dockerfile"
     it << "--build-arg IMAGE=#{base_ruby_image_tag}"
     it << '--build-arg LD_PRELOAD=/usr/local/lib/libjemalloc3.so'
     it << "spec/#{rails_version}"

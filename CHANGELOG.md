@@ -9,6 +9,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Updated Rubygems to `3.4.1` (from `3.3.26`) which **drops supports for Ruby 2.3, 2.4 and 2.5**, https://github.com/rubygems/rubygems/blob/v3.4.1/CHANGELOG.md
 - Updated Bundler to `2.4.1` (from `2.3.26`) which **drops supports for Ruby 2.3, 2.4 and 2.5**, https://github.com/rubygems/rubygems/blob/bundler-v2.4.1/bundler/CHANGELOG.md
 
+### Removed
+- Ruby `2.4.*` and Ruby `2.5.*` have been removed.
+- We no longer need thpoff, so that has also been removed. 
+
 ## [9018] - 2022-11-25
 
 Grubruby version `9018` ships with:

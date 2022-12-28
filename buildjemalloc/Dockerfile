@@ -1,5 +1,5 @@
 ################################################################################
-# Build and compile Jemalloc and Thpoff
+# Build and compile Jemalloc
 ################################################################################
 ARG BASE_IMAGE=
 
@@ -31,11 +31,4 @@ FROM $BASE_IMAGE
         echo "$JEMALLOC_5_SHA256 *jemalloc-5.2.1.tar.bz2" | sha256sum -c - && \
         tar -xjf jemalloc-5.2.1.tar.bz2 && cd jemalloc-5.2.1 && ./configure --prefix=/usr/local --with-install-suffix=5.2.1 && make build_lib && make install_lib && \
         cd / && rm -rf /jemalloc-new
-
-  # This tool allows us to disable huge page support for our current process
-  # since the flag is preserved through forks and execs it can be used on any
-  # process
-  # Obsolete with Ruby 2.6, according to https://bugs.ruby-lang.org/issues/14705
-  ADD source/thpoff.c /src/thpoff.c
-  RUN gcc -o /usr/local/bin/thpoff /src/thpoff.c && rm /src/thpoff.c
 

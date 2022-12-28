@@ -2,7 +2,6 @@
 
 This is a collection of Ruby images that ships with stable releases of jemalloc.
 
-It is also bundled with `thpoff` which can disable huge page support which will be the default in Ruby 2.6 according to https://bugs.ruby-lang.org/issues/14705
 
 Everything here is heavily inspired of how the Discourse project (https://github.com/discourse) are building their Docker images, but the main Dockerfiles are using the base of https://github.com/docker-library/ruby.
 
@@ -30,14 +29,3 @@ To use Jemalloc in your `Dockerfile`, pick a version, and use `ENV LD_PRELOAD`:
 ENV LD_PRELOAD=/usr/local/lib/libjemalloc5.so
 ```
 
-## How to use thpoff (only needed if you are not using Ruby 2.6+)
-
-Thpoff is a tool that disables transparent hugepages for applications, and it can allow less memory consumption for forked processes, this is built-in Ruby 2.6 and newer.
-
-Thpoff is baked into the Grubruby images at this location: `/usr/local/bin/thpoff` you can use it by prepending your command with the binary.
-
-In `docker-compose.yml` you would do the following:
-
-```yaml
-command: ["/usr/local/bin/thpoff", "bundle", "exec", "unicorn", "-c", "config/unicorn.rb"]
-```
