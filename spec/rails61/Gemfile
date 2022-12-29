@@ -22,6 +22,9 @@ gem 'net-smtp'
 gem 'net-imap'
 gem 'net-pop'
 
+# We seem to need this because of an issue with Ruby 3.2: https://github.com/sparklemotion/nokogiri/issues/2740#issuecomment-1365477377
+gem 'nokogiri', force_ruby_platform: true
+
 # Test jemalloc compilation https://github.com/kaspergrubbe/grubruby-jemalloc/pull/38
 gem 'mini_racer'
 
