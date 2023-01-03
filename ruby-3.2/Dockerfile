@@ -27,6 +27,8 @@ ENV RUBY_DOWNLOAD_SHA256=${RUBY_DOWNLOAD_SHA256}
 ENV RUBYGEMS_VERSION=${RUBYGEMS_VERSION}
 ENV BUNDLER_VERSION=${BUNDLER_VERSION}
 
+ENV RUST_VERSION="1.66.0"
+
 # some of ruby's build scripts are written in ruby
 #   we purge system ruby later to make sure our final image uses what we just built
 RUN set -eux && \
@@ -49,9 +51,17 @@ RUN set -eux && \
     ruby \
     wget \
     xz-utils \
-    rustc \
   && \
   rm -rf /var/lib/apt/lists/* && \
+  \
+  mkdir -p /usr/src/rust && \
+  wget -O rust-x86_64-unknown-linux-gnu.tar.gz "https://static.rust-lang.org/dist/rust-${RUST_VERSION}-x86_64-unknown-linux-gnu.tar.gz" && \
+  tar xvzf rust-x86_64-unknown-linux-gnu.tar.gz -C /usr/src/rust --strip-components=1 --exclude=rust-docs && \
+  cd /usr/src/rust && \
+  ./install.sh --components=rustc,rust-std-x86_64-unknown-linux-gnu,cargo --without=rust-docs && \
+  cd / && \
+  # rm rust-x86_64-unknown-linux-gnu.tar.gz && \
+  # rm -rf /usr/src/rust && \
   \
   wget -O ruby.tar.xz "https://cache.ruby-lang.org/pub/ruby/${RUBY_MAJOR%-rc}/ruby-$RUBY_VERSION.tar.xz" && \
   echo "$RUBY_DOWNLOAD_SHA256 *ruby.tar.xz" | sha256sum --check --strict && \
@@ -83,6 +93,7 @@ RUN set -eux && \
     --build="$gnuArch" \
     --disable-install-doc \
     --enable-shared \
+    --enable-yjit \
   && \
   make -j "$(nproc)" && \
   make install && \
@@ -101,10 +112,19 @@ RUN set -eux && \
   \
   cd / && \
   rm -r /usr/src/ruby && \
+  \
+  cd /usr/src/rust && \
+  ./install.sh --uninstall --components=rustc,rust-std-x86_64-unknown-linux-gnu,cargo --without=rust-docs && \
+  cd / && \
+  rm rust-x86_64-unknown-linux-gnu.tar.gz && \
+  rm -rf /usr/src/rust && \
+  \
 # make sure bundled "rubygems" is older than RUBYGEMS_VERSION (https://github.com/docker-library/ruby/issues/246)
   ruby -e "puts Gem::Version.create(ENV['RUBYGEMS_VERSION'])" && \
   ruby -e "puts Gem::Version.create(Gem::VERSION)" && \
   ruby -e 'exit(Gem::Version.create(ENV["RUBYGEMS_VERSION"]) >= Gem::Version.create(Gem::VERSION))' && \
+  ruby -e 'exit(RubyVM::YJIT.enabled? == false)' && \
+  ruby --yjit -e 'exit(RubyVM::YJIT.enabled? == true)' && \
   gem update --system "$RUBYGEMS_VERSION" && \
   gem install bundler --version "$BUNDLER_VERSION" --force && \
 # verify we have no "ruby" packages installed
