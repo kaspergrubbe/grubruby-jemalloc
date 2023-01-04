@@ -75,7 +75,7 @@ RUN set -eux && \
   fi && \
   if [ "$CUSTOM_DEBUGFLAGS" != "default" ]; \
     then export debugflags="$CUSTOM_DEBUGFLAGS"; \
-  fi && \ 
+  fi && \
   autoconf && \
   gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)" && \
   ./configure \
