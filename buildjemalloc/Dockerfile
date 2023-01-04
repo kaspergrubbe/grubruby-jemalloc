@@ -32,3 +32,10 @@ FROM $BASE_IMAGE
         tar -xjf jemalloc-5.2.1.tar.bz2 && cd jemalloc-5.2.1 && ./configure --prefix=/usr/local --with-install-suffix=5.2.1 && make build_lib && make install_lib && \
         cd / && rm -rf /jemalloc-new
 
+  ENV JEMALLOC_5_3_SHA256 2db82d1e7119df3e71b7640219b6dfe84789bc0537983c3b7ac4f7189aecfeaa
+  RUN mkdir /jemalloc-new && cd /jemalloc-new && \
+        wget https://github.com/jemalloc/jemalloc/releases/download/5.3.0/jemalloc-5.3.0.tar.bz2 && \
+        echo "$JEMALLOC_5_3_SHA256 *jemalloc-5.3.0.tar.bz2" | sha256sum -c - && \
+        tar -xjf jemalloc-5.3.0.tar.bz2 && cd jemalloc-5.3.0 && ./configure --prefix=/usr/local --with-install-suffix=5.3.0 && make build_lib && make install_lib && \
+        cd / && rm -rf /jemalloc-new
+
