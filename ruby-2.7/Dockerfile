@@ -131,6 +131,7 @@ RUN mkdir -p "$GEM_HOME" && chmod 777 "$GEM_HOME" && \
 COPY --from=buildjemalloc_image /usr/local/lib/libjemalloc3.6.0.so /usr/local/lib/libjemalloc3.so
 COPY --from=buildjemalloc_image /usr/local/lib/libjemalloc4.5.0.so /usr/local/lib/libjemalloc4.so
 COPY --from=buildjemalloc_image /usr/local/lib/libjemalloc5.2.1.so /usr/local/lib/libjemalloc5.so
+COPY --from=buildjemalloc_image /usr/local/lib/libjemalloc5.3.0.so /usr/local/lib/libjemalloc5_3.so
 
 # Test Jemalloc with LD_PRELOAD
 RUN MALLOC_CONF="stats_print:true" \
@@ -142,5 +143,8 @@ RUN MALLOC_CONF="stats_print:true" \
 RUN MALLOC_CONF="stats_print:true" \
   LD_PRELOAD="/usr/local/lib/libjemalloc5.so" \
   ruby -e "exit" 2>&1 | grep "5.2.1-0"
+RUN MALLOC_CONF="stats_print:true" \
+  LD_PRELOAD="/usr/local/lib/libjemalloc5_3.so" \
+  ruby -e "exit" 2>&1 | grep "5.3.0-0"
 
 CMD [ "irb" ]
