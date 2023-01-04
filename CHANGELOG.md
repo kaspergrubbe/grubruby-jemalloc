@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 - Added Yjit support to Ruby `3.2.0`! https://github.com/kaspergrubbe/grubruby-jemalloc/pull/58
+- Added Jemalloc `5.3.0`, I still haven't heard much about its performance with Ruby, so it's added alongside the more battletested version of `5.2.1`.
 
 ## [9019] - 2022-12-31
 
