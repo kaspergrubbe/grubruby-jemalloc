@@ -27,8 +27,6 @@ ENV RUBY_DOWNLOAD_SHA256=${RUBY_DOWNLOAD_SHA256}
 ENV RUBYGEMS_VERSION=${RUBYGEMS_VERSION}
 ENV BUNDLER_VERSION=${BUNDLER_VERSION}
 
-ENV RUST_VERSION="1.66.0"
-
 # some of ruby's build scripts are written in ruby
 #   we purge system ruby later to make sure our final image uses what we just built
 RUN set -eux && \
@@ -55,7 +53,6 @@ RUN set -eux && \
   rm -rf /var/lib/apt/lists/* && \
   \
   mkdir -p /usr/src/rust && \
-  wget -O rust-x86_64-unknown-linux-gnu.tar.gz "https://static.rust-lang.org/dist/rust-${RUST_VERSION}-x86_64-unknown-linux-gnu.tar.gz" && \
   tar xvzf rust-x86_64-unknown-linux-gnu.tar.gz -C /usr/src/rust --strip-components=1 --exclude=rust-docs && \
   cd /usr/src/rust && \
   ./install.sh --components=rustc,rust-std-x86_64-unknown-linux-gnu,cargo --without=rust-docs && \
