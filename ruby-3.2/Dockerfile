@@ -54,7 +54,7 @@ RUN set -eux && \
   \
   mkdir -p /usr/src/rust && \
   wget -O rust-x86_64-unknown-linux-gnu.tar.gz "https://static.rust-lang.org/dist/rust-1.66.0-x86_64-unknown-linux-gnu.tar.gz" && \
-  echo "f6ff8b7a38bab7d8f3cb7b70c7201494a5485c2cf12e84a13c9e232fa51ebfe7 *rust-x86_64-unknown-linux-gnu" | sha256sum --check --strict && \
+  echo "f6ff8b7a38bab7d8f3cb7b70c7201494a5485c2cf12e84a13c9e232fa51ebfe7 *rust-x86_64-unknown-linux-gnu.tar.gz" | sha256sum --check --strict && \
   tar xvzf rust-x86_64-unknown-linux-gnu.tar.gz -C /usr/src/rust --strip-components=1 --exclude=rust-docs && \
   cd /usr/src/rust && \
   ./install.sh --components=rustc,rust-std-x86_64-unknown-linux-gnu,cargo --without=rust-docs && \
