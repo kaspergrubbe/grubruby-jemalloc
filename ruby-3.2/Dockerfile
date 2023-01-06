@@ -122,6 +122,7 @@ RUN set -eux && \
   ruby -e 'exit(Gem::Version.create(ENV["RUBYGEMS_VERSION"]) >= Gem::Version.create(Gem::VERSION))' && \
   ruby -e 'exit(RubyVM::YJIT.enabled? == false)' && \
   ruby --yjit -e 'exit(RubyVM::YJIT.enabled? == true)' && \
+  RUBY_YJIT_ENABLE=1 ruby -e 'exit(RubyVM::YJIT.enabled? == true)' && \
   gem update --system "$RUBYGEMS_VERSION" && \
   gem install bundler --version "$BUNDLER_VERSION" --force && \
 # verify we have no "ruby" packages installed
