@@ -11,6 +11,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 - Updated Rubygems to `3.4.3` (from `3.4.1`), https://github.com/rubygems/rubygems/blob/v3.4.3/CHANGELOG.md
+- Updated Bundler to `2.4.3` (from `2.4.1`), https://github.com/rubygems/rubygems/blob/bundler-v2.4.3/bundler/CHANGELOG.md
+
 ## [9019] - 2022-12-31
 
 Grubruby version `9019` ships with:
