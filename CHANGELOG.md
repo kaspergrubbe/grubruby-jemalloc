@@ -9,6 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added Yjit support to Ruby `3.2.0`! https://github.com/kaspergrubbe/grubruby-jemalloc/pull/58
 - Added Jemalloc `5.3.0`, I still haven't heard much about its performance with Ruby, so it's added alongside the more battletested version of `5.2.1`.
 
+### Changed
+- Updated Rubygems to `3.4.3` (from `3.4.1`), https://github.com/rubygems/rubygems/blob/v3.4.3/CHANGELOG.md
 ## [9019] - 2022-12-31
 
 Grubruby version `9019` ships with:
