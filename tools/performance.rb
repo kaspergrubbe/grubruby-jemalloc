@@ -47,8 +47,10 @@ flags << RubyFlagCollection.new([nil, '-fno-semantic-interposition'], :cflag)
 flags << RubyFlagCollection.new([nil, '-flto'], :cflag)
 # flags << RubyFlagCollection.new([nil, '-finline-limit=10000', '-finline-limit=7500', '-finline-limit=5000', '-finline-limit=2500', '-finline-limit=1500'], :cflag)
 
-flags << if ['2.6', '2.7', '3.0', '3.1'].map{|mjit_version| ruby_version.start_with?(mjit_version)}.any? 
+flags << if ['2.6', '2.7', '3.0'].map{|mjit_version| ruby_version.start_with?(mjit_version)}.any?
   RubyFlagCollection.new([nil, '--jit --jit-wait'], :runtimeflag)
+elsif ruby_version.start_with?('3.1')
+  RubyFlagCollection.new([nil, '--mjit --mjit-wait'], :runtimeflag)
 elsif ruby_version.start_with?('3.2')
   RubyFlagCollection.new([nil, '--yjit'], :runtimeflag)
 else
