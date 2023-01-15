@@ -45,12 +45,22 @@ flags << RubyFlagCollection.new([nil, '-fno-semantic-interposition'], :cflag)
 flags << RubyFlagCollection.new([nil, '-flto'], :cflag)
 # flags << RubyFlagCollection.new([nil, '-finline-limit=10000', '-finline-limit=7500', '-finline-limit=5000', '-finline-limit=2500', '-finline-limit=1500'], :cflag)
 
+flags << if ['2.6', '2.7', '3.0', '3.1'].map{|mjit_version| ruby_version.start_with?(mjit_version)}.any? 
+  RubyFlagCollection.new([nil, '--jit --jit-wait'], :runtimeflag)
+elsif ruby_version.start_with?('3.2')
+  RubyFlagCollection.new([nil, '--yjit'], :runtimeflag)
+else
+  RubyFlagCollection.new([nil], :runtimeflag)
+end
 
 combinations = flags.first.flags.product(*flags.drop(1).map(&:flags)).map { |fl| fl.delete_if { |f| f.flag.nil? } }
 
 combinations.each.with_index(1) do |combination, index|
   combination_name = combination.map(&:flag).join(' ')
 
+  runtimeflags = [].tap do |d|
+    d.concat(combination.select { |c| c.group == :runtimeflag })
+  end
   optflags = [].tap do |d|
     d.concat(combination.select { |c| c.group == :cflag })
   end
@@ -63,8 +73,11 @@ combinations.each.with_index(1) do |combination, index|
   variant_image_tag = tag_name_variant(@grubruby, "variant-#{Time.now.to_i}")
   logger_header = "[#{index}/#{combinations.size}]"
   $logger.info "#{logger_header} Building a version of #{ruby_version} with name: #{variant_image_tag}"
+  $logger.info "#{logger_header} ... combination_name: #{combination_name}"
+  $logger.info "#{logger_header} - runtimeflags: #{runtimeflags.map(&:flag).join(' ')}" if runtimeflags.any?
   $logger.info "#{logger_header} - optflags: #{optflags.map(&:flag).join(' ')}" if optflags.any?
   $logger.info "#{logger_header} - debugflags: #{debugflags.map(&:flag).join(' ')}" if debugflags.any?
+  
   build_ruby_image(variant_image_tag, @grubruby, build_image_tag, buildjemalloc_tag, ruby_version, sha256hash,
                    debugflags: debugflags.map(&:flag).join(' '),
                    optflags: optflags.map(&:flag).join(' '))
@@ -85,6 +98,7 @@ combinations.each.with_index(1) do |combination, index|
 
   # Run benchmarks
   # ------------------------------------------------------------------
+  runtimeflags_cmd = runtimeflags.map(&:flag).join(' ')
   $logger.info "#{logger_header} .. running benchmark-suite!"
   build_command = [].tap do |it|
     it << 'docker run'
@@ -92,7 +106,7 @@ combinations.each.with_index(1) do |combination, index|
     it << "--name rubybench#{Time.now.to_i}"
     it << '--rm'
     it << "-t #{bench_image_tag}"
-    it << 'ruby run_benchmarks.rb'
+    it << "ruby #{runtimeflags_cmd} run_benchmarks.rb"
   end
   status, stdout, stderr = run_command(build_command.join(' '))
 
@@ -101,6 +115,7 @@ combinations.each.with_index(1) do |combination, index|
   ruby_details = {
     'index' => index,
     'combination_name' => combination_name,
+    'runtimeflags' => runtimeflags.map(&:flag),
     'debugflags' => debugflags.map(&:flag),
     'optflags' => optflags.map(&:flag),
   }
