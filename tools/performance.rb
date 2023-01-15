@@ -35,7 +35,9 @@ end
 
 build_image_tag = build_base_image(@grubruby)
 buildjemalloc_tag = build_jemalloc_image(@grubruby, build_image_tag)
-ruby_version, sha256hash, = @supported_versions.last
+
+ruby_version, sha256hash, = @supported_versions.select{|rv| rv[0] == '3.1.3'}.first
+# ruby_version, sha256hash, = @supported_versions.last
 
 # -0s: Enables all -O2 optimizations except those that often increase code size
 flags = []
