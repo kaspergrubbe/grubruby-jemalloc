@@ -38,15 +38,15 @@ buildjemalloc_tag = build_jemalloc_image(@grubruby, build_image_tag)
 ruby_version, sha256hash, = @supported_versions.last
 
 # -0s: Enables all -O2 optimizations except those that often increase code size
-# -Ofast: Disregard strict standards compliance. -Ofast enables all -O3 optimizations
-o = RubyFlagCollection.new(['-O2', '-O3'], :cflag)
-march = RubyFlagCollection.new([nil, '-march=x86-64', '-march=native'], :cflag)
-sem = RubyFlagCollection.new([nil, '-fno-semantic-interposition'], :cflag)
-ggdb = RubyFlagCollection.new([nil], :debugflag)
-linktime = RubyFlagCollection.new([nil, '-flto'], :cflag)
-finl = RubyFlagCollection.new([nil, '-finline-limit=10000', '-finline-limit=7500', '-finline-limit=5000', '-finline-limit=2500', '-finline-limit=1500'], :cflag)
+flags = []
+flags << RubyFlagCollection.new([nil, '-0s', '-O2', '-O3'], :cflag)
+# flags << RubyFlagCollection.new([nil, '-march=x86-64', '-march=x86-64-v4', '-march=native'], :cflag)
+flags << RubyFlagCollection.new([nil, '-fno-semantic-interposition'], :cflag)
+flags << RubyFlagCollection.new([nil, '-flto'], :cflag)
+# flags << RubyFlagCollection.new([nil, '-finline-limit=10000', '-finline-limit=7500', '-finline-limit=5000', '-finline-limit=2500', '-finline-limit=1500'], :cflag)
 
-combinations = o.flags.product(march.flags, sem.flags, ggdb.flags, linktime.flags, finl.flags).map { |fl| fl.delete_if { |f| f.flag.nil? } }
+
+combinations = flags.first.flags.product(*flags.drop(1).map(&:flags)).map { |fl| fl.delete_if { |f| f.flag.nil? } }
 
 combinations.each.with_index(1) do |combination, index|
   combination_name = combination.map(&:flag).join(' ')
