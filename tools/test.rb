@@ -47,7 +47,7 @@ tested_versions.map do |ruby_version, sha256hash, rails_version|
   build_ruby_image(base_ruby_image_tag, @grubruby, base_image_tag, buildjemalloc_tag, ruby_version, sha256hash)
   $logger.info "[#{ruby_version}] .. size is #{bytes_to_megabytes(docker_image_size_in_bytes(base_ruby_image_tag))} MB"
 
-  # Build image
+  # Build Rails image
   # -----------------------------------------------------------------
   test_image_tag = "#{@grubruby.repo_name}.beta:#{test_time}-#{ruby_version}-webtest"
 
@@ -66,7 +66,7 @@ tested_versions.map do |ruby_version, sha256hash, rails_version|
   end
   run_command(build_command.join(' '))
 
-  # Boot image
+  # Boot Rails image
   # -----------------------------------------------------------------
   outside_port = ENV.fetch('WEB_PORT', 3888)
   $logger.info "[#{ruby_version}] Booting Rails container #{test_image_tag} on port #{outside_port}"
@@ -82,7 +82,7 @@ tested_versions.map do |ruby_version, sha256hash, rails_version|
   end
   _, container_name, = run_command(setup_command.join(' '))
 
-  # Verify that the container is running
+  # Verify that the Rails container is running
   # -----------------------------------------------------------------
   $logger.info "[#{ruby_version}] Verifying that the container is running"
   running = false
@@ -99,7 +99,7 @@ tested_versions.map do |ruby_version, sha256hash, rails_version|
   end
   print "\n"
 
-  # Verify that the container is responding on specified port
+  # Verify that the Rails container is responding on specified port
   # -----------------------------------------------------------------
   $logger.info "[#{ruby_version}] Verifying that the container responds with 200 on http://localhost:#{outside_port}/"
   webserver_running = false
@@ -118,7 +118,7 @@ tested_versions.map do |ruby_version, sha256hash, rails_version|
   end
   $logger.info "[#{ruby_version}] Container responded succesfully after #{tries} tries."
 
-  # Shutdown container
+  # Shutdown Rails container
   # -----------------------------------------------------------------
   $logger.info "[#{ruby_version}] Shutting down container"
   kill_command = [].tap do |it|
@@ -128,7 +128,7 @@ tested_versions.map do |ruby_version, sha256hash, rails_version|
 
   run_command(kill_command.join(' '))
 
-  # Verify that the container is shutdown
+  # Verify that the Rails container is shutdown
   # -----------------------------------------------------------------
   $logger.info "[#{ruby_version}] Verifying that the container is shutdown"
   shutdown = false
