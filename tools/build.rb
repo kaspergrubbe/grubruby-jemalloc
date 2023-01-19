@@ -23,7 +23,7 @@ release_info = []
 release_info << "Grubruby version `#{@grubruby.version}` ships with:"
 release_info << "- Rubygems `#{@grubruby.rubygems_version}`."
 release_info << "- Bundler `#{@grubruby.bundler_version}`."
-release_info << '- Jemalloc `3.6.0`, `4.5.0` and `5.2.1`.'
+release_info << '- Jemalloc `3.6.0`, `4.5.0`, `5.2.1` and `5.3.0`.'
 release_info << "\nAnd the following Ruby-versions:"
 
 base_image_tag = build_base_image(@grubruby)
