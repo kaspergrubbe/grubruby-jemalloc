@@ -25,10 +25,10 @@ release_info << "- Rubygems `#{@grubruby.rubygems_version}`."
 release_info << "- Bundler `#{@grubruby.bundler_version}`."
 release_info << ''
 release_info << '- Jemalloc:'
-release_info << '- `3.6.0`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc3.so`'
-release_info << '- `4.5.0`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc4.so`'
-release_info << '- `5.2.1`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc5.so`'
-release_info << '- `5.3.0`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc5_3.so`'
+release_info << '  - `3.6.0`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc3.so`.'
+release_info << '  - `4.5.0`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc4.so`.'
+release_info << '  - `5.2.1`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc5.so`.'
+release_info << '  - `5.3.0`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc5_3.so`.'
 release_info << ''
 release_info << 'And the following Ruby-versions:'
 
