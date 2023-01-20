@@ -5,6 +5,52 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+N/A
+
+## [9020] 2023-01-20 - The Yjit and Jemalloc 5.3 release!
+
+Grubruby version `9020` ships with:
+- Rubygems `3.4.4`.
+- Bundler `2.4.4`.
+
+- Jemalloc:
+  - `3.6.0`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc3.so`.
+  - `4.5.0`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc4.so`.
+  - `5.2.1`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc5.so`.
+  - `5.3.0`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc5_3.so`.
+
+And the following Ruby-versions:
+- `2.6.0` as `kaspergrubbe/grubruby-jemalloc:2.6.0.9020` (182.95 MB).
+- `2.6.1` as `kaspergrubbe/grubruby-jemalloc:2.6.1.9020` (182.98 MB).
+- `2.6.2` as `kaspergrubbe/grubruby-jemalloc:2.6.2.9020` (182.99 MB).
+- `2.6.3` as `kaspergrubbe/grubruby-jemalloc:2.6.3.9020` (183.06 MB).
+- `2.6.4` as `kaspergrubbe/grubruby-jemalloc:2.6.4.9020` (182.96 MB).
+- `2.6.5` as `kaspergrubbe/grubruby-jemalloc:2.6.5.9020` (182.96 MB).
+- `2.6.6` as `kaspergrubbe/grubruby-jemalloc:2.6.6.9020` (182.96 MB).
+- `2.6.7` as `kaspergrubbe/grubruby-jemalloc:2.6.7.9020` (183.01 MB).
+- `2.6.8` as `kaspergrubbe/grubruby-jemalloc:2.6.8.9020` (183.01 MB).
+- `2.6.9` as `kaspergrubbe/grubruby-jemalloc:2.6.9.9020` (183.04 MB).
+- `2.6.10` as `kaspergrubbe/grubruby-jemalloc:2.6.10.9020` (183.04 MB).
+- `2.7.0` as `kaspergrubbe/grubruby-jemalloc:2.7.0.9020` (185.22 MB).
+- `2.7.1` as `kaspergrubbe/grubruby-jemalloc:2.7.1.9020` (185.24 MB).
+- `2.7.2` as `kaspergrubbe/grubruby-jemalloc:2.7.2.9020` (185.26 MB).
+- `2.7.3` as `kaspergrubbe/grubruby-jemalloc:2.7.3.9020` (185.31 MB).
+- `2.7.4` as `kaspergrubbe/grubruby-jemalloc:2.7.4.9020` (176.35 MB).
+- `2.7.5` as `kaspergrubbe/grubruby-jemalloc:2.7.5.9020` (176.38 MB).
+- `2.7.6` as `kaspergrubbe/grubruby-jemalloc:2.7.6.9020` (176.38 MB).
+- `2.7.7` as `kaspergrubbe/grubruby-jemalloc:2.7.7.9020` (176.4 MB).
+- `3.0.0` as `kaspergrubbe/grubruby-jemalloc:3.0.0.9020` (211.91 MB).
+- `3.0.1` as `kaspergrubbe/grubruby-jemalloc:3.0.1.9020` (212.3 MB).
+- `3.0.2` as `kaspergrubbe/grubruby-jemalloc:3.0.2.9020` (212.33 MB).
+- `3.0.3` as `kaspergrubbe/grubruby-jemalloc:3.0.3.9020` (213.11 MB).
+- `3.0.4` as `kaspergrubbe/grubruby-jemalloc:3.0.4.9020` (213.13 MB).
+- `3.0.5` as `kaspergrubbe/grubruby-jemalloc:3.0.5.9020` (213.15 MB).
+- `3.1.0` as `kaspergrubbe/grubruby-jemalloc:3.1.0.9020` (221.46 MB).
+- `3.1.1` as `kaspergrubbe/grubruby-jemalloc:3.1.1.9020` (222.97 MB).
+- `3.1.2` as `kaspergrubbe/grubruby-jemalloc:3.1.2.9020` (222.97 MB).
+- `3.1.3` as `kaspergrubbe/grubruby-jemalloc:3.1.3.9020` (204.91 MB).
+- `3.2.0` as `kaspergrubbe/grubruby-jemalloc:3.2.0.9020` (205.03 MB).
+
 ### Added
 - Added Yjit support to Ruby `3.2.0`! https://github.com/kaspergrubbe/grubruby-jemalloc/pull/58
 - Added Jemalloc `5.3.0`, I still haven't heard much about its performance with Ruby, so it's added alongside the more battletested version of `5.2.1`.
