@@ -141,7 +141,7 @@ combinations.each.with_index(1) do |combination, index|
     'optflags' => optflags.map(&:flag),
     'actualcompileflags' => actual_compile_flags,
   }
-  benchmark_scores = JSON.parse(stdout.lines.select{|l| l.start_with?('json=') }.first.split('=').last).merge({'ruby_details' => ruby_details})
+  benchmark_scores = {'ruby_details' => ruby_details}.merge(JSON.parse(benchmark_output.lines.select{|l| l.start_with?('json=') }.first.split('=').last))
   FileUtils.mkdir_p('benchmark_results')
 
   $logger.info "#{logger_header} .. writing results to file"
