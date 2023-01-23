@@ -5,6 +5,13 @@ require_relative 'helpers'
 require 'json'
 require 'fileutils'
 
+ruby_version, sha256hash, = if ARGV[0]
+  @supported_versions.select{|rv| rv[0].start_with?(ARGV[0])}.last
+else
+  @supported_versions.last
+end
+raise 'No Rubies found' if ruby_version.nil?
+
 unless Dir.exist?('spec/yjit-bench')
   run_command('wget https://github.com/kaspergrubbe/yjit-bench/archive/refs/heads/main.zip')
   run_command('unzip main.zip -d spec/')
@@ -35,9 +42,6 @@ end
 
 build_image_tag = build_base_image(@grubruby)
 buildjemalloc_tag = build_jemalloc_image(@grubruby, build_image_tag)
-
-ruby_version, sha256hash, = @supported_versions.select{|rv| rv[0] == '3.1.3'}.first
-# ruby_version, sha256hash, = @supported_versions.last
 
 # -0s: Enables all -O2 optimizations except those that often increase code size
 flags = []
