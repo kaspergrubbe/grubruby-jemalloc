@@ -70,10 +70,10 @@ def build_ruby_image(tag_name, grubruby, base_image_tag, buildjemalloc_tag, ruby
     it << "--build-arg RUBYGEMS_VERSION=#{grubruby.rubygems_version}"
     it << "--build-arg BUNDLER_VERSION=#{grubruby.bundler_version}"
 
-    debugflags = nil if debugflags && debugflags.flags == ''
+    debugflags = nil if debugflags && debugflags.strip.empty?
     it << "--build-arg CUSTOM_DEBUGFLAGS=\"#{debugflags}\"" if debugflags
 
-    optflags = nil if optflags && optflags.strip == ''
+    optflags = nil if optflags && optflags.strip.empty?
     it << "--build-arg CUSTOM_OPTFLAGS=\"#{optflags}\"" if optflags
 
     it << '.'
