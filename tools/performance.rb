@@ -36,6 +36,7 @@ class RubyFlagCollection
   attr_reader :flags
 end
 
+# This needs to be here to please some internal code
 def push?
   false
 end
