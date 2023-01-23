@@ -139,6 +139,7 @@ combinations.each.with_index(1) do |combination, index|
     'runtimeflags' => runtimeflags.map(&:flag),
     'debugflags' => debugflags.map(&:flag),
     'optflags' => optflags.map(&:flag),
+    'actualcompileflags' => actual_compile_flags,
   }
   benchmark_scores = JSON.parse(stdout.lines.select{|l| l.start_with?('json=') }.first.split('=').last).merge({'ruby_details' => ruby_details})
   FileUtils.mkdir_p('benchmark_results')
