@@ -41,8 +41,8 @@ ruby_version, sha256hash, = @supported_versions.select{|rv| rv[0] == '3.1.3'}.fi
 
 # -0s: Enables all -O2 optimizations except those that often increase code size
 flags = []
-flags << RubyFlagCollection.new([nil, '-0s', '-O2', '-O3'], :cflag)
 # flags << RubyFlagCollection.new([nil, '-march=x86-64', '-march=x86-64-v4', '-march=native'], :cflag)
+flags << RubyFlagCollection.new([nil, '-0s', '-O2', '-O3 -fno-fast-math'], :cflag)
 flags << RubyFlagCollection.new([nil, '-fno-semantic-interposition'], :cflag)
 flags << RubyFlagCollection.new([nil, '-flto'], :cflag)
 # flags << RubyFlagCollection.new([nil, '-finline-limit=10000', '-finline-limit=7500', '-finline-limit=5000', '-finline-limit=2500', '-finline-limit=1500'], :cflag)
