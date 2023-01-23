@@ -98,19 +98,24 @@ combinations.each.with_index(1) do |combination, index|
     it << "--build-arg IMAGE=#{variant_image_tag}"
     it << 'spec/yjit-bench'
   end
-  status, stdout, stderr = run_command(build_command.join(' '))
+  run_command(build_command.join(' '))
 
   # Run benchmarks
   # ------------------------------------------------------------------
   runtimeflags_cmd = runtimeflags.map(&:flag).join(' ')
   $logger.info "#{logger_header} .. running benchmark-suite!"
-  build_command = [].tap do |it|
-    it << 'docker run'
-    it << '--privileged'
-    it << "--name rubybench#{Time.now.to_i}"
-    it << '--rm'
-    it << "-t #{bench_image_tag}"
-    it << "ruby run_benchmarks.rb --ruby_opts='#{runtimeflags_cmd}'"
+  benchmark_output = ''.tap do |output|
+    build_command = [].tap do |it|
+      it << 'docker run'
+      it << '--privileged'
+      it << "--name rubybench#{Time.now.to_i}"
+      it << '--rm'
+      it << "-t #{bench_image_tag}"
+      it << "ruby run_benchmarks.rb --ruby_opts='#{runtimeflags_cmd}'"
+    end
+    _, stdout, _ = run_command(build_command.join(' '))
+  end
+
   # Fetch actual compile flags
   # ------------------------------------------------------------------
   $logger.info "#{logger_header} .. fetching actual compile-flags!"
@@ -125,7 +130,6 @@ combinations.each.with_index(1) do |combination, index|
     end
     _, acf, _ = run_command(build_command.join(' '))
   end
-  status, stdout, stderr = run_command(build_command.join(' '))
 
   # Parse benchmark data
   # ------------------------------------------------------------------
