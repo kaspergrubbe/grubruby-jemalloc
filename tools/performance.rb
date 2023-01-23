@@ -116,33 +116,29 @@ combinations.each.with_index(1) do |combination, index|
   # ------------------------------------------------------------------
   runtimeflags_cmd = runtimeflags.map(&:flag).join(' ')
   $logger.info "#{logger_header} .. running benchmark-suite!"
-  benchmark_output = ''.tap do |output|
-    build_command = [].tap do |it|
-      it << 'docker run'
-      it << '--privileged'
-      it << "--name rubybench#{Time.now.to_i}"
-      it << '--rm'
-      it << "-t #{bench_image_tag}"
-      # it << "ruby run_benchmarks.rb --ruby_opts='#{runtimeflags_cmd}' --name_filters=jekyll"
-      it << "ruby run_benchmarks.rb --ruby_opts='#{runtimeflags_cmd}'"
-    end
-    _, stdout, _ = run_command(build_command.join(' '))
+  build_command = [].tap do |it|
+    it << 'docker run'
+    it << '--privileged'
+    it << "--name rubybench#{Time.now.to_i}"
+    it << '--rm'
+    it << "-t #{bench_image_tag}"
+    it << "ruby run_benchmarks.rb --min_itrs=100 --warmup_itrs=15 --ruby_opts='#{runtimeflags_cmd}' --name_filters=jekyll"
+    # it << "ruby run_benchmarks.rb --ruby_opts='#{runtimeflags_cmd}'"
   end
+  _, benchmark_output, _ = run_command(build_command.join(' '))
 
   # Fetch actual compile flags
   # ------------------------------------------------------------------
   $logger.info "#{logger_header} .. fetching actual compile-flags!"
-  actual_compile_flags = ''.tap do |acf|
-    build_command = [].tap do |it|
-      it << 'docker run'
-      it << '--privileged'
-      it << "--name rubybench#{Time.now.to_i}"
-      it << '--rm'
-      it << "-t #{variant_image_tag}" 
-      it << "ruby -r rbconfig -e 'a = RbConfig::CONFIG[\"CFLAGS\"].split - RbConfig::CONFIG[\"warnflags\"].split; puts a.join \" \"'"
-    end
-    _, acf, _ = run_command(build_command.join(' '))
+  build_command = [].tap do |it|
+    it << 'docker run'
+    it << '--privileged'
+    it << "--name rubybench#{Time.now.to_i}"
+    it << '--rm'
+    it << "-t #{variant_image_tag}" 
+    it << "ruby -r rbconfig -e 'a = RbConfig::CONFIG[\"CFLAGS\"].split - RbConfig::CONFIG[\"warnflags\"].split; puts a.join \" \"'"
   end
+  _, actual_compile_flags, _ = run_command(build_command.join(' '))
 
   # Parse benchmark data
   # ------------------------------------------------------------------
