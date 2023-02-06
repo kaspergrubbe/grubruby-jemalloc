@@ -6,8 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Changed
-- Updated Rubygems to `3.4.5` (from `3.4.4`), https://github.com/rubygems/rubygems/blob/v3.4.5/CHANGELOG.md
 - Updated Bundler to `2.4.5` (from `2.4.4`), https://github.com/rubygems/rubygems/blob/bundler-v2.4.5/bundler/CHANGELOG.md
+- Updated Rubygems to `3.4.6` (from `3.4.4`), https://github.com/rubygems/rubygems/blob/v3.4.6/CHANGELOG.md
 
 ## [9020] 2023-01-20 - The Yjit and Jemalloc 5.3 release!
 
