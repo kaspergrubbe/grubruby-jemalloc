@@ -11,6 +11,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added Ruby `3.0.6` which fixes CVE-2023-28755 and CVE-2023-28756, https://www.ruby-lang.org/en/news/2023/03/30/ruby-3-0-6-released/
 - Added Ruby `2.7.8` which fixes CVE-2023-28755 and CVE-2023-28756, https://www.ruby-lang.org/en/news/2023/03/30/ruby-2-7-8-released/
 
+### Changed
+- Updated Rubygems to `3.4.10` (from `3.4.6`), https://github.com/rubygems/rubygems/blob/v3.4.10/CHANGELOG.md
 ## [9022] 2023-02-09
 
 Grubruby version `9022` ships with:
