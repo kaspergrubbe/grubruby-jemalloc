@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added Ruby `3.2.2` which fixes CVE-2023-28755 and CVE-2023-28756, https://www.ruby-lang.org/en/news/2023/03/30/ruby-3-2-2-released/
 - Added Ruby `3.1.4` which fixes CVE-2023-28755 and CVE-2023-28756, https://www.ruby-lang.org/en/news/2023/03/30/ruby-3-1-4-released/
 - Added Ruby `3.0.6` which fixes CVE-2023-28755 and CVE-2023-28756, https://www.ruby-lang.org/en/news/2023/03/30/ruby-3-0-6-released/
+- Added Ruby `2.7.8` which fixes CVE-2023-28755 and CVE-2023-28756, https://www.ruby-lang.org/en/news/2023/03/30/ruby-2-7-8-released/
 
 ## [9022] 2023-02-09
 
