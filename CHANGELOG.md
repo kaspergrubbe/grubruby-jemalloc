@@ -5,7 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-N/A
+### Added
+- Added Ruby `3.2.2` which fixes CVE-2023-28755 and CVE-2023-28756, https://www.ruby-lang.org/en/news/2023/03/30/ruby-3-2-2-released/
 
 ## [9022] 2023-02-09
 
