@@ -12,7 +12,7 @@ FROM $IMAGE AS bundler
   # Install dependencies:
   # - build-essential: To ensure certain gems can be compiled
   # - nodejs: Compile assets
-  RUN apt-get update && apt-get install -qq -y build-essential nodejs yarn python libpq-dev --fix-missing --no-install-recommends
+  RUN apt-get update && apt-get install -qq -y build-essential nodejs yarn python3 libpq-dev --fix-missing --no-install-recommends
 
   # skip installing gem documentation
   RUN mkdir -p /usr/local/etc \
