@@ -57,8 +57,8 @@ FROM $IMAGE
   RUN mkdir -p /app/logs && \
       mkdir -p /app/tmp && \
       mkdir -p /app/tmp/pids && \
-      mkdir -p /app/tmp/sockets
-  RUN chown -R ${USER_GROUP}:${USER_GROUP} /app/*
+      mkdir -p /app/tmp/sockets && \
+      chown -R ${USER_GROUP}:${USER_GROUP} /app/*
 
   # From here onwards, any RUN, CMD, or ENTRYPOINT will be run under the following user instead of 'root'
   USER ${USER_GROUP}
