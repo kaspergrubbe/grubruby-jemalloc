@@ -58,6 +58,8 @@ RUN set -eux && \
   tar xvzf rust-x86_64-unknown-linux-gnu.tar.gz -C /usr/src/rust --strip-components=1 --exclude=rust-docs && \
   cd /usr/src/rust && \
   ./install.sh --components=rustc,rust-std-x86_64-unknown-linux-gnu,cargo --without=rust-docs && \
+  rustc --version && \
+  cargo --version && \
   cd / && \
   \
   wget -O ruby.tar.xz "https://cache.ruby-lang.org/pub/ruby/${RUBY_MAJOR%-rc}/ruby-$RUBY_VERSION.tar.xz" && \
