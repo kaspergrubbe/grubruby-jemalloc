@@ -10,6 +10,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Updated Rubygems to `3.4.15` (from `3.4.10`), https://github.com/rubygems/rubygems/blob/v3.4.15/CHANGELOG.md
 - Updated Bundler to `2.4.15` (from `2.4.10`), https://github.com/rubygems/rubygems/blob/bundler-v2.4.15/bundler/CHANGELOG.md
 
+### Removed
+- Removed Ruby 2.6 and Ruby 2.7 as they are no longer maintained.
+
 ## [9023] 2023-03-31
 
 Grubruby version `9023` ships with:
