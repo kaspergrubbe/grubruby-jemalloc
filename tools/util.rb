@@ -6,7 +6,7 @@ gemfile do
 end
 
 def debug?
-  ARGV.include?('debug')
+  !ENV['DEBUG'].nil?
 end
 
 def skip_cache?
