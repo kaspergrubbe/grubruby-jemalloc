@@ -21,6 +21,7 @@ def build_base_image(grubruby)
 
   base_command = [].tap do |it|
     it << 'docker build --compress'
+    it << '--platform=linux/amd64'
     it << "--tag #{base_image_tag}"
     it << '--no-cache' if skip_cache?
     it << '--file base/Dockerfile'
@@ -37,6 +38,7 @@ def build_jemalloc_image(grubruby, base_image_tag)
 
   buildjemalloc_command = [].tap do |it|
     it << 'docker build --compress'
+    it << '--platform=linux/amd64'
     it << "--tag #{buildjemalloc_tag}"
     it << '--no-cache' if skip_cache?
     it << '--file buildjemalloc/Dockerfile'
@@ -55,6 +57,7 @@ def build_ruby_image(tag_name, grubruby, base_image_tag, buildjemalloc_tag, ruby
     dockerfile = "ruby-#{ruby_version_major}/Dockerfile"
 
     it << 'docker build --compress'
+    it << '--platform=linux/amd64'
 
     it << "--tag #{tag_name}"
     it << '--no-cache' if skip_cache?
