@@ -37,6 +37,7 @@ RUN set -eux && \
     bison \
     dpkg-dev \
     gcc \
+    g++ \
     libbz2-dev \
     libgdbm-compat-dev \
     libgdbm-dev \
@@ -100,7 +101,7 @@ RUN set -eux && \
   apt-mark auto '.*' > /dev/null && \
   apt-mark manual $savedAptMark > /dev/null && \
   find /usr/local -type f -executable -not \( -name '*tkinter*' \) -exec ldd '{}' ';' \
-    | awk '/=>/ { print $(NF-1) }' \
+    | awk '/=>/ { so = $(NF-1); if (index(so, "/usr/local/") == 1) { next }; gsub("^/(usr/)?", "", so); print so }' \
     | sort -u \
     | xargs -r dpkg-query --search \
     | cut -d: -f1 \
@@ -158,10 +159,10 @@ RUN mkdir -p "$GEM_HOME" && chmod 777 "$GEM_HOME" && \
 ################################################################################
 # Add in Jemalloc libraries
 ################################################################################
-COPY --from=buildjemalloc_image /usr/local/lib/libjemalloc3.6.0.so /usr/local/lib/libjemalloc3.so
-COPY --from=buildjemalloc_image /usr/local/lib/libjemalloc4.5.0.so /usr/local/lib/libjemalloc4.so
-COPY --from=buildjemalloc_image /usr/local/lib/libjemalloc5.2.1.so /usr/local/lib/libjemalloc5.so
-COPY --from=buildjemalloc_image /usr/local/lib/libjemalloc5.3.0.so /usr/local/lib/libjemalloc5_3.so
+# COPY --from=buildjemalloc_image /usr/local/lib/libjemalloc3.6.0.so /usr/local/lib/libjemalloc3.so
+# COPY --from=buildjemalloc_image /usr/local/lib/libjemalloc4.5.0.so /usr/local/lib/libjemalloc4.so
+# COPY --from=buildjemalloc_image /usr/local/lib/libjemalloc5.2.1.so /usr/local/lib/libjemalloc5.so
+# COPY --from=buildjemalloc_image /usr/local/lib/libjemalloc5.3.0.so /usr/local/lib/libjemalloc5_3.so
 
 # Test Jemalloc with LD_PRELOAD
 RUN MALLOC_CONF="stats_print:true" \

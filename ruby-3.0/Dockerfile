@@ -37,6 +37,7 @@ RUN set -eux && \
     bison \
     dpkg-dev \
     gcc \
+    g++ \
     libbz2-dev \
     libgdbm-compat-dev \
     libgdbm-dev \
