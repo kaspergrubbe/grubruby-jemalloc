@@ -158,6 +158,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    sqlite3 (1.6.3-arm64-darwin)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
     thor (1.2.2)
@@ -189,13 +190,11 @@ DEPENDENCIES
   puma (~> 5.0)
   rails (~> 7.0.6)
   sprockets-rails
+  sqlite3 (~> 1.4)
   stimulus-rails
   turbo-rails
   tzinfo-data
   web-console
-
-RUBY VERSION
-   ruby 3.2.1p31
 
 BUNDLED WITH
    2.4.10
