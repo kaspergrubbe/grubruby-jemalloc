@@ -18,8 +18,10 @@ $logger.info
 
 test_time = Time.now.utc.to_i
 
+$logger.info 'Building base-image'
 base_image_tag = "#{@grubruby.repo_name}.beta:#{test_time}-base"
 base_command = [].tap do |it|
+  it << 'docker build'
   it << "--tag #{base_image_tag}"
   it << '--platform=linux/amd64'
   it << '--no-cache' if skip_cache?
@@ -27,7 +29,9 @@ base_command = [].tap do |it|
   it << '.'
 end
 run_command(base_command.join(' '))
+$logger.info '.. done!'
 
+$logger.info 'Building base-image 30'
 base_image_tag_30 = "#{@grubruby.repo_name}.beta:#{test_time}-base30"
 base_command = [].tap do |it|
   it << 'docker build'
@@ -38,7 +42,9 @@ base_command = [].tap do |it|
   it << '.'
 end
 run_command(base_command.join(' '))
+$logger.info '.. done!'
 
+$logger.info 'Building jemalloc-image'
 buildjemalloc_tag = "#{@grubruby.repo_name}.beta:#{test_time}-buildjemalloc"
 buildjemalloc_command = [].tap do |it|
   it << 'docker build --compress'
@@ -50,7 +56,9 @@ buildjemalloc_command = [].tap do |it|
   it << '.'
 end
 run_command(buildjemalloc_command.join(' '))
+$logger.info '.. done!'
 
+$logger.info 'Building jemalloc-image 30'
 buildjemalloc_tag_30 = "#{@grubruby.repo_name}.beta:#{test_time}-buildjemalloc30"
 buildjemalloc_command = [].tap do |it|
   it << 'docker build'
@@ -62,6 +70,7 @@ buildjemalloc_command = [].tap do |it|
   it << '.'
 end
 run_command(buildjemalloc_command.join(' '))
+$logger.info '.. done!'
 
 tested_versions.map do |ruby_version, sha256hash, rails_version|
   base_ruby_image_tag = "#{@grubruby.repo_name}.beta:#{test_time}-#{ruby_version}"
