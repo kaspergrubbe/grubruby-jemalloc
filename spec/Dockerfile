@@ -4,7 +4,7 @@ ARG LD_PRELOAD=
 FROM $IMAGE AS bundler
   # Install newest NodeJS from https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions
   RUN apt-get update && apt-get install -qq -y curl
-  RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
+  RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
 
   RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | tee /usr/share/keyrings/yarnkey.gpg >/dev/null
   RUN echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | tee /etc/apt/sources.list.d/yarn.list
