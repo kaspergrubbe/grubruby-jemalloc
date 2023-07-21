@@ -68,13 +68,12 @@ tested_versions.map do |ruby_version, sha256hash, rails_version|
 
   $logger.info "[#{ruby_version}] Building base image for Ruby #{ruby_version} with name: #{base_ruby_image_tag}"
 
-  base_tag_name, jemalloc_tag_name = if ruby_version.start_with?('3.0')
-                           [base_image_tag_30, buildjemalloc_tag_30]
-                         else
-                           [base_image_tag, buildjemalloc_tag]
-                         end
+  if ruby_version.start_with?('3.0')
+    build_ruby_image(base_ruby_image_tag, @grubruby, base_image_tag_30, buildjemalloc_tag_30, ruby_version, sha256hash)
+  else
+    build_ruby_image(base_ruby_image_tag, @grubruby, base_image_tag, buildjemalloc_tag, ruby_version, sha256hash)
+  end
 
-  build_ruby_image(base_ruby_image_tag, @grubruby, base_tag_name, jemalloc_tag_name, ruby_version, sha256hash)
   $logger.info "[#{ruby_version}] .. size is #{bytes_to_megabytes(docker_image_size_in_bytes(base_ruby_image_tag))} MB"
 
   # Build Rails image
