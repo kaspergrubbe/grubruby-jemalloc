@@ -30,6 +30,7 @@ base_command = [].tap do |it|
 end
 run_command(base_command.join(' '))
 $logger.info '.. done!'
+$logger.info
 
 $logger.info 'Building base-image 30'
 base_image_tag_30 = "#{@grubruby.repo_name}.beta:#{test_time}-base30"
@@ -43,6 +44,7 @@ base_command = [].tap do |it|
 end
 run_command(base_command.join(' '))
 $logger.info '.. done!'
+$logger.info
 
 $logger.info 'Building jemalloc-image'
 buildjemalloc_tag = "#{@grubruby.repo_name}.beta:#{test_time}-buildjemalloc"
@@ -57,6 +59,7 @@ buildjemalloc_command = [].tap do |it|
 end
 run_command(buildjemalloc_command.join(' '))
 $logger.info '.. done!'
+$logger.info
 
 $logger.info 'Building jemalloc-image 30'
 buildjemalloc_tag_30 = "#{@grubruby.repo_name}.beta:#{test_time}-buildjemalloc30"
@@ -71,6 +74,7 @@ buildjemalloc_command = [].tap do |it|
 end
 run_command(buildjemalloc_command.join(' '))
 $logger.info '.. done!'
+$logger.info
 
 tested_versions.map do |ruby_version, sha256hash, rails_version|
   base_ruby_image_tag = "#{@grubruby.repo_name}.beta:#{test_time}-#{ruby_version}"
