@@ -35,7 +35,7 @@ release_info << 'And the following Ruby-versions:'
 base_image_tag = build_base_image(@grubruby)
 buildjemalloc_tag = build_jemalloc_image(@grubruby, base_image_tag)
 
-base_image_tag_30 = build_base_image(@grubruby, 'base/Dockerfile-bullseye', 'bullseye')
+base_image_tag_30 = build_base_image(@grubruby, dockerfile: 'base/Dockerfile-bullseye', variant: 'bullseye')
 buildjemalloc_tag_30 = build_jemalloc_image(@grubruby, base_image_tag_30)
 
 # Commands to be run after main building block
