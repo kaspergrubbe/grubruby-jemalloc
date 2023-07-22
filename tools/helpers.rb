@@ -16,15 +16,15 @@ def image_tag_name(grubruby, ruby_version)
   end
 end
 
-def build_base_image(grubruby)
-  base_image_tag = tag_name_variant(grubruby, 'base')
+def build_base_image(grubruby, dockerfile: 'base/Dockerfile', variant: 'base')
+  base_image_tag = tag_name_variant(grubruby, variant)
 
   base_command = [].tap do |it|
     it << 'docker build --compress'
     it << '--platform=linux/amd64'
     it << "--tag #{base_image_tag}"
     it << '--no-cache' if skip_cache?
-    it << '--file base/Dockerfile'
+    it << "--file #{dockerfile}"
     it << '.'
   end
 
