@@ -32,11 +32,11 @@ run_command(base_command.join(' '))
 $logger.info '.. done!'
 $logger.info
 
-$logger.info 'Building base-image 30'
-base_image_tag_30 = "#{@grubruby.repo_name}.beta:#{test_time}-base30"
+$logger.info 'Building base-image (bullseye)'
+base_image_tag_bullseye = "#{@grubruby.repo_name}.beta:#{test_time}-base30"
 base_command = [].tap do |it|
   it << 'docker build'
-  it << "--tag #{base_image_tag_30}"
+  it << "--tag #{base_image_tag_bullseye}"
   it << '--platform=linux/amd64'
   it << '--no-cache' if skip_cache?
   it << '--file base/Dockerfile-bullseye'
@@ -61,15 +61,15 @@ run_command(buildjemalloc_command.join(' '))
 $logger.info '.. done!'
 $logger.info
 
-$logger.info 'Building jemalloc-image 30'
-buildjemalloc_tag_30 = "#{@grubruby.repo_name}.beta:#{test_time}-buildjemalloc30"
+$logger.info 'Building jemalloc-image (bullseye)'
+buildjemalloc_tag_bullseye = "#{@grubruby.repo_name}.beta:#{test_time}-buildjemalloc-bullseye"
 buildjemalloc_command = [].tap do |it|
   it << 'docker build'
-  it << "--tag #{buildjemalloc_tag_30}"
+  it << "--tag #{buildjemalloc_tag_bullseye}"
   it << '--platform=linux/amd64'
   it << '--no-cache' if skip_cache?
   it << '--file buildjemalloc/Dockerfile'
-  it << "--build-arg BASE_IMAGE=#{base_image_tag_30}"
+  it << "--build-arg BASE_IMAGE=#{base_image_tag_bullseye}"
   it << '.'
 end
 run_command(buildjemalloc_command.join(' '))
@@ -81,8 +81,8 @@ tested_versions.map do |ruby_version, sha256hash, rails_version|
 
   $logger.info "[#{ruby_version}] Building base image for Ruby #{ruby_version} with name: #{base_ruby_image_tag}"
 
-  if ruby_version.start_with?('3.0')
-    build_ruby_image(base_ruby_image_tag, @grubruby, base_image_tag_30, buildjemalloc_tag_30, ruby_version, sha256hash)
+  if ['3.0', '2.6', '2.7'].any? { |bullseye_ruby| ruby_version.start_with?(bullseye_ruby) }
+    build_ruby_image(base_ruby_image_tag, @grubruby, base_image_tag_bullseye, buildjemalloc_tag_bullseye, ruby_version, sha256hash)
   else
     build_ruby_image(base_ruby_image_tag, @grubruby, base_image_tag, buildjemalloc_tag, ruby_version, sha256hash)
   end
