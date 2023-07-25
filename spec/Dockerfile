@@ -37,10 +37,10 @@ FROM $IMAGE AS bundler
 
   RUN bundle config set --local jobs 8
   RUN bundle config set --local without 'development test'
-  RUN bundle install
+  RUN bundle install --verbose
 
   COPY . /app
-  RUN RAILS_ENV=production bundle exec rake assets:precompile
+  RUN NODE_OPTIONS=--openssl-legacy-provider RAILS_ENV=production bundle exec rake assets:precompile
 
 FROM $IMAGE
   COPY --from=bundler /app /app

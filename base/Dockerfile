@@ -11,6 +11,7 @@ FROM debian:bookworm-slim
       libyaml-dev \
       procps \
       zlib1g-dev \
+      pkg-config \
     && apt-get -y clean \
     && rm -rf /var/lib/apt/lists/*
 

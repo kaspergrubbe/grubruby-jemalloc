@@ -25,7 +25,9 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+# Test jemalloc compilation of native gems https://github.com/kaspergrubbe/grubruby-jemalloc/pull/38
 gem 'mini_racer'
+gem 'pg'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"

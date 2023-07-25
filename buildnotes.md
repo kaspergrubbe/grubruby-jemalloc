@@ -3,6 +3,7 @@
 - Bundler versions: https://rubygems.org/gems/bundler
 - Ruby versions: https://www.ruby-lang.org/en/downloads/releases/
 - Jemalloc versions: https://github.com/jemalloc/jemalloc/releases
+- Supported Rubies and Rails versions: https://www.fastruby.io/blog/ruby/rails/versions/compatibility-table.html
 
 # How to do a release
 - Test if everything is building and working by running `ruby tools/test.rb`.
