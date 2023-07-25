@@ -6,7 +6,14 @@ require_relative 'util'
 require_relative 'helpers'
 
 tested_versions = if ARGV[0]
-                    @supported_versions.select { |version, _, _, _| version.start_with?(ARGV[0]) }
+                    case ARGV[0]
+                    when /\A\d+.\d+.\d+\z/
+                      @supported_versions.select { |version, _, _, _| version == ARGV[0] }
+                    when /\A\d+.\d+\z/
+                      @supported_versions.select { |version, _, _, _| version.start_with?(ARGV[0]) }
+                    else
+                      raise "#{ARGV[0]} not supported"
+                    end
                   else
                     @supported_versions
                   end
