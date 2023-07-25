@@ -6,7 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Changed
-- **Upgrade Ruby 3.1 and 3.2 from Debian Bullseye to Debian Bookworm:** Please test your builds when upgrading! (Ruby 3.0, 2.7 and 2.6 will remain on Debian Bullseye due to OpenSSL compatibility).
+- **THIS WILL BE A SPLIT RELEASE:**
+  - **Ruby 3.2 and 3.1 version will now be running Debian Bookworm:** Please test your builds when upgrading! 
+  - Ruby 3.0, 2.7 and 2.6 will remain on Debian Bullseye due to OpenSSL compatibility issues.
 - Updated Rubygems to `3.4.15` (from `3.4.10`), https://github.com/rubygems/rubygems/blob/v3.4.15/CHANGELOG.md
 - Updated Bundler to `2.4.15` (from `2.4.10`), https://github.com/rubygems/rubygems/blob/bundler-v2.4.15/bundler/CHANGELOG.md
 
