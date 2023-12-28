@@ -54,7 +54,7 @@ RUN set -eux && \
   rm -rf /var/lib/apt/lists/* && \
   \
   mkdir -p /usr/src/rust && \
-  wget -O rust-x86_64-unknown-linux-gnu.tar.gz "https://static.rust-lang.org/dist/rust-1.66.0-x86_64-unknown-linux-gnu.tar.gz" && \
+  wget --quiet -O rust-x86_64-unknown-linux-gnu.tar.gz "https://static.rust-lang.org/dist/rust-1.66.0-x86_64-unknown-linux-gnu.tar.gz" && \
   echo "f6ff8b7a38bab7d8f3cb7b70c7201494a5485c2cf12e84a13c9e232fa51ebfe7 *rust-x86_64-unknown-linux-gnu.tar.gz" | sha256sum --check --strict && \
   tar xvzf rust-x86_64-unknown-linux-gnu.tar.gz -C /usr/src/rust --strip-components=1 --exclude=rust-docs && \
   cd /usr/src/rust && \
@@ -63,7 +63,7 @@ RUN set -eux && \
   cargo --version && \
   cd / && \
   \
-  wget -O ruby.tar.xz "https://cache.ruby-lang.org/pub/ruby/${RUBY_MAJOR%-rc}/ruby-$RUBY_VERSION.tar.xz" && \
+  wget --quiet -O ruby.tar.xz "https://cache.ruby-lang.org/pub/ruby/${RUBY_MAJOR%-rc}/ruby-$RUBY_VERSION.tar.xz" && \
   echo "$RUBY_DOWNLOAD_SHA256 *ruby.tar.xz" | sha256sum --check --strict && \
   \
   mkdir -p /usr/src/ruby && \
