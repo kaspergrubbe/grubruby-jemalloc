@@ -5,12 +5,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+- Added Ruby `3.3.0`! Happy holidays! https://www.ruby-lang.org/en/news/2023/12/25/ruby-3-3-0-released/
+
+### Removed
+- Ruby `2.6.*` and Ruby `2.7.*` have been removed, they are no longer supported, and rubygems and bundler have removed support.
+
 ### Changed
 - **THIS WILL BE A SPLIT RELEASE:**
-  - **Ruby 3.2 and 3.1 version will now be running Debian Bookworm:** Please test your builds when upgrading! 
-  - Ruby 3.0, 2.7 and 2.6 will remain on Debian Bullseye due to OpenSSL compatibility issues.
-- Updated Rubygems to `3.4.17` (from `3.4.10`), https://github.com/rubygems/rubygems/blob/v3.4.17/CHANGELOG.md
-- Updated Bundler to `2.4.17` (from `2.4.10`), https://github.com/rubygems/rubygems/blob/bundler-v2.4.17/bundler/CHANGELOG.md
+  - **Ruby 3.3, 3.2 and 3.1 version will now be running Debian Bookworm:** Please test your builds when upgrading! 
+  - Ruby 3.0 will remain on Debian Bullseye due to OpenSSL compatibility issues.
+- Updated Rubygems to `3.5.3` (from `3.4.10`), https://github.com/rubygems/rubygems/blob/v3.5.3/CHANGELOG.md
+- Updated Bundler to `2.5.3` (from `2.4.10`), https://github.com/rubygems/rubygems/blob/bundler-v2.5.3/bundler/CHANGELOG.md
 
 ## [9023] 2023-03-31
 

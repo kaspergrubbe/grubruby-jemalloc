@@ -17,6 +17,9 @@ ARG RUBY_DOWNLOAD_SHA256
 ARG RUBYGEMS_VERSION
 ARG BUNDLER_VERSION
 
+ARG CUSTOM_OPTFLAGS=default
+ARG CUSTOM_DEBUGFLAGS=default
+
 ENV LANG C.UTF-8
 ENV RUBY_MAJOR=${RUBY_MAJOR}
 ENV RUBY_VERSION=${RUBY_VERSION}
@@ -34,6 +37,7 @@ RUN set -eux && \
     bison \
     dpkg-dev \
     gcc \
+    g++ \
     libbz2-dev \
     libgdbm-compat-dev \
     libgdbm-dev \
@@ -49,7 +53,17 @@ RUN set -eux && \
   && \
   rm -rf /var/lib/apt/lists/* && \
   \
-  wget -O ruby.tar.xz "https://cache.ruby-lang.org/pub/ruby/${RUBY_MAJOR%-rc}/ruby-$RUBY_VERSION.tar.xz" && \
+  mkdir -p /usr/src/rust && \
+  wget --quiet -O rust-x86_64-unknown-linux-gnu.tar.gz "https://static.rust-lang.org/dist/rust-1.74.1-x86_64-unknown-linux-gnu.tar.gz" && \
+  echo "d206888a2a9d55113940151ba16117ce2456d7de021bab18cfcb06dc48d3157c *rust-x86_64-unknown-linux-gnu.tar.gz" | sha256sum --check --strict && \
+  tar xvzf rust-x86_64-unknown-linux-gnu.tar.gz -C /usr/src/rust --strip-components=1 --exclude=rust-docs && \
+  cd /usr/src/rust && \
+  ./install.sh --components=rustc,rust-std-x86_64-unknown-linux-gnu,cargo --without=rust-docs && \
+  rustc --version && \
+  cargo --version && \
+  cd / && \
+  \
+  wget --quiet -O ruby.tar.xz "https://cache.ruby-lang.org/pub/ruby/${RUBY_MAJOR%-rc}/ruby-$RUBY_VERSION.tar.xz" && \
   echo "$RUBY_DOWNLOAD_SHA256 *ruby.tar.xz" | sha256sum --check --strict && \
   \
   mkdir -p /usr/src/ruby && \
@@ -67,12 +81,19 @@ RUN set -eux && \
   } > file.c.new && \
   mv file.c.new file.c && \
   \
+  if [ "$CUSTOM_OPTFLAGS" != "default" ]; \
+    then export optflags="$CUSTOM_OPTFLAGS"; \
+  fi && \
+  if [ "$CUSTOM_DEBUGFLAGS" != "default" ]; \
+    then export debugflags="$CUSTOM_DEBUGFLAGS"; \
+  fi && \
   autoconf && \
   gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)" && \
   ./configure \
     --build="$gnuArch" \
     --disable-install-doc \
     --enable-shared \
+    --enable-yjit \
   && \
   make -j "$(nproc)" && \
   make install && \
@@ -91,13 +112,22 @@ RUN set -eux && \
   \
   cd / && \
   rm -r /usr/src/ruby && \
+  \
+  cd /usr/src/rust && \
+  ./install.sh --uninstall --components=rustc,rust-std-x86_64-unknown-linux-gnu,cargo --without=rust-docs && \
+  cd / && \
+  rm rust-x86_64-unknown-linux-gnu.tar.gz && \
+  rm -rf /usr/src/rust && \
+  \
 # make sure bundled "rubygems" is older than RUBYGEMS_VERSION (https://github.com/docker-library/ruby/issues/246)
   ruby -e "puts Gem::Version.create(ENV['RUBYGEMS_VERSION'])" && \
   ruby -e "puts Gem::Version.create(Gem::VERSION)" && \
   ruby -e 'exit(Gem::Version.create(ENV["RUBYGEMS_VERSION"]) >= Gem::Version.create(Gem::VERSION))' && \
+  ruby -e 'exit(RubyVM::YJIT.enabled? == false)' && \
+  ruby --yjit -e 'exit(RubyVM::YJIT.enabled? == true)' && \
+  RUBY_YJIT_ENABLE=1 ruby -e 'exit(RubyVM::YJIT.enabled? == true)' && \
   gem update --system "$RUBYGEMS_VERSION" && \
   gem install bundler --version "$BUNDLER_VERSION" --force && \
-  rm -r /root/.gem/ && \
 # verify we have no "ruby" packages installed
   ! dpkg -l | grep -i ruby && \
   [ "$(command -v ruby)" = '/usr/local/bin/ruby' ] && \
@@ -106,6 +136,8 @@ RUN set -eux && \
   gem --version && \
   bundle --version && \
   ruby -e "puts Integer::GMP_VERSION" && \
+  ruby -r rbconfig -e 'puts (RbConfig::CONFIG["CFLAGS"].split - RbConfig::CONFIG["warnflags"].split).join(", ")' && \
+  ruby --parser=prism -e "require 'prism'; Prism.parse('1+2')" && \
 # inspiration from https://github.com/rubygems/ruby-ssl-check/blob/master/check.rb
   ruby -r openssl -e 'puts "Compiled with:  %s" % OpenSSL::OPENSSL_VERSION' && \
   ruby -r openssl -e 'puts "Loaded version: %s" % OpenSSL::OPENSSL_LIBRARY_VERSION if defined?(OpenSSL::OPENSSL_LIBRARY_VERSION)' && \
@@ -148,4 +180,3 @@ RUN MALLOC_CONF="stats_print:true" \
   ruby -e "exit" 2>&1 | grep "5.3.0-0"
 
 CMD [ "irb" ]
-
