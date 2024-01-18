@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Added
 - Added Ruby `3.2.3` due to CVE-2023-36617: ReDoS vulnerability in URI, https://www.ruby-lang.org/en/news/2024/01/18/ruby-3-2-3-released/
 
+### Changed
+- Updated Rubygems to `3.5.4` (from `3.5.3`), https://github.com/rubygems/rubygems/blob/v3.5.4/CHANGELOG.md
 ## [9024] 2023-12-28
 
 Grubruby version `9024` ships with:
