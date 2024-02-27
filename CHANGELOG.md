@@ -9,6 +9,35 @@ N/A
 
 ## [9025] 2024-01-27
 
+Grubruby version `9025` ships with:
+- Rubygems `3.5.6`.
+- Bundler `2.5.6`.
+
+- Jemalloc:
+  - `3.6.0`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc3.so`.
+  - `4.5.0`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc4.so`.
+  - `5.2.1`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc5.so`.
+  - `5.3.0`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc5_3.so`.
+
+And the following Ruby-versions:
+- `3.3.0` as `kaspergrubbe/grubruby-jemalloc:3.3.0.9025` (234.31 MB).
+- `3.2.3` as `kaspergrubbe/grubruby-jemalloc:3.2.3.9025` (232.57 MB).
+- `3.2.2` as `kaspergrubbe/grubruby-jemalloc:3.2.2.9025` (232.46 MB).
+- `3.2.1` as `kaspergrubbe/grubruby-jemalloc:3.2.1.9025` (232.45 MB).
+- `3.2.0` as `kaspergrubbe/grubruby-jemalloc:3.2.0.9025` (232.51 MB).
+- `3.1.4` as `kaspergrubbe/grubruby-jemalloc:3.1.4.9025` (232.5 MB).
+- `3.1.3` as `kaspergrubbe/grubruby-jemalloc:3.1.3.9025` (232.5 MB).
+- `3.1.2` as `kaspergrubbe/grubruby-jemalloc:3.1.2.9025` (252.68 MB).
+- `3.1.1` as `kaspergrubbe/grubruby-jemalloc:3.1.1.9025` (252.68 MB).
+- `3.1.0` as `kaspergrubbe/grubruby-jemalloc:3.1.0.9025` (251.18 MB).
+- `3.0.6` as `kaspergrubbe/grubruby-jemalloc:3.0.6.9025` (289.44 MB).
+- `3.0.5` as `kaspergrubbe/grubruby-jemalloc:3.0.5.9025` (289.44 MB).
+- `3.0.4` as `kaspergrubbe/grubruby-jemalloc:3.0.4.9025` (289.42 MB).
+- `3.0.3` as `kaspergrubbe/grubruby-jemalloc:3.0.3.9025` (289.4 MB).
+- `3.0.2` as `kaspergrubbe/grubruby-jemalloc:3.0.2.9025` (288.62 MB).
+- `3.0.1` as `kaspergrubbe/grubruby-jemalloc:3.0.1.9025` (288.6 MB).
+- `3.0.0` as `kaspergrubbe/grubruby-jemalloc:3.0.0.9025` (288.2 MB).
+
 ### Added
 - Added Ruby `3.2.3` due to CVE-2023-36617: ReDoS vulnerability in URI, https://www.ruby-lang.org/en/news/2024/01/18/ruby-3-2-3-released/
 
