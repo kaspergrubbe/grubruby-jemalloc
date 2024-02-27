@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+N/A
+
+## [9025] 2024-01-27
+
 ### Added
 - Added Ruby `3.2.3` due to CVE-2023-36617: ReDoS vulnerability in URI, https://www.ruby-lang.org/en/news/2024/01/18/ruby-3-2-3-released/
 
