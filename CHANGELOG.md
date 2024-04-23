@@ -9,6 +9,39 @@ N/A
 
 ## [9026] 2024-04-23
 
+Grubruby version `9026` ships with:
+- Rubygems `3.5.9`.
+- Bundler `2.5.9`.
+
+- Jemalloc:
+  - `3.6.0`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc3.so`.
+  - `4.5.0`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc4.so`.
+  - `5.2.1`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc5.so`.
+  - `5.3.0`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc5_3.so`.
+
+And the following Ruby-versions:
+- `3.3.1` as `kaspergrubbe/grubruby-jemalloc:3.3.1.9026` (233.63 MB).
+- `3.3.0` as `kaspergrubbe/grubruby-jemalloc:3.3.0.9026` (240.86 MB).
+- `3.2.4` as `kaspergrubbe/grubruby-jemalloc:3.2.4.9026` (239.13 MB).
+- `3.2.3` as `kaspergrubbe/grubruby-jemalloc:3.2.3.9026` (239.12 MB).
+- `3.2.2` as `kaspergrubbe/grubruby-jemalloc:3.2.2.9026` (239.01 MB).
+- `3.2.1` as `kaspergrubbe/grubruby-jemalloc:3.2.1.9026` (238.99 MB).
+- `3.2.0` as `kaspergrubbe/grubruby-jemalloc:3.2.0.9026` (239.05 MB).
+- `3.1.5` as `kaspergrubbe/grubruby-jemalloc:3.1.5.9026` (239.1 MB).
+- `3.1.4` as `kaspergrubbe/grubruby-jemalloc:3.1.4.9026` (239.04 MB).
+- `3.1.3` as `kaspergrubbe/grubruby-jemalloc:3.1.3.9026` (239.05 MB).
+- `3.1.2` as `kaspergrubbe/grubruby-jemalloc:3.1.2.9026` (259.5 MB).
+- `3.1.1` as `kaspergrubbe/grubruby-jemalloc:3.1.1.9026` (259.5 MB).
+- `3.1.0` as `kaspergrubbe/grubruby-jemalloc:3.1.0.9026` (257.99 MB).
+- `3.0.7` as `kaspergrubbe/grubruby-jemalloc:3.0.7.9026` (290.58 MB).
+- `3.0.6` as `kaspergrubbe/grubruby-jemalloc:3.0.6.9026` (290.58 MB).
+- `3.0.5` as `kaspergrubbe/grubruby-jemalloc:3.0.5.9026` (290.58 MB).
+- `3.0.4` as `kaspergrubbe/grubruby-jemalloc:3.0.4.9026` (290.56 MB).
+- `3.0.3` as `kaspergrubbe/grubruby-jemalloc:3.0.3.9026` (290.54 MB).
+- `3.0.2` as `kaspergrubbe/grubruby-jemalloc:3.0.2.9026` (289.76 MB).
+- `3.0.1` as `kaspergrubbe/grubruby-jemalloc:3.0.1.9026` (289.73 MB).
+- `3.0.0` as `kaspergrubbe/grubruby-jemalloc:3.0.0.9026` (289.34 MB).
+
 ### Added
 - Added Ruby `3.3.1`! https://www.ruby-lang.org/en/news/2024/04/23/ruby-3-3-1-released/
 - Added Ruby `3.2.4`! https://www.ruby-lang.org/en/news/2024/04/23/ruby-3-2-4-released/
