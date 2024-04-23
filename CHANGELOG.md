@@ -11,6 +11,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added Ruby `3.1.5`! https://www.ruby-lang.org/en/news/2024/04/23/ruby-3-1-5-released/
 - Added Ruby `3.0.7`! https://www.ruby-lang.org/en/news/2024/04/23/ruby-3-0-7-released/
 
+### Changed
+- Updated Rubygems to `3.5.9` (from `3.5.6`), https://github.com/rubygems/rubygems/blob/v3.5.9/CHANGELOG.md
 ## [9025] 2024-01-27
 
 Grubruby version `9025` ships with:
