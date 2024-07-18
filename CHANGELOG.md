@@ -9,8 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added Ruby `3.3.3`! https://www.ruby-lang.org/en/news/2024/06/12/ruby-3-3-3-released/
 
 ### Changed
-- Updated Bundler to `2.5.11` (from `2.5.9`), https://github.com/rubygems/rubygems/blob/bundler-v2.5.11/bundler/CHANGELOG.md
 - Updated Rubygems to `3.5.15` (from `3.5.9`), https://github.com/rubygems/rubygems/blob/v3.5.15/CHANGELOG.md
+- Updated Bundler to `2.5.15` (from `2.5.9`), https://github.com/rubygems/rubygems/blob/bundler-v2.5.15/bundler/CHANGELOG.md
 
 ## [9026] 2024-04-23
 
