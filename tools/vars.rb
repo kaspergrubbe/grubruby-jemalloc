@@ -47,5 +47,6 @@ bundler    = '2.5.15'
 
   ['3.3.0', '676b65a36e637e90f982b57b059189b3276b9045034dcd186a7e9078847b975b', 'rails70'],
   ['3.3.1', '0686941a3ec395a15ae2a852487b2a88e5fb8a5518e188df00d8d1bb71a6349b', 'rails70'],
-  ['3.3.3', '83c0995388399c9555bad87e70af069755b5a9d84bbaa74aa22d1e37ff70fc1e', 'rails70']
+  ['3.3.3', '83c0995388399c9555bad87e70af069755b5a9d84bbaa74aa22d1e37ff70fc1e', 'rails70'],
+  ['3.3.4', '1caaee9a5a6befef54bab67da68ace8d985e4fb59cd17ce23c28d9ab04f4ddad', 'rails70']
 ].reverse!

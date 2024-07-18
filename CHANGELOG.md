@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 - Added Ruby `3.3.3`! https://www.ruby-lang.org/en/news/2024/06/12/ruby-3-3-3-released/
+- Added Ruby `3.3.4`! https://www.ruby-lang.org/en/news/2024/07/09/ruby-3-3-4-released/
 
 ### Changed
 - Updated Rubygems to `3.5.15` (from `3.5.9`), https://github.com/rubygems/rubygems/blob/v3.5.15/CHANGELOG.md
