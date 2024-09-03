@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Added
 - Added Ruby `3.3.5`, a minor release with bugfixes! https://www.ruby-lang.org/en/news/2024/09/03/3-3-5-released/
 
+### Changed
+- Updated Rubygems to `3.5.18` (from `3.5.16`), https://github.com/rubygems/rubygems/blob/v3.5.18/CHANGELOG.md
 ## [9028] 2024-07-26
 
 Grubruby version `9028` ships with:
