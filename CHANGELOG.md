@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 - Updated Rubygems to `3.5.22` (from `3.5.18`), https://github.com/rubygems/rubygems/blob/v3.5.22/CHANGELOG.md
+- Updated Bundler to `2.5.22` (from `2.5.18`), https://github.com/rubygems/rubygems/blob/bundler-v2.5.22/bundler/CHANGELOG.md
+
 ## [9029] 2024-09-04
 
 Grubruby version `9029` ships with:
