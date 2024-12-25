@@ -5,7 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-N/A
+### Added
+- Added Ruby `3.4.0`, a major release with lots of exciting changes! https://www.ruby-lang.org/en/news/2024/12/25/ruby-3-4-0-released/
+- Added Ruby `3.4.1`, a minor release that fixes the version output! https://www.ruby-lang.org/en/news/2024/12/25/ruby-3-4-1-released/
 
 ## [9030] 2024-11-07
 
