@@ -90,6 +90,7 @@ GEM
     jsbundling-rails (1.1.2)
       railties (>= 6.0.0)
     libv8-node (18.16.0.0-arm64-darwin)
+    logger (1.6.4)
     loofah (2.21.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -105,6 +106,7 @@ GEM
     mini_racer (0.8.0)
       libv8-node (~> 18.16.0.0)
     minitest (5.18.1)
+    mutex_m (0.3.0)
     net-imap (0.3.6)
       date
       net-protocol
@@ -118,6 +120,7 @@ GEM
     nokogiri (1.15.3)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
+    ostruct (0.6.1)
     pg (1.5.3)
     puma (5.6.6)
       nio4r (~> 2.0)
@@ -195,7 +198,10 @@ DEPENDENCIES
   debug
   jbuilder
   jsbundling-rails
+  logger
   mini_racer
+  mutex_m
+  ostruct
   pg
   puma (~> 5.0)
   rails (~> 7.0.6)
