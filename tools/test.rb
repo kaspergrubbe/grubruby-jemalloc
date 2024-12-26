@@ -39,20 +39,6 @@ run_command(base_command.join(' '))
 $logger.info '.. done!'
 $logger.info
 
-$logger.info 'Building base-image (bullseye)'
-base_image_tag_bullseye = "#{@grubruby.repo_name}.beta:#{test_time}-base30"
-base_command = [].tap do |it|
-  it << 'docker build'
-  it << "--tag #{base_image_tag_bullseye}"
-  it << '--platform=linux/amd64'
-  it << '--no-cache' if skip_cache?
-  it << '--file base/Dockerfile-bullseye'
-  it << '.'
-end
-run_command(base_command.join(' '))
-$logger.info '.. done!'
-$logger.info
-
 $logger.info 'Building jemalloc-image'
 buildjemalloc_tag = "#{@grubruby.repo_name}.beta:#{test_time}-buildjemalloc"
 buildjemalloc_command = [].tap do |it|
@@ -68,32 +54,11 @@ run_command(buildjemalloc_command.join(' '))
 $logger.info '.. done!'
 $logger.info
 
-$logger.info 'Building jemalloc-image (bullseye)'
-buildjemalloc_tag_bullseye = "#{@grubruby.repo_name}.beta:#{test_time}-buildjemalloc-bullseye"
-buildjemalloc_command = [].tap do |it|
-  it << 'docker build'
-  it << "--tag #{buildjemalloc_tag_bullseye}"
-  it << '--platform=linux/amd64'
-  it << '--no-cache' if skip_cache?
-  it << '--file buildjemalloc/Dockerfile'
-  it << "--build-arg BASE_IMAGE=#{base_image_tag_bullseye}"
-  it << '.'
-end
-run_command(buildjemalloc_command.join(' '))
-$logger.info '.. done!'
-$logger.info
-
 tested_versions.map do |ruby_version, sha256hash, rails_version|
   base_ruby_image_tag = "#{@grubruby.repo_name}.beta:#{test_time}-#{ruby_version}"
 
   $logger.info "[#{ruby_version}] Building base image for Ruby #{ruby_version} with name: #{base_ruby_image_tag}"
-
-  if ['3.0', '2.6', '2.7'].any? { |bullseye_ruby| ruby_version.start_with?(bullseye_ruby) }
-    build_ruby_image(base_ruby_image_tag, @grubruby, base_image_tag_bullseye, buildjemalloc_tag_bullseye, ruby_version, sha256hash)
-  else
-    build_ruby_image(base_ruby_image_tag, @grubruby, base_image_tag, buildjemalloc_tag, ruby_version, sha256hash)
-  end
-
+  build_ruby_image(base_ruby_image_tag, @grubruby, base_image_tag, buildjemalloc_tag, ruby_version, sha256hash)
   $logger.info "[#{ruby_version}] .. size is #{bytes_to_megabytes(docker_image_size_in_bytes(base_ruby_image_tag))} MB"
 
   # Build Rails image
@@ -109,7 +74,7 @@ tested_versions.map do |ruby_version, sha256hash, rails_version|
     it << "--tag #{test_image_tag}"
     it << '--platform=linux/amd64'
     it << '--no-cache' if skip_cache?
-    it << "--file spec/Dockerfile"
+    it << '--file spec/Dockerfile'
     it << "--build-arg IMAGE=#{base_ruby_image_tag}"
     it << '--build-arg LD_PRELOAD=/usr/local/lib/libjemalloc3.so'
     it << "spec/#{rails_version}"

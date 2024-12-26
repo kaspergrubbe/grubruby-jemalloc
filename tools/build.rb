@@ -35,21 +35,12 @@ release_info << 'And the following Ruby-versions:'
 base_image_tag = build_base_image(@grubruby)
 buildjemalloc_tag = build_jemalloc_image(@grubruby, base_image_tag)
 
-base_image_tag_bullseye = build_base_image(@grubruby, dockerfile: 'base/Dockerfile-bullseye', variant: 'bullseye')
-buildjemalloc_tag_bullseye = build_jemalloc_image(@grubruby, base_image_tag_bullseye)
-
 # Commands to be run after main building block
 after_commands = []
 
 @supported_versions.each do |ruby_version, sha256hash, _, _|
-  base_tag, jemalloc_tag =  if ['3.0', '2.6', '2.7'].any? { |bullseye_ruby| ruby_version.start_with?(bullseye_ruby) }
-                              [base_image_tag_bullseye, buildjemalloc_tag_bullseye]
-                            else
-                              [base_image_tag, buildjemalloc_tag]
-                            end
-
   image_tag = image_tag_name(@grubruby, ruby_version)
-  build_ruby_image(image_tag, @grubruby, base_tag, jemalloc_tag, ruby_version, sha256hash)
+  build_ruby_image(image_tag, @grubruby, base_image_tag, buildjemalloc_tag, ruby_version, sha256hash)
 
   size = bytes_to_megabytes(docker_image_size_in_bytes(image_tag))
   release_info << "- `#{ruby_version}` as `#{image_tag}` (#{size} MB)."
