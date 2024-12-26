@@ -9,6 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added Ruby `3.4.0`, a major release with lots of exciting changes! https://www.ruby-lang.org/en/news/2024/12/25/ruby-3-4-0-released/
 - Added Ruby `3.4.1`, a minor release that fixes the version output! https://www.ruby-lang.org/en/news/2024/12/25/ruby-3-4-1-released/
 
+### Changed
+- Updated Rubygems to `3.6.2` (from `3.5.23`), https://github.com/rubygems/rubygems/blob/v3.6.2/CHANGELOG.md
 ## [9030] 2024-11-07
 
 Grubruby version `9030` ships with:
