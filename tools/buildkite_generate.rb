@@ -18,10 +18,10 @@ def buildkite_ruby_step(ruby_version, index)
       source ~/.bash_profile
 
       echo "--- setup ruby"
-      rbenv local 3.2.2 || rbenv install 3.2.2 && rbenv local 3.2.2
+      rbenv local 3.4.1 || rbenv install 3.4.1 && rbenv local 3.4.1
 
       echo "--- bundle setup"
-      gem query --silent --installed --exact bundler || gem install bundler
+      gem search --silent --installed --exact bundler || gem install bundler
 
       flock -u 10
 
@@ -53,10 +53,10 @@ when '-minor'
   end
 when '-major'
   # Buildkite step for each major version:
-  versions = @supported_versions.map(&:first).map { |version|
+  versions = @supported_versions.map(&:first).map do |version|
     major, minor, = version.split('.')
     "#{major}.#{minor}"
-  }.uniq
+  end.uniq
 
   versions.each_with_index do |version, index|
     puts buildkite_ruby_step(version, index)
