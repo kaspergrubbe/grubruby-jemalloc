@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added Ruby 3.3.7, https://www.ruby-lang.org/en/news/2025/01/15/ruby-3-3-7-released/
 - Added Ruby 3.2.7, https://www.ruby-lang.org/en/news/2025/02/04/ruby-3-2-7-released/
 
+### Changed
+- Updated Rubygems to `3.6.3` (from `3.6.2`), https://github.com/rubygems/rubygems/blob/v3.6.3/CHANGELOG.md
 ## [9031] 2024-12-26
 
 Grubruby version `9031` ships with:
