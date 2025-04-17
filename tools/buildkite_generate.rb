@@ -41,7 +41,7 @@ def buildkite_push(ruby_versions)
 
   <<-RUBY
   - label: "Build & Push"
-    command: ruby build/build.rb build push
+    command: ruby tools/build.rb build push
     depends_on:
 #{depends_on_keys}
     if: build.tag != null

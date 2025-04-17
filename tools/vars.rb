@@ -14,7 +14,7 @@ end
 
 repo_owner  = 'kaspergrubbe'
 repo_name   = 'grubruby-jemalloc'
-env_version = ENV["VERSION"] || ENV.fetch("BUILDKITE_VERSION") { raise "env VERSION= or BUILDKITE_VERSION= must be set" }
+env_version = ENV["VERSION"] || ENV.fetch("BUILDKITE_TAG") { raise "env VERSION= or BUILDKITE_TAG= must be set" }
 version     = env_version.delete_prefix("v").to_i
 rubygems    = '3.6.8'
 bundler     = '2.6.8'
