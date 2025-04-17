@@ -1,10 +1,3 @@
-require 'bundler/inline'
-
-gemfile do
-  source 'https://rubygems.org'
-  gem 'pry'
-end
-
 def debug?
   !ENV['DEBUG'].nil?
 end
