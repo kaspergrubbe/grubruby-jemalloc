@@ -12,11 +12,12 @@ class Grubruby
   attr_reader :repo_owner, :repo_name, :version, :rubygems_version, :bundler_version
 end
 
-repo_owner = 'kaspergrubbe'
-repo_name  = 'grubruby-jemalloc'
-version    = '9031'
-rubygems   = '3.6.8'
-bundler    = '2.6.8'
+repo_owner  = 'kaspergrubbe'
+repo_name   = 'grubruby-jemalloc'
+env_version = ENV["VERSION"] || ENV.fetch("BUILDKITE_VERSION") { raise "env VERSION= or BUILDKITE_VERSION= must be set" }
+version     = env_version.delete_prefix("v").to_i
+rubygems    = '3.6.8'
+bundler     = '2.6.8'
 
 @grubruby = Grubruby.new(repo_owner, repo_name, version, rubygems, bundler)
 
