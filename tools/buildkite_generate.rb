@@ -47,8 +47,8 @@ def buildkite_push(ruby_versions)
     if: build.tag != null
     plugins:
       - docker-login#v3.0.0:
-        username: grubautomated
-        password-env: GRUBAUTOMATED_DOCKER_LOGIN_PASSWORD
+          username: grubautomated
+          password-env: GRUBAUTOMATED_DOCKER_LOGIN_PASSWORD
   RUBY
 end
 
