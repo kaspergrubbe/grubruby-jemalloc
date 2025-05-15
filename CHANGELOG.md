@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 - Updated Rubygems to `3.6.9` (from `3.6.8`), https://github.com/rubygems/rubygems/blob/v3.6.9/CHANGELOG.md
+- Updated Bundler to `2.6.9` (from `2.6.8`), https://github.com/rubygems/rubygems/blob/bundler-v2.6.9/bundler/CHANGELOG.md
+
 ## [9033] 2025-04-18
 
 Grubruby version `9033` ships with:
