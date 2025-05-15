@@ -5,9 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-## Added
+### Added
 - Added Ruby 3.4.4, https://www.ruby-lang.org/en/news/2025/05/14/ruby-3-4-4-released/
 
+### Changed
+- Updated Rubygems to `3.6.9` (from `3.6.8`), https://github.com/rubygems/rubygems/blob/v3.6.9/CHANGELOG.md
 ## [9033] 2025-04-18
 
 Grubruby version `9033` ships with:
@@ -50,7 +52,7 @@ And the following Ruby-versions:
 - `3.1.1` as `kaspergrubbe/grubruby-jemalloc:3.1.1.9033` (233.96 MB).
 - `3.1.0` as `kaspergrubbe/grubruby-jemalloc:3.1.0.9033` (232.45 MB).
 
-## Added
+### Added
 - Added Ruby 3.4.3, https://www.ruby-lang.org/en/news/2025/04/14/ruby-3-4-3-released/
 - Added Ruby 3.4.2, https://www.ruby-lang.org/en/news/2025/02/14/ruby-3-4-2-released/
 - Added Ruby 3.3.8, https://www.ruby-lang.org/en/news/2025/04/09/ruby-3-3-8-released/
