@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 - Added Ruby 3.4.6, https://www.ruby-lang.org/en/news/2025/09/16/ruby-3-4-6-released/
+- Added Ruby 3.3.9, https://www.ruby-lang.org/en/news/2025/07/24/ruby-3-3-9-released/
 
 ## [9035] 2025-07-17
 
