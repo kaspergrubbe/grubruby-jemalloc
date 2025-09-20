@@ -1,11 +1,5 @@
 require_relative 'vars'
 
-buildkite_block_step = <<-BLOCK
-  - block: "Run? 🤔🧐🤨"
-    blocked_state: "running"
-
-BLOCK
-
 def buildkite_ruby_step(ruby_version, index)
   web_port = 3500 + index
 
