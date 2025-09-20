@@ -1,11 +1,5 @@
 require_relative 'vars'
 
-buildkite_block_step = <<-BLOCK
-  - block: "Run? 🤔🧐🤨"
-    blocked_state: "running"
-
-BLOCK
-
 def buildkite_ruby_step(ruby_version, index)
   web_port = 3500 + index
 
@@ -68,7 +62,6 @@ when nil
   exit(1)
 when '-minor'
   puts 'steps:'
-  puts buildkite_block_step
 
   # Buildkite step for each version:
   versions = @supported_versions.map(&:first)
@@ -79,7 +72,6 @@ when '-minor'
   puts buildkite_push(versions)
 when '-major'
   puts 'steps:'
-  puts buildkite_block_step
 
   # Buildkite step for each major version:
   versions = @supported_versions.map(&:first).map do |version|
