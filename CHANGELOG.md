@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+N/A
+
+## [9037] 2025-10-31
+
 ### Added
 - Added Ruby 3.4.7, https://www.ruby-lang.org/en/news/2025/10/07/ruby-3-4-7-released/
 - Added Ruby 3.3.10, https://www.ruby-lang.org/en/news/2025/10/23/ruby-3-3-10-released/
