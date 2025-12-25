@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+- Added Ruby 4.0.0, happy holidays! https://www.ruby-lang.org/en/news/2025/12/25/ruby-4-0-0-released/
+
 ### Changed
 - Updated Bundler to `4.0.3` (from `2.7.2`), https://github.com/rubygems/rubygems/blob/bundler-v4.0.3/bundler/CHANGELOG.md
 - Updated Rubygems to `4.0.3` (from `3.7.2`), https://github.com/rubygems/rubygems/blob/v4.0.3/CHANGELOG.md
