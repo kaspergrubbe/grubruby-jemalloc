@@ -94,6 +94,7 @@ RUN set -eux && \
     --disable-install-doc \
     --enable-shared \
     --enable-yjit \
+    --enable-zjit \
   && \
   make -j "$(nproc)" && \
   make install && \
@@ -137,6 +138,7 @@ RUN set -eux && \
   bundle --version && \
   ruby -e "puts Integer::GMP_VERSION" && \
   ruby -r rbconfig -e 'puts (RbConfig::CONFIG["CFLAGS"].split - RbConfig::CONFIG["warnflags"].split).join(", ")' && \
+  ruby --parser=prism -e "require 'prism'; Prism.parse('1+2')" && \
 # inspiration from https://github.com/rubygems/ruby-ssl-check/blob/master/check.rb
   ruby -r openssl -e 'puts "Compiled with:  %s" % OpenSSL::OPENSSL_VERSION' && \
   ruby -r openssl -e 'puts "Loaded version: %s" % OpenSSL::OPENSSL_LIBRARY_VERSION if defined?(OpenSSL::OPENSSL_LIBRARY_VERSION)' && \
@@ -179,3 +181,4 @@ RUN MALLOC_CONF="stats_print:true" \
   ruby -e "exit" 2>&1 | grep "5.3.0-0"
 
 CMD [ "irb" ]
+

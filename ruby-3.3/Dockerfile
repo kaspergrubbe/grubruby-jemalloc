@@ -54,8 +54,8 @@ RUN set -eux && \
   rm -rf /var/lib/apt/lists/* && \
   \
   mkdir -p /usr/src/rust && \
-  wget --quiet -O rust-x86_64-unknown-linux-gnu.tar.gz "https://static.rust-lang.org/dist/rust-1.74.1-x86_64-unknown-linux-gnu.tar.gz" && \
-  echo "d206888a2a9d55113940151ba16117ce2456d7de021bab18cfcb06dc48d3157c *rust-x86_64-unknown-linux-gnu.tar.gz" | sha256sum --check --strict && \
+  wget --quiet -O rust-x86_64-unknown-linux-gnu.tar.gz "https://static.rust-lang.org/dist/rust-1.91.1-x86_64-unknown-linux-gnu.tar.gz" && \
+  echo "1c955c040dd087e4751d15588ddec288b4208bea16f8ec5046c164877e55fff7 *rust-x86_64-unknown-linux-gnu.tar.gz" | sha256sum --check --strict && \
   tar xvzf rust-x86_64-unknown-linux-gnu.tar.gz -C /usr/src/rust --strip-components=1 --exclude=rust-docs && \
   cd /usr/src/rust && \
   ./install.sh --components=rustc,rust-std-x86_64-unknown-linux-gnu,cargo --without=rust-docs && \
