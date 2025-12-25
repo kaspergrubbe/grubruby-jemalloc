@@ -12,6 +12,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Updated Bundler to `4.0.3` (from `2.7.2`), https://github.com/rubygems/rubygems/blob/bundler-v4.0.3/bundler/CHANGELOG.md
 - Updated Rubygems to `4.0.3` (from `3.7.2`), https://github.com/rubygems/rubygems/blob/v4.0.3/CHANGELOG.md
 
+### Removed
+- Removed Ruby 3.4.0, something in it breaks compilation of the pg-gem which we rely on for testing.
+
 ## [9038] 2025-12-21
 
 ### Added
