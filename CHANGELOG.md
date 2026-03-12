@@ -5,7 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-N/A
+### Added
+- Added Ruby 3.4.9, that comes with a few bugfixes, and an [update to the zlib gem addressing CVE-2026-27820](https://www.ruby-lang.org/en/news/2026/03/05/buffer-overflow-zlib-cve-2026-27820/): https://www.ruby-lang.org/en/news/2026/03/11/ruby-3-4-9-released/
 
 ## [9040] 2026-01-15
 
