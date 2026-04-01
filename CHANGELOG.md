@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Added
 - Added Ruby 4.0.2, that fixes a YJIT bug affecting Puma, https://www.ruby-lang.org/en/news/2026/03/16/ruby-4-0-2-released/
 - Added Ruby 3.4.9, that comes with a few bugfixes, and an [update to the zlib gem addressing CVE-2026-27820](https://www.ruby-lang.org/en/news/2026/03/05/buffer-overflow-zlib-cve-2026-27820/): https://www.ruby-lang.org/en/news/2026/03/11/ruby-3-4-9-released/
+- Added Ruby 3.3.11, that includes an [update to the zlib gem addressing CVE-2026-27820](https://www.ruby-lang.org/en/news/2026/03/05/buffer-overflow-zlib-cve-2026-27820/): https://www.ruby-lang.org/en/news/2026/03/26/ruby-3-3-11-released/
 
 ### Changed
 - Updated Bundler to `4.0.9` (from `4.0.3`), https://github.com/rubygems/rubygems/blob/bundler-v4.0.9/bundler/CHANGELOG.md
