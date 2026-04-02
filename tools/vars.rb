@@ -16,8 +16,8 @@ repo_owner  = 'kaspergrubbe'
 repo_name   = 'grubruby-jemalloc'
 env_version = ENV["VERSION"] || ENV.fetch("BUILDKITE_TAG") { raise "env VERSION= or BUILDKITE_TAG= must be set" }
 version     = env_version.delete_prefix("v").to_i
-rubygems    = '4.0.8'
-bundler     = '4.0.8'
+rubygems    = '4.0.9'
+bundler     = '4.0.9'
 
 @grubruby = Grubruby.new(repo_owner, repo_name, version, rubygems, bundler)
 
@@ -33,6 +33,8 @@ bundler     = '4.0.8'
   ['3.2.7', 'fc159b0d4a8ce412948fb69e61493839a0b3e1d5c919180f27036f1c948cfbe2', 'rails70'],
   ['3.2.8', '1cccd3100155275293ae5d4ea0a1a1068f5de69e71732220f144acce26327a3c', 'rails70'],
   ['3.2.9', 'cf6699d0084c588e7944d92e1a8edda28b1cc3ee471a1f0aebb4b3d32c9753b2', 'rails70'],
+  ['3.2.10', 'a64a8a910ac2f28834b2170dedea688f06cbc6431fcd65eb18cc49ddbf3826ae', 'rails70'],
+  ['3.2.11', 'c13aec0c206725d5d356acbae6e5fd8bffd92dc325aec14fd5dd7795d4b763d2', 'rails70'],
 
   ['3.3.0', '676b65a36e637e90f982b57b059189b3276b9045034dcd186a7e9078847b975b', 'rails70'],
   ['3.3.1', '0686941a3ec395a15ae2a852487b2a88e5fb8a5518e188df00d8d1bb71a6349b', 'rails70'],
@@ -44,6 +46,7 @@ bundler     = '4.0.8'
   ['3.3.8', '44ae70fee043da3ce48289b7a52618ebe32dc083253993d486211c7e445c8642', 'rails70'],
   ['3.3.9', '2b24a2180a2f7f63c099851a1d01e6928cf56d515d136a91bd2075423a7a76bb', 'rails70'],
   ['3.3.10', '3a06c3a709672a4ddae4e511d7e82f74799b8b3f550c8cf2d6f32089003cb84c', 'rails70'],
+  ['3.3.11', '9116bb2e313203bd78cd3e8dc09284d34b2645f725877623a7185bf3807c8ca3', 'rails70'],
 
   ['3.4.1', '018d59ffb52be3c0a6d847e22d3fd7a2c52d0ddfee249d3517a0c8c6dbfa70af', 'rails70'],
   ['3.4.2', 'ebf1c2eb58f5da17c23e965d658dd7e6202c5c50f5179154c5574452bef4b3e0', 'rails70'],
