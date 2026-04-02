@@ -9,6 +9,53 @@ N/A
 
 ## [9041] 2026-04-2
 
+Grubruby version `9041` ships with:
+- Rubygems `4.0.9`.
+- Bundler `4.0.9`.
+
+- Jemalloc:
+  - `3.6.0`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc3.so`.
+  - `4.5.0`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc4.so`.
+  - `5.2.1`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc5.so`.
+  - `5.3.0`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc5_3.so`.
+
+And the following Ruby-versions:
+- `4.0.2` as `kaspergrubbe/grubruby-jemalloc:4.0.2.9041` (100.05 MB).
+- `4.0.1` as `kaspergrubbe/grubruby-jemalloc:4.0.1.9041` (100.04 MB).
+- `4.0.0` as `kaspergrubbe/grubruby-jemalloc:4.0.0.9041` (100.04 MB).
+- `3.4.9` as `kaspergrubbe/grubruby-jemalloc:3.4.9.9041` (92.53 MB).
+- `3.4.8` as `kaspergrubbe/grubruby-jemalloc:3.4.8.9041` (92.52 MB).
+- `3.4.7` as `kaspergrubbe/grubruby-jemalloc:3.4.7.9041` (92.6 MB).
+- `3.4.6` as `kaspergrubbe/grubruby-jemalloc:3.4.6.9041` (92.6 MB).
+- `3.4.5` as `kaspergrubbe/grubruby-jemalloc:3.4.5.9041` (92.5 MB).
+- `3.4.4` as `kaspergrubbe/grubruby-jemalloc:3.4.4.9041` (92.5 MB).
+- `3.4.3` as `kaspergrubbe/grubruby-jemalloc:3.4.3.9041` (92.48 MB).
+- `3.4.2` as `kaspergrubbe/grubruby-jemalloc:3.4.2.9041` (92.47 MB).
+- `3.4.1` as `kaspergrubbe/grubruby-jemalloc:3.4.1.9041` (92.45 MB).
+- `3.3.11` as `kaspergrubbe/grubruby-jemalloc:3.3.11.9041` (88.83 MB).
+- `3.3.10` as `kaspergrubbe/grubruby-jemalloc:3.3.10.9041` (88.78 MB).
+- `3.3.9` as `kaspergrubbe/grubruby-jemalloc:3.3.9.9041` (88.91 MB).
+- `3.3.8` as `kaspergrubbe/grubruby-jemalloc:3.3.8.9041` (88.88 MB).
+- `3.3.7` as `kaspergrubbe/grubruby-jemalloc:3.3.7.9041` (88.85 MB).
+- `3.3.6` as `kaspergrubbe/grubruby-jemalloc:3.3.6.9041` (88.85 MB).
+- `3.3.5` as `kaspergrubbe/grubruby-jemalloc:3.3.5.9041` (88.84 MB).
+- `3.3.4` as `kaspergrubbe/grubruby-jemalloc:3.3.4.9041` (88.82 MB).
+- `3.3.3` as `kaspergrubbe/grubruby-jemalloc:3.3.3.9041` (87.31 MB).
+- `3.3.1` as `kaspergrubbe/grubruby-jemalloc:3.3.1.9041` (87.3 MB).
+- `3.3.0` as `kaspergrubbe/grubruby-jemalloc:3.3.0.9041` (87.25 MB).
+- `3.2.11` as `kaspergrubbe/grubruby-jemalloc:3.2.11.9041` (86.86 MB).
+- `3.2.10` as `kaspergrubbe/grubruby-jemalloc:3.2.10.9041` (87.09 MB).
+- `3.2.9` as `kaspergrubbe/grubruby-jemalloc:3.2.9.9041` (87.08 MB).
+- `3.2.8` as `kaspergrubbe/grubruby-jemalloc:3.2.8.9041` (87.08 MB).
+- `3.2.7` as `kaspergrubbe/grubruby-jemalloc:3.2.7.9041` (87.07 MB).
+- `3.2.6` as `kaspergrubbe/grubruby-jemalloc:3.2.6.9041` (87.05 MB).
+- `3.2.5` as `kaspergrubbe/grubruby-jemalloc:3.2.5.9041` (85.69 MB).
+- `3.2.4` as `kaspergrubbe/grubruby-jemalloc:3.2.4.9041` (85.61 MB).
+- `3.2.3` as `kaspergrubbe/grubruby-jemalloc:3.2.3.9041` (85.6 MB).
+- `3.2.2` as `kaspergrubbe/grubruby-jemalloc:3.2.2.9041` (85.56 MB).
+- `3.2.1` as `kaspergrubbe/grubruby-jemalloc:3.2.1.9041` (85.55 MB).
+- `3.2.0` as `kaspergrubbe/grubruby-jemalloc:3.2.0.9041` (85.56 MB).
+
 ### Added
 - Added Ruby 4.0.2, that fixes a YJIT bug affecting Puma, https://www.ruby-lang.org/en/news/2026/03/16/ruby-4-0-2-released/
 - Added Ruby 3.4.9, that comes with a few bugfixes, and an [update to the zlib gem addressing CVE-2026-27820](https://www.ruby-lang.org/en/news/2026/03/05/buffer-overflow-zlib-cve-2026-27820/): https://www.ruby-lang.org/en/news/2026/03/11/ruby-3-4-9-released/
