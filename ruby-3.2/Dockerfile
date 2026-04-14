@@ -176,6 +176,6 @@ RUN MALLOC_CONF="stats_print:true" \
   ruby -e "exit" 2>&1 | grep "5.2.1-0"
 RUN MALLOC_CONF="stats_print:true" \
   LD_PRELOAD="/usr/local/lib/libjemalloc5_3.so" \
-  ruby -e "exit" 2>&1 | grep "5.3.0-0"
+  ruby -e "exit" 2>&1 | grep "5.3.1-0"
 
 CMD [ "irb" ]

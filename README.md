@@ -22,7 +22,7 @@ File locations for Jemalloc is:
 - Jemalloc stable release version 3: `/usr/local/lib/libjemalloc3.so`
 - Jemalloc stable release version 4: `/usr/local/lib/libjemalloc4.so`
 - Jemalloc stable release version 5.2.1: `/usr/local/lib/libjemalloc5.so`
-- Jemalloc stable release version 5.3.0: `/usr/local/lib/libjemalloc5_3.so`
+- Jemalloc stable release version 5.3.1: `/usr/local/lib/libjemalloc5_3.so`
 
 To use Jemalloc in your `Dockerfile`, pick a version, and use `ENV LD_PRELOAD`:
 
