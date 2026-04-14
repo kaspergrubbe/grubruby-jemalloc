@@ -5,7 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-N/A
+### Changed
+- Updated `Jemalloc 5.3` to version `5.3.1` (from `5.3.0`), https://github.com/jemalloc/jemalloc/releases/tag/5.3.1
 
 ## [9041] 2026-04-2
 
