@@ -5,7 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-N/A
+### Added
+- Added Ruby 4.0.3 that contains an update to `erb` which fixes a CVE-2026-41316, https://www.ruby-lang.org/en/news/2026/04/21/ruby-4-0-3-released/
 
 ## [9042] 2026-04-14
 
