@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Added
 - Added Ruby 4.0.4, https://www.ruby-lang.org/en/news/2026/05/11/ruby-4-0-4-released/
 
+### Changed
+- Updated Bundler to `4.0.11` (from `4.0.10`), https://github.com/rubygems/rubygems/blob/bundler-v4.0.11/bundler/CHANGELOG.md
+- Updated Rubygems to `4.0.11` (from `4.0.10`), https://github.com/rubygems/rubygems/blob/v4.0.11/CHANGELOG.md
+
 ## [9042] 2026-04-14
 
 Grubruby version `9043` ships with:
