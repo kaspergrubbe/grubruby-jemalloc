@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 - Updated Bundler to `4.0.12` (from `4.0.11`), https://github.com/rubygems/rubygems/blob/bundler-v4.0.12/bundler/CHANGELOG.md
+- Updated Rubygems to `4.0.12` (from `4.0.11`), https://github.com/rubygems/rubygems/blob/v4.0.12/CHANGELOG.md
+
 ## [9044] 2026-05-16
 
 ### Added
