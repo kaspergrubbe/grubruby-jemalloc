@@ -17,7 +17,7 @@ repo_name   = 'grubruby-jemalloc'
 env_version = ENV['VERSION'] || ENV.fetch('BUILDKITE_TAG') { raise 'env VERSION= or BUILDKITE_TAG= must be set' }
 version     = env_version.delete_prefix('v').to_i
 rubygems    = '4.0.11'
-bundler     = '4.0.11'
+bundler     = '4.0.12'
 
 @grubruby = Grubruby.new(repo_owner, repo_name, version, rubygems, bundler)
 
