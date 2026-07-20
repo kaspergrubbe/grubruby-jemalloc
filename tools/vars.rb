@@ -16,8 +16,8 @@ repo_owner  = 'kaspergrubbe'
 repo_name   = 'grubruby-jemalloc'
 env_version = ENV['VERSION'] || ENV.fetch('BUILDKITE_TAG') { raise 'env VERSION= or BUILDKITE_TAG= must be set' }
 version     = env_version.delete_prefix('v').to_i
-rubygems    = '4.0.12'
-bundler     = '4.0.12'
+rubygems    = '4.0.16'
+bundler     = '4.0.16'
 
 @grubruby = Grubruby.new(repo_owner, repo_name, version, rubygems, bundler)
 
@@ -35,6 +35,7 @@ bundler     = '4.0.12'
   ['3.2.9', 'cf6699d0084c588e7944d92e1a8edda28b1cc3ee471a1f0aebb4b3d32c9753b2', 'rails70'],
   ['3.2.10', 'a64a8a910ac2f28834b2170dedea688f06cbc6431fcd65eb18cc49ddbf3826ae', 'rails70'],
   ['3.2.11', 'c13aec0c206725d5d356acbae6e5fd8bffd92dc325aec14fd5dd7795d4b763d2', 'rails70'],
+  ['3.2.12', '873e3297990b8cff7a5436f6e510a3a7a18c74e5f2c794e4162e605fe0a743b3', 'rails70'],
 
   ['3.3.0', '676b65a36e637e90f982b57b059189b3276b9045034dcd186a7e9078847b975b', 'rails70'],
   ['3.3.1', '0686941a3ec395a15ae2a852487b2a88e5fb8a5518e188df00d8d1bb71a6349b', 'rails70'],
@@ -57,11 +58,13 @@ bundler     = '4.0.12'
   ['3.4.7', 'db425a86f6e07546957578f4946cc700a91e7fd51115a86c56e096f30e0530c7', 'rails70'],
   ['3.4.8', '53a8ec71111449cbbd42224d8d27c493fa6ded228636731051c48604d4255d68', 'rails70'],
   ['3.4.9', '4231c54072601a171faed1699f105985e9971c94cd382b78feb4eb44eec2dd1a', 'rails70'],
+  ['3.4.10', '6f32ad662baafc228d12030dbcd284f83b034dd4337b300dc84ac74d11a1eb68', 'rails70'],
 
   ['4.0.0', 'a72bacee9de07283ebc19baa4ac243b193129f21aa4e168c7186fb1fe7d07fe1', 'rails70'],
   ['4.0.1', '0531fe57dfdb56bf591620d2450642ea0e0964f3512a6ebee7dc9305de69395f', 'rails70'],
   ['4.0.2', '4618db85bb9ec04d8152d0099db488694a3d3c4f52106625e4ad547f1318db87', 'rails70'],
   ['4.0.3', '22cf6005d25bbe496b5ebe9224d63a1aaabfbfe02591bb5d612517c5a7836f29', 'rails70'],
   ['4.0.4', '6ff9d2d6e75f5a6f997222ecc45f79209d663737eceb3689d1f42ab952673fb7', 'rails70'],
-  ['4.0.5', '5dc5521ea54c726e6cc10b1b5a0f4004b27b482e61c04c99aed79315e30895e5', 'rails70']
+  ['4.0.5', '5dc5521ea54c726e6cc10b1b5a0f4004b27b482e61c04c99aed79315e30895e5', 'rails70'],
+  ['4.0.6', '9c9d121fe3314ea7c801e690b9de981d2b9d12d7849db99c27482468a541ba0a', 'rails70']
 ].reverse!
