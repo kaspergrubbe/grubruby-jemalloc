@@ -16,8 +16,8 @@ repo_owner  = 'kaspergrubbe'
 repo_name   = 'grubruby-jemalloc'
 env_version = ENV['VERSION'] || ENV.fetch('BUILDKITE_TAG') { raise 'env VERSION= or BUILDKITE_TAG= must be set' }
 version     = env_version.delete_prefix('v').to_i
-rubygems    = '4.0.11'
-bundler     = '4.0.11'
+rubygems    = '4.0.12'
+bundler     = '4.0.12'
 
 @grubruby = Grubruby.new(repo_owner, repo_name, version, rubygems, bundler)
 
@@ -62,5 +62,6 @@ bundler     = '4.0.11'
   ['4.0.1', '0531fe57dfdb56bf591620d2450642ea0e0964f3512a6ebee7dc9305de69395f', 'rails70'],
   ['4.0.2', '4618db85bb9ec04d8152d0099db488694a3d3c4f52106625e4ad547f1318db87', 'rails70'],
   ['4.0.3', '22cf6005d25bbe496b5ebe9224d63a1aaabfbfe02591bb5d612517c5a7836f29', 'rails70'],
-  ['4.0.4', '6ff9d2d6e75f5a6f997222ecc45f79209d663737eceb3689d1f42ab952673fb7', 'rails70']
+  ['4.0.4', '6ff9d2d6e75f5a6f997222ecc45f79209d663737eceb3689d1f42ab952673fb7', 'rails70'],
+  ['4.0.5', '5dc5521ea54c726e6cc10b1b5a0f4004b27b482e61c04c99aed79315e30895e5', 'rails70']
 ].reverse!

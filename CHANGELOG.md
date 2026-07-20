@@ -5,7 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-N/A
+### Added
+- Added Ruby 4.0.5, which fixes [CVE-2026-46727](https://www.ruby-lang.org/en/news/2026/05/20/getaddrinfo-cve-2026-46727/) - https://www.ruby-lang.org/en/news/2026/05/20/ruby-4-0-5-released/
+
+### Changed
+- Updated Bundler to `4.0.12` (from `4.0.11`), https://github.com/rubygems/rubygems/blob/bundler-v4.0.12/bundler/CHANGELOG.md
+- Updated Rubygems to `4.0.12` (from `4.0.11`), https://github.com/rubygems/rubygems/blob/v4.0.12/CHANGELOG.md
 
 ## [9044] 2026-05-16
 
