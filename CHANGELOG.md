@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
+## [9045] 2026-07-30
 
 ### Added
 - Added Ruby 4.0.5, which fixes [CVE-2026-46727](https://www.ruby-lang.org/en/news/2026/05/20/getaddrinfo-cve-2026-46727/) - https://www.ruby-lang.org/en/news/2026/05/20/ruby-4-0-5-released/
