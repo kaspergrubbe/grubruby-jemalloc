@@ -26,6 +26,10 @@ def buildkite_ruby_step(ruby_version, index)
       WEB_PORT: #{web_port}
       VERSION: v0000
     key: "#{step_key(ruby_version)}"
+    retry:
+      automatic:
+        - exit_status: "*"
+          limit: 2
 
   RUBY
 end
