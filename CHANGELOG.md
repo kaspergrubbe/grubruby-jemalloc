@@ -3,17 +3,25 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [9045] 2026-07-30
+## [9046] 2026-08-14
 
 ### Added
 - Added Ruby 4.0.6, https://www.ruby-lang.org/en/news/2026/07/14/ruby-4-0-6-released/
-- Added Ruby 4.0.5, which fixes [CVE-2026-46727](https://www.ruby-lang.org/en/news/2026/05/20/getaddrinfo-cve-2026-46727/) - https://www.ruby-lang.org/en/news/2026/05/20/ruby-4-0-5-released/
 - Added Ruby 3.4.10, https://www.ruby-lang.org/en/news/2026/06/30/ruby-3-4-10-released/
 - Added Ruby 3.3.12, https://www.ruby-lang.org/en/news/2026/07/16/ruby-3-3-12-released/
 
 ### Changed
 - Updated Bundler to `4.0.16` (from `4.0.12`), https://github.com/rubygems/rubygems/blob/bundler-v4.0.16/bundler/CHANGELOG.md
 - Updated Rubygems to `4.0.16` (from `4.0.12`), https://github.com/rubygems/rubygems/blob/v4.0.16/CHANGELOG.md
+
+## [9045] 2026-07-30
+
+### Added
+- Added Ruby 4.0.5, which fixes [CVE-2026-46727](https://www.ruby-lang.org/en/news/2026/05/20/getaddrinfo-cve-2026-46727/) - https://www.ruby-lang.org/en/news/2026/05/20/ruby-4-0-5-released/
+
+### Changed
+- Updated Bundler to `4.0.12` (from `4.0.11`), https://github.com/rubygems/rubygems/blob/bundler-v4.0.12/bundler/CHANGELOG.md
+- Updated Rubygems to `4.0.12` (from `4.0.11`), https://github.com/rubygems/rubygems/blob/v4.0.12/CHANGELOG.md
 
 ## [9044] 2026-05-16
 
