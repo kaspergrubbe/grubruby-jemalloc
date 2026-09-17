@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## Unreleased
+
+### Added
+- Added Ruby 4.0.7, https://www.ruby-lang.org/en/news/2026/09/15/ruby-4-0-7-released/
+
+### Changed
+- Updated Bundler to `4.0.21` (from `4.0.16`), https://github.com/ruby/rubygems/blob/v4.0.21/bundler/CHANGELOG.md
+- Updated Rubygems to `4.0.21` (from `4.0.16`), https://github.com/ruby/rubygems/blob/v4.0.21/CHANGELOG.md
+
 ## [9046] 2026-08-14
 
 ### Added
