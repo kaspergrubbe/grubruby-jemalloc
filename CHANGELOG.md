@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Unreleased
 
+N/A
+
+## [9047] 2026-09-18
+
 ### Added
 - Added Ruby 4.0.7, https://www.ruby-lang.org/en/news/2026/09/15/ruby-4-0-7-released/
 - Added Jemalloc 5.4.0, https://github.com/jemalloc/jemalloc/releases/tag/5.4.0
