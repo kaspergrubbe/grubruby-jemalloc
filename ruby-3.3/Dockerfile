@@ -87,6 +87,8 @@ RUN set -eux && \
   if [ "$CUSTOM_DEBUGFLAGS" != "default" ]; \
     then export debugflags="$CUSTOM_DEBUGFLAGS"; \
   fi && \
+# full RELRO: resolve all symbols at load time so the GOT can be mapped read-only
+  export LDFLAGS="-Wl,-z,relro -Wl,-z,now" && \
   autoconf && \
   gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)" && \
   ./configure \
