@@ -4,6 +4,8 @@
 ARG BASE_IMAGE=
 
 FROM $BASE_IMAGE
+  # full RELRO for all jemalloc builds
+  ENV LDFLAGS="-Wl,-z,relro -Wl,-z,now"
   ARG DEBIAN_FRONTEND=noninteractive
   RUN apt-get update \ 
     && apt-get install -qq -y wget build-essential --fix-missing --no-install-recommends \
