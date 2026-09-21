@@ -5,7 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Unreleased
 
-N/A
+
+### Removed
+- Removed the unused `ruby-3.1/Dockerfile`, Ruby 3.1 has not been built since it was dropped from the supported versions in release [9035] on 2025-07-17 (Rubygems and Bundler dropped support for it, https://github.com/rubygems/rubygems/pull/8634).
 
 ## [9047] 2026-09-18
 
