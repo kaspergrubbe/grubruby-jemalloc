@@ -4,23 +4,7 @@ def buildkite_ruby_step(ruby_version, index)
   web_port = 3500 + index
 
   <<-RUBY
-  - command: |-
-      exec 10>>~/.bash_profile
-      flock 10
-
-      echo "--- setup rbenv"
-      source ~/.bash_profile
-
-      echo "--- setup ruby"
-      rbenv local 3.4.1 || rbenv install 3.4.1 && rbenv local 3.4.1
-
-      echo "--- bundle setup"
-      gem search --silent --installed --exact bundler || gem install bundler
-
-      flock -u 10
-
-      echo "--- tests"
-      ruby tools/test.rb #{ruby_version}
+  - command: ruby tools/test.rb #{ruby_version}
     label: Ruby #{ruby_version}
     env:
       WEB_PORT: #{web_port}
@@ -46,7 +30,7 @@ def buildkite_push(ruby_versions)
     env:
       DEBUG: "1"
     plugins:
-      - docker-login#v3.0.0:
+      - docker-login#v3.1.0:
           username: grubautomated
           password-env: GRUBAUTOMATED_DOCKER_LOGIN_PASSWORD
   RUBY
