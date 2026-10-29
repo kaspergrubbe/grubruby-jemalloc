@@ -5,12 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
-## [9050] 2026-23-10
+## [9050] 2026-10-23
 
 ### Added
 - Added Ruby 4.0.9, https://www.ruby-lang.org/en/news/2026/10/23/ruby-4-0-9-released/
 
-## [9049] 2026-23-10
+## [9049] 2026-10-23
 
 ### Added
 - Added Ruby 4.0.8, https://www.ruby-lang.org/en/news/2026/10/22/ruby-4-0-8-released/
