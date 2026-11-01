@@ -209,6 +209,7 @@ def with_deploy_key
   key, status = Open3.capture2('buildkite-agent', 'secret', 'get', 'GRUBRUBY_DEPLOY_KEY')
   abort 'Could not read the GRUBRUBY_DEPLOY_KEY secret' unless status.success?
   run_command('ssh-add -', key)
+  $logger.info 'Loaded the deploy key into ssh-agent'
 
   yield
 ensure
@@ -219,12 +220,15 @@ with_deploy_key do
   unless dry_run?
     git('remote', 'set-url', 'origin', REMOTE)
     git('fetch', '--tags', '--force', 'origin')
+    $logger.info "Fetched tags from #{REMOTE}"
   end
 
   added = add_new_releases
   if added.any?
     git('commit', '--quiet', '-m', "Add Ruby #{added.join(', ')}", '--', RUBIES_PATH, CHANGELOG_PATH)
     push
+  else
+    $logger.info "No new Ruby releases for #{SUPPORTED_SERIES.join(', ')}"
   end
 
   if releasable?
