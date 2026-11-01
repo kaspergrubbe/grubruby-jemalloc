@@ -5,14 +5,31 @@
 - Jemalloc versions: https://github.com/jemalloc/jemalloc/releases
 - Supported Rubies and Rails versions: https://www.fastruby.io/blog/ruby/rails/versions/compatibility-table.html
 
-# How to do a release
-- Test if everything is building and working by running `ruby tools/test.rb`.
-- Update variable `grubruby_version` with `+ 1` in `tools/vars.rb`.
-- Build all the images by running `ruby tools/build.rb build`.
-- Update `CHANGELOG.md` with the new release and commit.
-- Git version tag the release with: `git_tag.rb vXXXX`.
-- Paste the information from `CHANGELOG.md` to Github, by going to https://github.com/kaspergrubbe/grubruby-jemalloc/releases and clicking "Draft new release".
-- Finally build and push everything: `ruby tools/build.rb build push`.
+# Automated Ruby releases
+
+The `grubruby-release-watch` Buildkite pipeline runs `ruby tools/check_releases.rb` every 15 minutes on `master`. Each run:
+
+- Reads https://github.com/ruby/www.ruby-lang.org/blob/master/_data/releases.yml, adds any newer patch release of a supported series to `tools/rubies.json` (after verifying the tarball SHA256) and to the top of `### Added` under `## [Unreleased]` in `CHANGELOG.md`, and pushes that to `master`.
+- Waits until `tools/rubies.json`/`CHANGELOG.md` have been untouched for 20 minutes (`RELEASE_QUIET_MINUTES`), so a batch of releases ships together, then renames `## [Unreleased]` to `## [XXXX] YYYY-MM-DD`, commits and tags that as `vXXXX`, and adds a new empty `## [Unreleased]` in a second `[skip ci]` commit. The tag builds and pushes the images.
+- Every `v*` tag, automated or manual, gets a GitHub release from `.github/workflows/release.yml`, with the notes from `VERSION=vXXXX ruby tools/release_notes.rb` (the CHANGELOG section plus what the images ship with).
+- The bot follows every series that has a `ruby-X.Y/Dockerfile`. To add a series (e.g. 4.1), add `ruby-4.1/Dockerfile` and the next run adds all its stable releases. To drop one, delete its `ruby-X.Y/` folder, otherwise the bot adds its releases back.
+
+Only a new Ruby triggers an automatic release: `## [Unreleased]` has to contain a bot style `- Added Ruby X.Y.Z, https://www.ruby-lang.org/...` line, and the cooldown has to have passed. Anything else under `## [Unreleased]` on `master` waits, and ships along with the next new Ruby or your next manual release.
+
+Dry run locally: `DRY_RUN=1 RELEASE_QUIET_MINUTES=0 ruby tools/check_releases.rb` (commits and tags locally, does not push).
+
+# How to do a release manually
+
+The Rubies we build are listed in `tools/rubies.json`, one per line, sorted by version (`{"version":"4.0.9","sha256":"...","rails":"rails70"}`). The Grubruby version is not stored anywhere, it is the number of the `vXXXX` git tag.
+
+- Make your change, e.g. add a Ruby to `tools/rubies.json` (get the SHA256 with `ruby tools/ruby_sha256.rb X.Y.Z`), and describe it under `## [Unreleased]` in `CHANGELOG.md`.
+- Test it with `ruby tools/test.rb` (or `ruby tools/test.rb 3.4` for one series).
+- Merge to `master`. A new Ruby gets released by the watcher after the cooldown, anything else waits for the next new Ruby, or release it by hand:
+  - Rename `## [Unreleased]` to `## [XXXX] YYYY-MM-DD`, commit, and tag it: `git tag -m vXXXX vXXXX`.
+  - Add a new empty `## [Unreleased]` above it and commit with `[skip ci]` in the message.
+  - Push both: `git push origin master vXXXX`.
+- The tag builds and pushes the images on Buildkite, and creates the GitHub release. Preview the notes with `VERSION=vXXXX ruby tools/release_notes.rb`.
+- To build locally: `VERSION=vXXXX ruby tools/build.rb build`.
 
 # How to check a SHA256 for a Ruby release
 

@@ -1,0 +1,27 @@
+name: GitHub release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Create release from CHANGELOG.md
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ github.ref_name }}
+        run: |
+          if gh release view "$VERSION" > /dev/null 2>&1; then
+            echo "Release $VERSION already exists"
+            exit 0
+          fi
+
+          ruby tools/release_notes.rb > release_notes.md
+          gh release create "$VERSION" --title "Version ${VERSION#v} released" --notes-file release_notes.md

@@ -122,3 +122,24 @@ rescue
   false
 end
 
+def shipped_with(grubruby, supported_versions)
+  rubies = supported_versions.map(&:first).map do |ruby_version|
+    "- `#{ruby_version}` as `#{image_tag_name(grubruby, ruby_version)}`."
+  end
+
+  <<~MARKDOWN.chomp
+    Grubruby version `#{grubruby.version}` ships with:
+
+    - Rubygems `#{grubruby.rubygems_version}`.
+    - Bundler `#{grubruby.bundler_version}`.
+    - Jemalloc:
+      - `3.6.0`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc3.so`.
+      - `4.5.0`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc4.so`.
+      - `5.2.1`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc5.so`.
+      - `5.3.1`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc5_3.so`.
+      - `5.4.0`, use with `ENV LD_PRELOAD=/usr/local/lib/libjemalloc5_4.so`.
+
+    And the following Ruby-versions:
+    #{rubies.join("\n")}
+  MARKDOWN
+end

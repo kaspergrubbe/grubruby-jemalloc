@@ -1,3 +1,4 @@
+require 'json'
 require 'open3'
 
 class Grubruby
@@ -9,68 +10,23 @@ class Grubruby
     @bundler_version = bundler_version
   end
 
-  attr_reader :repo_owner, :repo_name, :version, :rubygems_version, :bundler_version
+  attr_reader :repo_owner, :repo_name, :rubygems_version, :bundler_version
+
+  def version
+    @version or raise 'env VERSION= or BUILDKITE_TAG= must be set'
+  end
 end
 
 repo_owner  = 'kaspergrubbe'
 repo_name   = 'grubruby-jemalloc'
-env_version = ENV['VERSION'] || ENV.fetch('BUILDKITE_TAG') { raise 'env VERSION= or BUILDKITE_TAG= must be set' }
-version     = env_version.delete_prefix('v').to_i
+env_version = ENV['VERSION'] || ENV['BUILDKITE_TAG']
+version     = env_version&.delete_prefix('v')&.to_i
 rubygems    = '4.0.21'
 bundler     = '4.0.21'
 
 @grubruby = Grubruby.new(repo_owner, repo_name, version, rubygems, bundler)
 
-# VERSION, HASH, RAILS_VERSION
-@supported_versions = [
-  ['3.2.0', 'd2f4577306e6dd932259693233141e5c3ec13622c95b75996541b8d5b68b28b4', 'rails70'],
-  ['3.2.1', '746c8661ae25449cbdc5297d1092702e93e66f365a75fecb740d4f292ced630c', 'rails70'],
-  ['3.2.2', '4b352d0f7ec384e332e3e44cdbfdcd5ff2d594af3c8296b5636c710975149e23', 'rails70'],
-  ['3.2.3', 'cfb231954b8c241043a538a4c682a1cca0b2016d835fee0b9e4a0be3ceba476b', 'rails70'],
-  ['3.2.4', 'e7f1653d653232ec433472489a91afbc7433c9f760cc822defe7437c9d95791b', 'rails70'],
-  ['3.2.5', '7780d91130139406d39b29ed8fe16bba350d8fa00e510c76bef9b8ec1340903c', 'rails70'],
-  ['3.2.6', '671134022238c2c4a9d79dc7d1e58c909634197617901d25863642f735a27ecb', 'rails70'],
-  ['3.2.7', 'fc159b0d4a8ce412948fb69e61493839a0b3e1d5c919180f27036f1c948cfbe2', 'rails70'],
-  ['3.2.8', '1cccd3100155275293ae5d4ea0a1a1068f5de69e71732220f144acce26327a3c', 'rails70'],
-  ['3.2.9', 'cf6699d0084c588e7944d92e1a8edda28b1cc3ee471a1f0aebb4b3d32c9753b2', 'rails70'],
-  ['3.2.10', 'a64a8a910ac2f28834b2170dedea688f06cbc6431fcd65eb18cc49ddbf3826ae', 'rails70'],
-  ['3.2.11', 'c13aec0c206725d5d356acbae6e5fd8bffd92dc325aec14fd5dd7795d4b763d2', 'rails70'],
-
-  ['3.3.0', '676b65a36e637e90f982b57b059189b3276b9045034dcd186a7e9078847b975b', 'rails70'],
-  ['3.3.1', '0686941a3ec395a15ae2a852487b2a88e5fb8a5518e188df00d8d1bb71a6349b', 'rails70'],
-  ['3.3.3', '83c0995388399c9555bad87e70af069755b5a9d84bbaa74aa22d1e37ff70fc1e', 'rails70'],
-  ['3.3.4', '1caaee9a5a6befef54bab67da68ace8d985e4fb59cd17ce23c28d9ab04f4ddad', 'rails70'],
-  ['3.3.5', '51aec7ea89b46125a2c9adc6f36766b65023d47952b916b1aed300ddcc042359', 'rails70'],
-  ['3.3.6', '540975969d1af42190d26ff629bc93b1c3f4bffff4ab253e245e125085e66266', 'rails70'],
-  ['3.3.7', '5dbcbc605e0ed4b09c52703241577eb7edc3a2dc747e184c72b5285719b6ad72', 'rails70'],
-  ['3.3.8', '44ae70fee043da3ce48289b7a52618ebe32dc083253993d486211c7e445c8642', 'rails70'],
-  ['3.3.9', '2b24a2180a2f7f63c099851a1d01e6928cf56d515d136a91bd2075423a7a76bb', 'rails70'],
-  ['3.3.10', '3a06c3a709672a4ddae4e511d7e82f74799b8b3f550c8cf2d6f32089003cb84c', 'rails70'],
-  ['3.3.11', '9116bb2e313203bd78cd3e8dc09284d34b2645f725877623a7185bf3807c8ca3', 'rails70'],
-  ['3.3.12', '873e3297990b8cff7a5436f6e510a3a7a18c74e5f2c794e4162e605fe0a743b3', 'rails70'],
-  ['3.3.13', '6bd764359992373a96556b45fb7dfe6b6170da34a0a2fd0b7e1be7932fea982b', 'rails70'],
-
-  ['3.4.1', '018d59ffb52be3c0a6d847e22d3fd7a2c52d0ddfee249d3517a0c8c6dbfa70af', 'rails70'],
-  ['3.4.2', 'ebf1c2eb58f5da17c23e965d658dd7e6202c5c50f5179154c5574452bef4b3e0', 'rails70'],
-  ['3.4.3', '174dcd8c516694f833fd3c93ea227fa6c3321464577a3882a6fc7e4fe20237fd', 'rails70'],
-  ['3.4.4', 'f76d63efe9499dedd8526b74365c0c811af00dc9feb0bed7f5356488476e28f4', 'rails70'],
-  ['3.4.5', '7b3a905b84b8777aa29f557bada695c3ce108390657e614d2cc9e2fb7e459536', 'rails70'],
-  ['3.4.6', '804995bc22938aa475127000d3103cb133409ad3955edfc0e7412be66a4859b8', 'rails70'],
-  ['3.4.7', 'db425a86f6e07546957578f4946cc700a91e7fd51115a86c56e096f30e0530c7', 'rails70'],
-  ['3.4.8', '53a8ec71111449cbbd42224d8d27c493fa6ded228636731051c48604d4255d68', 'rails70'],
-  ['3.4.9', '4231c54072601a171faed1699f105985e9971c94cd382b78feb4eb44eec2dd1a', 'rails70'],
-  ['3.4.10', '6f32ad662baafc228d12030dbcd284f83b034dd4337b300dc84ac74d11a1eb68', 'rails70'],
-  ['3.4.11', 'f79c6e789ce4f30f77c88a40b23b93e2547c512a843dc17db27ab1f5cc66f4e4', 'rails70'],
-  ['3.4.12', 'db6c147940d7ad0b706823d42c8e6713c36dec70a1f83f635f1d3a7f0599ec90', 'rails70'],
-
-  ['4.0.0', 'a72bacee9de07283ebc19baa4ac243b193129f21aa4e168c7186fb1fe7d07fe1', 'rails70'],
-  ['4.0.1', '0531fe57dfdb56bf591620d2450642ea0e0964f3512a6ebee7dc9305de69395f', 'rails70'],
-  ['4.0.2', '4618db85bb9ec04d8152d0099db488694a3d3c4f52106625e4ad547f1318db87', 'rails70'],
-  ['4.0.3', '22cf6005d25bbe496b5ebe9224d63a1aaabfbfe02591bb5d612517c5a7836f29', 'rails70'],
-  ['4.0.4', '6ff9d2d6e75f5a6f997222ecc45f79209d663737eceb3689d1f42ab952673fb7', 'rails70'],
-  ['4.0.5', '5dc5521ea54c726e6cc10b1b5a0f4004b27b482e61c04c99aed79315e30895e5', 'rails70'],
-  ['4.0.6', '9c9d121fe3314ea7c801e690b9de981d2b9d12d7849db99c27482468a541ba0a', 'rails70'],
-  ['4.0.7', '47ef59413f7a4587ba6a6b78b14036eb5e36eec2ec0b90964801e88d56a3d375', 'rails70'],
-  ['4.0.8', '3bd35abc39dce9c682d62cf333fbd8b8f34816dd651f8228b3b59353157b84a4', 'rails70'],
-  ['4.0.9', 'a8057adb39f51ad6dc3106237504c93dd792bb515837b4fe7817ae21ed7e51f4', 'rails70']
-].reverse!
+# Newest first, as [VERSION, HASH, RAILS_VERSION]
+@supported_versions = JSON.parse(File.read('tools/rubies.json'))
+                          .map { |ruby| [ruby['version'], ruby['sha256'], ruby['rails']] }
+                          .reverse
