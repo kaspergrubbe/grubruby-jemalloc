@@ -31,6 +31,7 @@ def changelog_entry(release)
 end
 
 def http_get(url)
+  $logger.info "Downloading #{url}"
   response = Net::HTTP.get_response(URI(url))
   abort "GET #{url} failed with #{response.code}" unless response.is_a?(Net::HTTPSuccess)
 
@@ -52,7 +53,6 @@ end
 
 # Stable releases only, previews and release candidates are skipped.
 def ruby_releases
-  $logger.info "Downloading #{RELEASES_URL}"
   releases = YAML.safe_load(http_get(RELEASES_URL), permitted_classes: [Date])
                  .select { |release| release['version'].to_s.match?(/\A\d+\.\d+\.\d+\z/) }
   $logger.info "ruby-lang.org lists #{releases.size} stable Ruby releases"
@@ -62,10 +62,10 @@ end
 
 def verified_sha256(release)
   version  = release['version']
-  expected = release.dig('sha256', 'xz') or abort "releases.yml has no xz sha256 for #{version}"
-  url      = "https://cache.ruby-lang.org/pub/ruby/#{series(version)}/ruby-#{version}.tar.xz"
+  expected = release.dig('sha256', 'xz')
+  abort "releases.yml has no xz sha256 for #{version}" unless expected
 
-  $logger.info "Downloading #{url}"
+  url    = "https://cache.ruby-lang.org/pub/ruby/#{series(version)}/ruby-#{version}.tar.xz"
   sha256 = Digest::SHA256.hexdigest(http_get(url))
   abort "SHA256 mismatch for #{version}: releases.yml says #{expected}, tarball is #{sha256}" unless sha256 == expected
   $logger.info "SHA256 matches releases.yml: #{sha256}"
@@ -126,13 +126,14 @@ end
 # Adds new Ruby releases to rubies.json and CHANGELOG.md, and returns the added versions.
 def add_new_releases
   $logger.info "We build Ruby #{SUPPORTED_SERIES.join(', ')} (from the ruby-X.Y folders)"
-  known_versions = JSON.parse(File.read(RUBIES_PATH)).map { |ruby| ruby['version'] }
-  releases       = ruby_releases
+  known_versions   = JSON.parse(File.read(RUBIES_PATH)).map { |ruby| ruby['version'] }
+  releases         = ruby_releases
+  release_versions = releases.map { |release| release['version'] }
 
   SUPPORTED_SERIES.each do |series_name|
-    released = newest_in_series(releases.map { |release| release['version'] }, series_name)
-    known    = newest_in_series(known_versions, series_name)
-    $logger.info "Ruby #{series_name}: newest release is #{released || 'none'}, newest in rubies.json is #{known || 'none'}"
+    newest_release = newest_in_series(release_versions, series_name)
+    newest_known   = newest_in_series(known_versions, series_name)
+    $logger.info "Ruby #{series_name}: newest release is #{newest_release || 'none'}, newest in rubies.json is #{newest_known || 'none'}"
   end
 
   new_releases = releases.select { |release| new_release?(release['version'], known_versions) }
@@ -171,24 +172,26 @@ def releasable?
   true
 end
 
-def latest_version
+def latest_release_number
   _, tags, = git('tag', '--list', 'v*')
-  latest   = tags.split.grep(/\Av\d+\z/).map { |tag| tag.delete_prefix('v').to_i }.max
+  latest   = tags.split.grep(/\Av\d+\z/).map { |tag_name| tag_name.delete_prefix('v').to_i }.max
   abort 'No vXXXX tags found, run `git fetch --tags`' unless latest
 
   latest
 end
 
 # Turns `## [Unreleased]` into `## [XXXX] YYYY-MM-DD`, so the tagged commit has no `## [Unreleased]`.
-def date_unreleased_section(version)
+def date_unreleased_section(number)
+  $logger.info "Dating `## [Unreleased]` as `## [#{number}]` in CHANGELOG.md"
   header, unreleased, released = changelog_sections
-  dated = unreleased.sub(UNRELEASED, "## [#{version}] #{Date.today.iso8601}")
+  dated = unreleased.sub(UNRELEASED, "## [#{number}] #{Date.today.iso8601}")
 
   write_changelog(header, dated, released)
 end
 
 # Adds a new empty `## [Unreleased]` above the newest release, after it has been tagged.
 def add_unreleased_section
+  $logger.info 'Adding a new empty `## [Unreleased]` to CHANGELOG.md'
   header, *released = File.read(CHANGELOG_PATH).split(/^(?=## )/)
 
   write_changelog(header, "#{UNRELEASED}\n\n", released)
@@ -215,9 +218,14 @@ def commit(message, *paths)
   git('commit', '--quiet', '-m', message, '--', *paths)
 end
 
+def tag(tag_name)
+  $logger.info "Tagging #{tag_name}"
+  git('tag', '--annotate', '--message', tag_name, tag_name)
+end
+
 # Pushes the checked out commit (and tag) to master, rejected if master has moved since Buildkite checked it out.
-def push(tag = nil)
-  args = ['push', '--atomic', 'origin', 'HEAD:master', tag].compact
+def push(tag_name = nil)
+  args = ['push', '--atomic', 'origin', 'HEAD:master', tag_name].compact
 
   if dry_run?
     $logger.info "DRY_RUN: would run git #{args.join(' ')}"
@@ -229,7 +237,6 @@ end
 
 # Loads the deploy key from Buildkite Secrets into an in-memory ssh-agent, never onto disk.
 def with_deploy_key
-  section 'Load the deploy key'
   if dry_run?
     $logger.info 'DRY_RUN: skipping the deploy key, nothing will be fetched or pushed'
     return yield
@@ -250,14 +257,17 @@ ensure
   Process.kill('TERM', agent_pid) if agent_pid
 end
 
+section 'Load the deploy key'
 with_deploy_key do
   section 'Fetch tags'
-  unless dry_run?
+  if dry_run?
+    $logger.info 'DRY_RUN: using local tags, nothing fetched'
+  else
     git('remote', 'set-url', 'origin', REMOTE)
     git('fetch', '--tags', '--force', 'origin')
     $logger.info "Fetched tags from #{REMOTE}"
   end
-  $logger.info "Latest release is v#{latest_version}"
+  $logger.info "Latest release is v#{latest_release_number}"
 
   section 'Look for new Ruby releases'
   added = add_new_releases
@@ -270,20 +280,17 @@ with_deploy_key do
 
   section 'Check whether to release'
   if releasable?
-    version = latest_version + 1
-    tag     = "v#{version}"
+    number   = latest_release_number + 1
+    tag_name = "v#{number}"
 
-    section "Release #{tag}"
-    $logger.info "Dating `## [Unreleased]` as `## [#{version}]` in CHANGELOG.md"
-    date_unreleased_section(version)
-    commit("Update for #{version}", CHANGELOG_PATH)
-    $logger.info "Tagging #{tag}"
-    git('tag', '--annotate', '--message', tag, tag)
+    section "Release #{tag_name}"
+    date_unreleased_section(number)
+    commit("Update for #{number}", CHANGELOG_PATH)
+    tag(tag_name)
 
     # [skip ci], Buildkite has nothing to build for an empty changelog section, the tag builds the release.
-    $logger.info 'Adding a new empty `## [Unreleased]` to CHANGELOG.md'
     add_unreleased_section
     commit('Add [Unreleased] to CHANGELOG.md [skip ci]', CHANGELOG_PATH)
-    push(tag)
+    push(tag_name)
   end
 end
