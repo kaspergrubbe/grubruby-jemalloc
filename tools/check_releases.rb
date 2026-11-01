@@ -37,13 +37,27 @@ def http_get(url)
   response.body
 end
 
+# Starts a collapsible group in the Buildkite log.
+def section(title)
+  puts "--- #{title}"
+end
+
 def series(version)
   version.split('.')[0..1].join('.')
 end
 
+def newest_in_series(versions, series_name)
+  versions.select { |version| series(version) == series_name }.max_by { |version| Gem::Version.new(version) }
+end
+
+# Stable releases only, previews and release candidates are skipped.
 def ruby_releases
-  YAML.safe_load(http_get(RELEASES_URL), permitted_classes: [Date])
-      .select { |release| release['version'].to_s.match?(/\A\d+\.\d+\.\d+\z/) }
+  $logger.info "Downloading #{RELEASES_URL}"
+  releases = YAML.safe_load(http_get(RELEASES_URL), permitted_classes: [Date])
+                 .select { |release| release['version'].to_s.match?(/\A\d+\.\d+\.\d+\z/) }
+  $logger.info "ruby-lang.org lists #{releases.size} stable Ruby releases"
+
+  releases
 end
 
 def verified_sha256(release)
@@ -54,6 +68,7 @@ def verified_sha256(release)
   $logger.info "Downloading #{url}"
   sha256 = Digest::SHA256.hexdigest(http_get(url))
   abort "SHA256 mismatch for #{version}: releases.yml says #{expected}, tarball is #{sha256}" unless sha256 == expected
+  $logger.info "SHA256 matches releases.yml: #{sha256}"
 
   sha256
 end
@@ -102,18 +117,25 @@ end
 def new_release?(version, known_versions)
   return false unless SUPPORTED_SERIES.include?(series(version))
 
-  same_series = known_versions.select { |known| series(known) == series(version) }
-  return true if same_series.empty?
+  newest = newest_in_series(known_versions, series(version))
+  return true if newest.nil?
 
-  newest = same_series.max_by { |known| Gem::Version.new(known) }
   Gem::Version.new(version) > Gem::Version.new(newest)
 end
 
 # Adds new Ruby releases to rubies.json and CHANGELOG.md, and returns the added versions.
 def add_new_releases
+  $logger.info "We build Ruby #{SUPPORTED_SERIES.join(', ')} (from the ruby-X.Y folders)"
   known_versions = JSON.parse(File.read(RUBIES_PATH)).map { |ruby| ruby['version'] }
-  new_releases   = ruby_releases.select { |release| new_release?(release['version'], known_versions) }
+  releases       = ruby_releases
 
+  SUPPORTED_SERIES.each do |series_name|
+    released = newest_in_series(releases.map { |release| release['version'] }, series_name)
+    known    = newest_in_series(known_versions, series_name)
+    $logger.info "Ruby #{series_name}: newest release is #{released || 'none'}, newest in rubies.json is #{known || 'none'}"
+  end
+
+  new_releases = releases.select { |release| new_release?(release['version'], known_versions) }
   new_releases.sort_by { |release| Gem::Version.new(release['version']) }.map do |release|
     version = release['version']
     $logger.info "New Ruby release: #{version}"
@@ -131,28 +153,30 @@ def releasable?
   _, unreleased, = changelog_sections
 
   unless unreleased.match?(NEW_RUBY_ENTRY)
-    $logger.info 'No new Rubies under `## [Unreleased]` in CHANGELOG.md'
+    $logger.info 'No new Rubies under `## [Unreleased]` in CHANGELOG.md, nothing to release'
     return false
   end
+  $logger.info 'Found new Rubies under `## [Unreleased]` in CHANGELOG.md'
 
   quiet_minutes = Integer(ENV.fetch('RELEASE_QUIET_MINUTES', '20'))
   _, last_change, = git('log', '-1', '--format=%ct', '--', RUBIES_PATH, CHANGELOG_PATH)
   waited = ((Time.now - Time.at(Integer(last_change))) / 60).floor
 
   if waited < quiet_minutes
-    $logger.info "Last change was #{waited} minutes ago, waiting for #{quiet_minutes}"
+    $logger.info "Last change was #{waited} minutes ago, waiting until it has been #{quiet_minutes} minutes"
     return false
   end
+  $logger.info "Last change was #{waited} minutes ago, the #{quiet_minutes} minute cooldown has passed, time to release"
 
   true
 end
 
-def next_version
+def latest_version
   _, tags, = git('tag', '--list', 'v*')
   latest   = tags.split.grep(/\Av\d+\z/).map { |tag| tag.delete_prefix('v').to_i }.max
   abort 'No vXXXX tags found, run `git fetch --tags`' unless latest
 
-  latest + 1
+  latest
 end
 
 # Turns `## [Unreleased]` into `## [XXXX] YYYY-MM-DD`, so the tagged commit has no `## [Unreleased]`.
@@ -186,6 +210,11 @@ def git(*args)
   ].shelljoin)
 end
 
+def commit(message, *paths)
+  $logger.info "Committing \"#{message}\""
+  git('commit', '--quiet', '-m', message, '--', *paths)
+end
+
 # Pushes the checked out commit (and tag) to master, rejected if master has moved since Buildkite checked it out.
 def push(tag = nil)
   args = ['push', '--atomic', 'origin', 'HEAD:master', tag].compact
@@ -193,13 +222,18 @@ def push(tag = nil)
   if dry_run?
     $logger.info "DRY_RUN: would run git #{args.join(' ')}"
   else
+    $logger.info "Running git #{args.join(' ')}"
     git(*args)
   end
 end
 
 # Loads the deploy key from Buildkite Secrets into an in-memory ssh-agent, never onto disk.
 def with_deploy_key
-  return yield if dry_run?
+  section 'Load the deploy key'
+  if dry_run?
+    $logger.info 'DRY_RUN: skipping the deploy key, nothing will be fetched or pushed'
+    return yield
+  end
 
   _, agent, = run_command('ssh-agent -s')
   ENV.update(agent.scan(/(SSH_AUTH_SOCK|SSH_AGENT_PID)=([^;]+);/).to_h)
@@ -217,31 +251,39 @@ ensure
 end
 
 with_deploy_key do
+  section 'Fetch tags'
   unless dry_run?
     git('remote', 'set-url', 'origin', REMOTE)
     git('fetch', '--tags', '--force', 'origin')
     $logger.info "Fetched tags from #{REMOTE}"
   end
+  $logger.info "Latest release is v#{latest_version}"
 
+  section 'Look for new Ruby releases'
   added = add_new_releases
   if added.any?
-    git('commit', '--quiet', '-m', "Add Ruby #{added.join(', ')}", '--', RUBIES_PATH, CHANGELOG_PATH)
+    commit("Add Ruby #{added.join(', ')}", RUBIES_PATH, CHANGELOG_PATH)
     push
   else
-    $logger.info "No new Ruby releases for #{SUPPORTED_SERIES.join(', ')}"
+    $logger.info 'No new Ruby releases'
   end
 
+  section 'Check whether to release'
   if releasable?
-    version = next_version
+    version = latest_version + 1
     tag     = "v#{version}"
 
+    section "Release #{tag}"
+    $logger.info "Dating `## [Unreleased]` as `## [#{version}]` in CHANGELOG.md"
     date_unreleased_section(version)
-    git('commit', '--quiet', '-m', "Update for #{version}", '--', CHANGELOG_PATH)
+    commit("Update for #{version}", CHANGELOG_PATH)
+    $logger.info "Tagging #{tag}"
     git('tag', '--annotate', '--message', tag, tag)
 
     # [skip ci], Buildkite has nothing to build for an empty changelog section, the tag builds the release.
+    $logger.info 'Adding a new empty `## [Unreleased]` to CHANGELOG.md'
     add_unreleased_section
-    git('commit', '--quiet', '-m', 'Add [Unreleased] to CHANGELOG.md [skip ci]', '--', CHANGELOG_PATH)
+    commit('Add [Unreleased] to CHANGELOG.md [skip ci]', CHANGELOG_PATH)
     push(tag)
   end
 end
