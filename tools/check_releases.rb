@@ -38,9 +38,9 @@ def http_get(url)
   response.body
 end
 
-# Starts a collapsible group in the Buildkite log.
+# Starts a group in the Buildkite log, `+++` keeps it expanded (`---` would collapse it).
 def section(title)
-  puts "--- #{title}"
+  puts "+++ #{title}"
 end
 
 def series(version)
