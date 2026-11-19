@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- Added Ruby 3.3.14, https://www.ruby-lang.org/en/news/2026/11/18/ruby-3-3-14-released/
 - Added Ruby 4.0.10, https://www.ruby-lang.org/en/news/2026/11/18/ruby-4-0-10-released/
 - Added Ruby 3.4.13, https://www.ruby-lang.org/en/news/2026/11/18/ruby-3-4-13-released/
 

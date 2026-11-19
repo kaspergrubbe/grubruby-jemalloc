@@ -24,6 +24,7 @@
   {"version":"3.3.11","sha256":"9116bb2e313203bd78cd3e8dc09284d34b2645f725877623a7185bf3807c8ca3","rails":"rails70"},
   {"version":"3.3.12","sha256":"873e3297990b8cff7a5436f6e510a3a7a18c74e5f2c794e4162e605fe0a743b3","rails":"rails70"},
   {"version":"3.3.13","sha256":"6bd764359992373a96556b45fb7dfe6b6170da34a0a2fd0b7e1be7932fea982b","rails":"rails70"},
+  {"version":"3.3.14","sha256":"e24ef6d97095a9c42bf8259a2de33a25aac8d92bb48fefdbdc81724b87784854","rails":"rails70"},
   {"version":"3.4.1","sha256":"018d59ffb52be3c0a6d847e22d3fd7a2c52d0ddfee249d3517a0c8c6dbfa70af","rails":"rails70"},
   {"version":"3.4.2","sha256":"ebf1c2eb58f5da17c23e965d658dd7e6202c5c50f5179154c5574452bef4b3e0","rails":"rails70"},
   {"version":"3.4.3","sha256":"174dcd8c516694f833fd3c93ea227fa6c3321464577a3882a6fc7e4fe20237fd","rails":"rails70"},
