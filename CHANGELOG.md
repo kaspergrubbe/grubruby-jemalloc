@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-## [Unreleased]
+## [9051] 2026-11-19
 
 ### Added
 - Added Ruby 3.3.14, https://www.ruby-lang.org/en/news/2026/11/18/ruby-3-3-14-released/
