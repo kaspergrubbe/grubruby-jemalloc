@@ -7,7 +7,7 @@
 
 # Automated Ruby releases
 
-The `grubruby-release-watch` Buildkite pipeline runs `ruby tools/check_releases.rb` every 5 minutes on `master`. Each run:
+The `grubruby-release-watch` Buildkite pipeline runs `ruby tools/check_releases.rb` every 5 minutes on `master`. Buildkite schedules can't run more often than every 10 minutes, so it has two: `*/10 * * * *` and `5-55/10 * * * *`. Each run:
 
 - Reads https://cache.ruby-lang.org/pub/ruby/index.txt, which lists a tarball as soon as it is uploaded. Any newer patch release of a supported series is added to `tools/rubies.json`, after the tarball's SHA256 is checked against index.txt. It also goes at the top of `### Added` under `## [Unreleased]` in `CHANGELOG.md`, and both are pushed to `master`.
 - Waits until `tools/rubies.json`/`CHANGELOG.md` have been untouched for 5 minutes (`RELEASE_QUIET_MINUTES`), so a batch of releases ships together, then renames `## [Unreleased]` to `## [XXXX] YYYY-MM-DD`, commits and tags that as `vXXXX`, and adds a new empty `## [Unreleased]` in a second `[skip ci]` commit. The tag builds and pushes the images. `tools/build.rb` builds the Rubies that the release added first, and pushes each image as soon as it is built.
