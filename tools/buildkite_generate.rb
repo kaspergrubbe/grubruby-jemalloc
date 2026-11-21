@@ -1,5 +1,8 @@
 require_relative 'vars'
 
+# Release (tag) builds go ahead of branch builds that are waiting for an agent, Buildkite runs higher priorities first.
+PRIORITY = ENV['BUILDKITE_TAG'].to_s.empty? ? 0 : 10
+
 def buildkite_ruby_step(ruby_version, index)
   web_port = 3500 + index
 
@@ -10,6 +13,7 @@ def buildkite_ruby_step(ruby_version, index)
       WEB_PORT: #{web_port}
       VERSION: v0000
     key: "#{step_key(ruby_version)}"
+    priority: #{PRIORITY}
     retry:
       automatic:
         - exit_status: "*"
@@ -27,6 +31,7 @@ def buildkite_push(ruby_versions)
     depends_on:
 #{depends_on_keys}
     if: build.tag != null
+    priority: #{PRIORITY}
     env:
       DEBUG: "1"
     plugins:

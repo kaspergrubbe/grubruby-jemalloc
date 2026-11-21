@@ -10,11 +10,11 @@ require 'json'
 require 'net/http'
 require 'open3'
 require 'shellwords'
-require 'yaml'
 
 require_relative 'util'
 
-RELEASES_URL   = 'https://raw.githubusercontent.com/ruby/www.ruby-lang.org/master/_data/releases.yml'
+# Lists every tarball on cache.ruby-lang.org with its SHA256 as soon as it is uploaded.
+INDEX_URL      = 'https://cache.ruby-lang.org/pub/ruby/index.txt'
 RUBIES_PATH    = 'tools/rubies.json'
 CHANGELOG_PATH = 'CHANGELOG.md'
 UNRELEASED     = '## [Unreleased]'
@@ -24,10 +24,10 @@ REMOTE         = 'git@github.com:kaspergrubbe/grubruby-jemalloc.git'
 SUPPORTED_SERIES = Dir.glob('ruby-*/').map { |dir| dir.delete_prefix('ruby-').delete_suffix('/') }
 
 # Only bot-style "Added Ruby" lines trigger an automatic release, so keep these two in sync.
-NEW_RUBY_ENTRY = %r{^- Added Ruby \d+\.\d+\.\d+, https://www\.ruby-lang\.org/}
+NEW_RUBY_ENTRY = /^- Added Ruby \d+\.\d+\.\d+\b/
 
 def changelog_entry(release)
-  "- Added Ruby #{release['version']}, https://www.ruby-lang.org#{release['post']}"
+  "- Added Ruby #{release['version']}"
 end
 
 def http_get(url)
@@ -51,24 +51,29 @@ def newest_in_series(versions, series_name)
   versions.select { |version| series(version) == series_name }.max_by { |version| Gem::Version.new(version) }
 end
 
-# Stable releases only, previews and release candidates are skipped.
+# The .tar.xz of every stable release in index.txt, previews and release candidates are skipped.
+# index.txt is tab separated: name, url, sha1, sha256, sha512.
 def ruby_releases
-  releases = YAML.safe_load(http_get(RELEASES_URL), permitted_classes: [Date])
-                 .select { |release| release['version'].to_s.match?(/\A\d+\.\d+\.\d+\z/) }
-  $logger.info "ruby-lang.org lists #{releases.size} stable Ruby releases"
+  releases = http_get(INDEX_URL).lines.drop(1).filter_map do |line|
+    name, url, _sha1, sha256, = line.chomp.split("\t")
+    version = name.to_s.delete_prefix('ruby-')
+    next unless version.match?(/\A\d+\.\d+\.\d+\z/) && url.to_s.end_with?('.tar.xz')
+
+    { 'version' => version, 'url' => url, 'sha256' => sha256 }
+  end
+  $logger.info "cache.ruby-lang.org lists #{releases.size} stable Ruby releases"
 
   releases
 end
 
 def verified_sha256(release)
   version  = release['version']
-  expected = release.dig('sha256', 'xz')
-  abort "releases.yml has no xz sha256 for #{version}" unless expected
+  expected = release['sha256']
+  abort "index.txt has no sha256 for #{version}" if expected.to_s.empty?
 
-  url    = "https://cache.ruby-lang.org/pub/ruby/#{series(version)}/ruby-#{version}.tar.xz"
-  sha256 = Digest::SHA256.hexdigest(http_get(url))
-  abort "SHA256 mismatch for #{version}: releases.yml says #{expected}, tarball is #{sha256}" unless sha256 == expected
-  $logger.info "SHA256 matches releases.yml: #{sha256}"
+  sha256 = Digest::SHA256.hexdigest(http_get(release['url']))
+  abort "SHA256 mismatch for #{version}: index.txt says #{expected}, tarball is #{sha256}" unless sha256 == expected
+  $logger.info "SHA256 matches index.txt: #{sha256}"
 
   sha256
 end
@@ -159,7 +164,7 @@ def releasable?
   end
   $logger.info 'Found new Rubies under `## [Unreleased]` in CHANGELOG.md'
 
-  quiet_minutes = Integer(ENV.fetch('RELEASE_QUIET_MINUTES', '20'))
+  quiet_minutes = Integer(ENV.fetch('RELEASE_QUIET_MINUTES', '5'))
   _, last_change, = git('log', '-1', '--format=%ct', '--', RUBIES_PATH, CHANGELOG_PATH)
   waited = ((Time.now - Time.at(Integer(last_change))) / 60).floor
 

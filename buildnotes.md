@@ -7,14 +7,14 @@
 
 # Automated Ruby releases
 
-The `grubruby-release-watch` Buildkite pipeline runs `ruby tools/check_releases.rb` every 15 minutes on `master`. Each run:
+The `grubruby-release-watch` Buildkite pipeline runs `ruby tools/check_releases.rb` every 5 minutes on `master`. Each run:
 
-- Reads https://github.com/ruby/www.ruby-lang.org/blob/master/_data/releases.yml, adds any newer patch release of a supported series to `tools/rubies.json` (after verifying the tarball SHA256) and to the top of `### Added` under `## [Unreleased]` in `CHANGELOG.md`, and pushes that to `master`.
-- Waits until `tools/rubies.json`/`CHANGELOG.md` have been untouched for 20 minutes (`RELEASE_QUIET_MINUTES`), so a batch of releases ships together, then renames `## [Unreleased]` to `## [XXXX] YYYY-MM-DD`, commits and tags that as `vXXXX`, and adds a new empty `## [Unreleased]` in a second `[skip ci]` commit. The tag builds and pushes the images.
+- Reads https://cache.ruby-lang.org/pub/ruby/index.txt, which lists a tarball as soon as it is uploaded. Any newer patch release of a supported series is added to `tools/rubies.json`, after the tarball's SHA256 is checked against index.txt. It also goes at the top of `### Added` under `## [Unreleased]` in `CHANGELOG.md`, and both are pushed to `master`.
+- Waits until `tools/rubies.json`/`CHANGELOG.md` have been untouched for 5 minutes (`RELEASE_QUIET_MINUTES`), so a batch of releases ships together, then renames `## [Unreleased]` to `## [XXXX] YYYY-MM-DD`, commits and tags that as `vXXXX`, and adds a new empty `## [Unreleased]` in a second `[skip ci]` commit. The tag builds and pushes the images. `tools/build.rb` builds the Rubies that the release added first, and pushes each image as soon as it is built.
 - Every `v*` tag, automated or manual, gets a GitHub release from `.github/workflows/release.yml`, with the notes from `VERSION=vXXXX ruby tools/release_notes.rb` (the CHANGELOG section plus what the images ship with).
 - The bot follows every series that has a `ruby-X.Y/Dockerfile`. To add a series (e.g. 4.1), add `ruby-4.1/Dockerfile` and the next run adds all its stable releases. To drop one, delete its `ruby-X.Y/` folder, otherwise the bot adds its releases back.
 
-Only a new Ruby triggers an automatic release: `## [Unreleased]` has to contain a bot style `- Added Ruby X.Y.Z, https://www.ruby-lang.org/...` line, and the cooldown has to have passed. Anything else under `## [Unreleased]` on `master` waits, and ships along with the next new Ruby or your next manual release.
+Only a new Ruby triggers an automatic release: `## [Unreleased]` has to contain a bot style `- Added Ruby X.Y.Z` line, and the cooldown has to have passed. Anything else under `## [Unreleased]` on `master` waits, and ships along with the next new Ruby or your next manual release.
 
 Dry run locally: `DRY_RUN=1 RELEASE_QUIET_MINUTES=0 ruby tools/check_releases.rb` (commits and tags locally, does not push).
 

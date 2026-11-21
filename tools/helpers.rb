@@ -143,3 +143,15 @@ def shipped_with(grubruby, supported_versions)
     #{rubies.join("\n")}
   MARKDOWN
 end
+
+# The CHANGELOG.md section of a release without its heading, or nil when it has none.
+def changelog_section(version)
+  section = File.read('CHANGELOG.md').split(/^(?=## )/).find { |s| s.start_with?("## [#{version}]") }
+
+  section&.lines&.drop(1)&.join&.strip
+end
+
+# The Rubies a release added, e.g. ["4.0.10", "3.4.13", "3.3.14"] for 9051.
+def added_rubies(version)
+  changelog_section(version).to_s.scan(/^- Added Ruby (\d+\.\d+\.\d+)\b/).flatten
+end

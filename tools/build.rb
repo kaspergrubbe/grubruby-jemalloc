@@ -21,18 +21,17 @@ end
 base_image_tag = build_base_image(@grubruby)
 buildjemalloc_tag = build_jemalloc_image(@grubruby, base_image_tag)
 
-# Commands to be run after main building block
-after_commands = []
+# The Rubies this release added go first, and every image is pushed as soon as it is built,
+# so a new Ruby is out without waiting for the rest to build.
+added = added_rubies(@grubruby.version)
+ruby_versions = @supported_versions.partition { |ruby_version, _| added.include?(ruby_version) }.flatten(1)
+$logger.info "Build order: #{ruby_versions.map(&:first).join(', ')}"
 
-@supported_versions.each do |ruby_version, sha256hash|
+ruby_versions.each do |ruby_version, sha256hash|
   image_tag = image_tag_name(@grubruby, ruby_version)
   build_ruby_image(image_tag, @grubruby, base_image_tag, buildjemalloc_tag, ruby_version, sha256hash)
 
-  after_commands.push("docker push #{image_tag}") if push?
-end
-
-after_commands.each do |command|
-  run_command(command)
+  run_command("docker push #{image_tag}") if push?
 end
 
 # Release info
